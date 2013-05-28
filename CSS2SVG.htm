@@ -1,0 +1,425 @@
+<!DOCTYPE html >
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CSS3 Gradient &rarr; SVG Image Converter</title>
+<style class="text/css">
+html,body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+p {
+	margin: 0 0 0 5px;
+	padding: 0;
+}
+
+.center {
+	margin: 0 auto;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+
+body {
+	background: rgb(193,196,206);
+	background: -moz-linear-gradient(top, rgb(245,245,247) 0%, rgb(193,196,206) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(245,245,247)), color-stop(100%,rgb(193,196,206)));
+	background: -webkit-linear-gradient(top, rgb(245,245,247) 0%,rgb(193,196,206) 100%);
+	background: -o-linear-gradient(top, rgb(245,245,247) 0%,rgb(193,196,206) 100%);
+	background: -ms-linear-gradient(top, rgb(245,245,247) 0%,rgb(193,196,206) 100%);
+	background: linear-gradient(top, rgb(245,245,247) 0%,rgb(193,196,206) 100%);
+	font-family: Arial, sans-serif;
+}
+
+#footer {
+	font-size: .75em;
+	text-align: center;
+}
+
+.inputboxes {
+	width: 80%;
+	border: 1px solid #333;
+	padding: 10px;
+	margin-bottom: 20px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.outputboxes {
+	width: 80%;
+}
+
+.codebox {
+	display: block;
+	width: 80%;
+	height: 200px;
+	margin-top: 10px;
+	overflow: auto;
+	padding: 10px;
+	-moz-box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.25);
+	-webkit-box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.25);
+	-ms-box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.25);
+	box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.25);
+	background: #fff;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	font-size: 12px;
+	font-family: Courier, monospace;
+}
+
+h1 {
+	text-align: center;
+}
+.button {
+	height: 35px;
+	min-width: 35px;
+	border: 1px solid #fff;
+background: rgb(238,238,238);
+background: -moz-linear-gradient(top, rgba(238,238,238,1) 0%, rgba(204,204,204,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(238,238,238,1)), color-stop(100%,rgba(204,204,204,1)));
+background: -webkit-linear-gradient(top, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%);
+background: -o-linear-gradient(top, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%);
+background: -ms-linear-gradient(top, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
+background: linear-gradient(top, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%);	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 30px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.50);
+	-moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.50);
+	-webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.50);
+	-ms-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.50);
+}
+
+.bluebutton {
+	height: 35px;
+	min-width: 35px;
+	border: 1px solid #fff;
+	color: #fff;
+background: rgb(73,155,234);
+background: -moz-linear-gradient(top, rgba(73,155,234,1) 0%, rgba(32,124,229,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(73,155,234,1)), color-stop(100%,rgba(32,124,229,1)));
+background: -webkit-linear-gradient(top, rgba(73,155,234,1) 0%,rgba(32,124,229,1) 100%);
+background: -o-linear-gradient(top, rgba(73,155,234,1) 0%,rgba(32,124,229,1) 100%);
+background: -ms-linear-gradient(top, rgba(73,155,234,1) 0%,rgba(32,124,229,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#207ce5',GradientType=0 );
+background: linear-gradient(top, rgba(73,155,234,1) 0%,rgba(32,124,229,1) 100%);
+	font-weight: bold;
+	text-align: center;
+	line-height: 30px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.50);
+	-moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.50);
+	-webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.50);
+	-ms-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.50);
+}
+
+.button:hover, .button:focus {
+color: #fff;
+background: rgb(125,126,125);
+background: -moz-linear-gradient(top, rgba(125,126,125,1) 0%, rgba(14,14,14,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,126,125,1)), color-stop(100%,rgba(14,14,14,1)));
+background: -webkit-linear-gradient(top, rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%);
+background: -o-linear-gradient(top, rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%);
+background: -ms-linear-gradient(top, rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=0 );
+background: linear-gradient(top, rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%);
+}
+
+.bluebutton:hover, .bluebutton:focus {
+color: #fff;
+background: rgb(44,83,158);
+background: -moz-linear-gradient(top, rgba(44,83,158,1) 0%, rgba(44,83,158,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(44,83,158,1)), color-stop(100%,rgba(44,83,158,1)));
+background: -webkit-linear-gradient(top, rgba(44,83,158,1) 0%,rgba(44,83,158,1) 100%);
+background: -o-linear-gradient(top, rgba(44,83,158,1) 0%,rgba(44,83,158,1) 100%);
+background: -ms-linear-gradient(top, rgba(44,83,158,1) 0%,rgba(44,83,158,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c539e', endColorstr='#2c539e',GradientType=0 );
+background: linear-gradient(top, rgba(44,83,158,1) 0%,rgba(44,83,158,1) 100%);
+}
+
+
+</style>
+<script type="text/javascript">
+var svgAngle = '';
+var svgHeight = "100";
+var svgWidth = "100";
+var myAngle = '';
+var gradientType = "linear";
+var stopsArray = [];
+var colorArray = [];
+var units = "%";
+var prev = '';
+function init() {
+	prev = document.getElementById('preview');
+	if (document.getElementById('userH')!='') {
+	svgHeight = document.getElementById('userH').value;
+	}
+	if (document.getElementById('userW')!='') {
+	svgWidth = document.getElementById('userW').value;
+	}
+	if (!document.getElementById('userUnit').checked) {
+		units = "px";
+	} else { units = "%";}
+}
+
+function splitGradient(string) {
+		init();
+		// Find out if this is linear or radial //
+		if (string.match('radial')) {
+			alert('This converter currently only supports LINEAR Gradients');
+			document.getElementById('output').value="Error: Please enter a valid linear gradient in the box above.";
+			} else { gradientType = 'linear'}
+		// Remove vendor CSS code
+		string = string.replace(/(color-stop|linear|-gradient|radial|repeating-|-moz-|-webkit-|-o-|background:|background-image:|gradient)/g,'')
+		// Find Direction //
+		if (string.search(/[0-9]?[0-9]?[0-9]deg/)!=-1) {
+			var dir = string.match(/[0-9]?[0-9]?[0-9]deg/gi);
+				dir = dir.join("");
+				dir = dir.replace(/deg/g, '');
+		}
+		else if (string.search(/top left|top right|bottom left|bottom right|left top|right top|left bottom|right bottom/)!=-1) {
+			var dir = string.match(/top left|top right|bottom left|bottom right|left top|right top|left bottom|right bottom/gi);
+				dir=dir.join("");
+				dir=dir.replace(/\s/g, '');
+		}
+		else {
+			var dir = string.match(/top|left|right|bottom/gi);
+		}
+
+		//Match 3 or 6 Hex, RGB Decimal, RGBA Decimal //
+		colorArray = string.match(/#([0-9A-Fa-f]{3})?([0-9A-Fa-f]{3})|rgb\([0-9]*?[0-9]*?[0-9],[0-9]*?[0-9]*?[0-9],[0-9]*?[0-9]*?[0-9],*?[0-9]*?\)|rgba\([0-9]*?[0-9]*?[0-9],[0-9]*?[0-9]*?[0-9],[0-9]*?[0-9]*?[0-9],*?[0-9\.]*?\)/gi);
+		stopsArray = string.match(/[0-9]?[0-9]?[0-9]%/g);
+		
+		normalizeAngle(dir);
+
+}
+
+
+function normalizeAngle(st) {
+	if (st=="left"||st=="leftright") {
+		myAngle = 0;
+	}
+	else if (st=="bottomlefttopright"||st=="bottomleftrighttop"||st=="leftbottomrighttop"||st=="leftbottomtopright") {
+		myAngle = 45;
+	}
+	else if (st=="bottom"||st=="bottomtop"||st=="bottomlefttopleft"||st=="bottomleftlefttop"||st=="leftbottomlefttop"||st=="leftbottomtopleft"||st=="bottomrighttopright"||st=="bottomrightrighttop"||st=="rightbottomrighttop"||st=="rightbottomtopright") {
+		myAngle = 90;
+	}
+	else if (st=="bottomrighttopleft"||st=="bottomrightlefttop"||st=="rightbottomlefttop"||st=="rightbottomtopleft") {
+		myAngle = 135;
+	}
+	else if (st=="right"||st=="rightleft") {
+		myAngle = 180;
+	}
+	else if (st=="toprightbottomleft"||st=="toprightleftbottom"||st=="righttopleftbottom"||st=="righttopbottomleft") {
+		myAngle = 225;
+	}
+	else if (st=="top"||st=="topbottom"||st=="topleftbottomleft"||st=="topleftleftbottom"||st=="lefttopleftbottom"||st=="lefttopbottomleft"||st=="toprightbottomright"||st=="toprightrightbottom"||st=="righttoprightbottom"||st=="righttopbottomright") {
+		myAngle = 270;
+	}
+	else if (st=="topleftrightbottom"||st=="topleftbottomright"||st=="lefttopbottomright"||st=="lefttoprightbottom") {
+		myAngle = 315;
+	}
+	else { myAngle = st; }
+	SVGangle(myAngle);
+}
+
+
+function pointOfAngle(a) {
+    return {x:Math.cos(a),
+            y:Math.sin(a)};
+}
+// r2d is not used - here for completeness //
+function radiansToDegrees(r) {
+var r2d = (r*180)/Math.PI;
+	return r2d;
+}
+function degreesToRadians(d) {
+var d2r = (d*Math.PI)/180;
+	return d2r
+}
+
+function SVGangle(v) {
+var eps = Math.pow(2, -52);
+var inputAngle = parseInt(v);
+var angle = (inputAngle % 360);
+// Positive Value is COUNTER-CLOCKWISE in mathematics //
+var startPoint = pointOfAngle(degreesToRadians(180-angle));
+var endPoint = pointOfAngle(degreesToRadians(360-angle));
+// Negative Value checks - negative values do NOT rotate in //
+// the opposite direction like you think they would.  They 	//
+// move the vector start and/or end points outside the 		//
+// the SVG viewport!  So we won't use them.					//
+if(startPoint.x <= 0 || Math.abs(startPoint.x) <= eps) {
+    startPoint.x = 0;
+} 
+else { 
+	// For some reason radians are off from CSS by .3 in two quadrants 	//
+	// this hack makes the SVG closer to the appearance of the CSS		//
+	if ((angle > 90 && angle < 180) || (angle >270 && angle < 360)) {
+		startPoint.x = parseFloat(startPoint.x+.30); 
+	}
+}
+if(startPoint.y <= 0 || Math.abs(startPoint.y) <= eps) {
+    startPoint.y = 0;
+} 
+else { 
+	if ((angle > 90 && angle < 180) || (angle >270 && angle < 360)) {
+		startPoint.y = parseFloat(startPoint.y+.30); 
+	}
+}
+if(endPoint.x <= 0 || Math.abs(endPoint.x) <= eps) {
+    endPoint.x = 0;
+} 
+else { 
+	if ((angle > 90 && angle < 180) || (angle >270 && angle < 360)) {
+		endPoint.x = parseFloat(endPoint.x+.30); 
+	}
+}
+if(endPoint.y <= 0 || Math.abs(endPoint.y) <= eps) {
+    endPoint.y = 0;
+} 
+else { 
+	if ((angle > 90 && angle < 180) || (angle >270 && angle < 360)) {
+		endPoint.y = parseFloat(endPoint.y+.30);
+	}
+}
+// These need to be percentages because absolute values are poorly supported //
+x1 = parseInt(startPoint.x *100 ); // width
+y1 = parseInt(startPoint.y *100); // height
+x2 = parseInt(endPoint.x * 100); // width
+y2 = parseInt(endPoint.y * 100); // height
+svgAngle='x1="'+x1+'%" y1="'+y1+'%" x2="'+x2+'%" y2="'+y2+'%"';
+buildSVG();
+}
+
+function buildSVG () {
+var ranID=Math.floor(Math.random()*1001)
+svg = '<svg xmlns="http://www.w3.org/2000/svg" width="'+svgWidth+units+'" height="'+svgHeight+units+'">\n'+
+'<linearGradient id="grad'+ranID+'"  '+svgAngle+'>\n';
+for (i=0; i<stopsArray.length; i++) {
+	svg=svg+'<stop offset="'+stopsArray[i]+'" stop-color="'+colorArray[i]+'" />\n';
+}
+svg=svg+'</linearGradient>\n'+
+'<rect x="0" y="0" width="'+svgWidth+units+'" height="'+svgHeight+units+'" fill="url(#grad'+ranID+')" />\n'+
+'</svg>';
+// Show source code
+document.getElementById('output').value = svg;
+
+// See if there if preview is already full, if so clear it.
+if (prev.childNodes.length>0) {
+	prev.removeChild(prev.firstChild);
+}
+// Build SVG Preview
+	var svgURL = 'http://www.w3.org/2000/svg';
+	
+	// create the containing SVG view and add it to the document
+	var svgP = document.createElementNS(svgURL, 'svg');
+	svgP.setAttribute('xmlns', svgURL);
+	svgP.setAttributeNS(null, 'version', '1.1');
+	svgP.setAttributeNS(null, 'width', svgWidth+units);
+	svgP.setAttributeNS(null, 'height', svgHeight+units);
+	document.body.appendChild(svgP);
+	
+	// create a linear gradient and add it to the view
+	var gradient = document.createElementNS(svgURL, 'linearGradient');
+	gradient.setAttribute('id', 'grad'+ranID+'');
+	gradient.setAttribute('x1', x1+'%');
+	gradient.setAttribute('y1', y1+'%');
+	gradient.setAttribute('x2', x2+'%');
+	gradient.setAttribute('y2', y2+'%');
+	svgP.appendChild(gradient);
+	
+	var stop = [];
+	
+	// create color stops for gradient
+	for (i=0; i<stopsArray.length; i++) {
+	stop[i]	= document.createElementNS(svgURL, 'stop');
+	stop[i].setAttributeNS(null, 'offset', stopsArray[i]);
+	stop[i].setAttributeNS(null, 'stop-color', colorArray[i]);
+	gradient.appendChild(stop[i]);
+	}
+	
+	// create rectangle
+	var rectangle = document.createElementNS(svgURL, 'rect');
+	rectangle.setAttribute('x',0);
+	rectangle.setAttribute('y',0);
+	rectangle.setAttribute('width', svgWidth+units);
+	rectangle.setAttribute('height', svgHeight+units);
+	rectangle.setAttribute('fill', 'url(#grad'+ranID+')');
+	svgP.appendChild(rectangle);
+
+prev.appendChild(svgP);
+
+prev.style.width=svgWidth+units;
+prev.style.height=svgHeight+units;
+
+}
+
+function updatePreview() {
+// Firefox can do live updates from the textarea
+	// Get the Height and Width of SVG (not gradient inside SVG) from inside the textarea //
+	editHsource = document.getElementById('output').value.match(/height="[0-9]?[0-9]?[0-9][%|p]x?"/g);
+	editHsource = editHsource.join("");
+	editHsource = editHsource.match(/"[0-9]?[0-9]?[0-9][%|p]x?"/);
+	editHsource = editHsource.join("");
+	editHsource = editHsource.replace(/\"/g, '');
+	editWsource = document.getElementById('output').value.match(/width="[0-9]?[0-9]?[0-9][%|p]x?"/g);
+	editWsource = editWsource.join("");
+	editWsource = editWsource.match(/"[0-9]?[0-9]?[0-9][%|p]x?"/);
+	editWsource = editWsource.join("");
+	editWsource = editWsource.replace(/\"/g, '');
+	prev.style.height=editHsource;
+	prev.style.width= editWsource;
+	prev.innerHTML = document.getElementById('output').value;
+}
+
+function clearInput(b) {
+	if (document.getElementById('clearit').checked.value=="1") {this.value='';}else {}
+}
+
+</script>
+</head>
+<body>
+<h1>CSS3 Gradient &rarr; SVG Image Converter</h1>
+<div class="inputboxes center">
+	<p style="text-align:center;">Need to create CSS3 Gradients?  I'd recommend using <a href="http://www.colorzilla.com/gradient-editor/" target="_blank">ColorZilla's Ultimate CSS Gradient Generator</a></p> 
+</div>
+<div class="inputboxes center">
+	<p>Enter any CSS3 Linear Gradient code (either W3C, -moz, -webkit, -o, or -ms):</p>
+	<input type="text" style="width: 90%;margin-right: 10px;" id="cssinput" onfocus="if (document.getElementById('clearit').checked) {this.value='';}else {}" /><input type="button" class="bluebutton" value="Convert!" onclick="splitGradient(document.getElementById('cssinput').value);" /><br />
+	<input type="radio" id="clearit" name="clearbox" value="1" checked />Clear Input Box on Focus <input type="radio" name="clearbox" value="0" /> Clear Input Box Manually<br /><br />
+	SVG Height:<input type="text" id="userH" value="100" /> SVG Width:<input type="text" id="userW" value="100"> <input type="radio" id="userUnit" name="unit" value="%" checked />Percent <input type="radio" name="unit" value="px" />Pixels<br />
+</div>
+<div class="outputboxes center">
+<p>Copy &amp; Paste the code below into a text document and save with .svg file extension</p>
+</div>
+<textarea id="output"  class="codebox center"></textarea>
+<div class="outputboxes center">
+<script type="text/javascript">if (navigator.userAgent.match(/Firefox/i)) {document.write('<br /><button class="button right" onmousedown="updatePreview()">Update</button><p>You can also edit the code in the box directly, then click the "Update" button to apply the changes to the preview below.</p>');}</script>
+<h2>Preview:</h2>
+</div>
+<div id="preview" class="center"></div>
+<div id="footer" class="outputboxes center">
+<p>Version 0.1</p>
+<p><em>Tested in Safari 5.x, Chrome 12, Firefox 4, Opera 11</em> &mdash; <a href="http://www.kmhcreative.com/labs/CSS3-2-SVG/">About This Utility</a></p>
+<p>Copyright 2011 Kristiana M. Hansen &mdash; Free To Use & Distribute<br/><a href="http://www.kmhcreative.com">www.kmhcreative.com</a></p>
+</body>
+</html>
