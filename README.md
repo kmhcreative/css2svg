@@ -1,5 +1,8 @@
 <h3>WHAT IS IT?</h3>
 <p>A Javascript-based utility for converting CSS3 Gradients to SVG images to help maintain the same look in a website viewed in browsers that do not support CSS3 gradients but do support SVG graphics.</p>
+<p>The CSS3 to SVG converter is pure JS and does not require any libraries (though you could certainly fork a version that does if you want).  It is also presented in a single HTML page to make it easy for 
+anyone who wants to use it or work on it offline to download it and know they have all the necessary code.</p>
+<h1><a href="http://fiddle.jshell.net/CG9t2/1/show/light/">Try It!</a></h1>
 <h3>HOW TO USE IT</h3>
 <ol>
 <li>Copy and paste almost any CSS3 Linear Gradient code into the input box at the top of the utility page.  It will accept W3C standards or Mozilla, Webkit (both old and new syntax), Opera, and Microsoft proprietary &#8220;vendor&#8221; versions <em>(see the &#8220;Release Notes&#8221; at the end of this page for details).</em></li>
@@ -21,6 +24,17 @@
 <p>SVG Rotation: <em>&lt;linearGradient id=&#8221;grad&#8221;  gradientTransform=&#8221;rotate(135)&#8221; &gt; </em>or SVG Vector:<em> &lt;linearGradient id=&#8221;grad&#8221;  x1=&#8221;70%&#8221; y1=&#8221;70%&#8221; x2=&#8221;0%&#8221; y2=&#8221;0%&#8221;&gt;</em></p>
 <p>After about a day of trying to figure out why this was happening I finally just settled on a hack to correct it.  The offset in both quadrants was consistent so in my checks for negative numbers I simply told it if it was a positive value for a degree setting that fell in between 90 and 180 degrees or between 270 and 360 to add .3 to the radians value before converting to vector coordinate percentages, which effectively turns each &#8220;70%&#8221; in the examples above to &#8220;100%.&#8221;  As you can see from the images above it fixes the problem perfectly, though I&#8217;m still not clear why it happens in the first place at least my converter now makes SVG image consistent with the CSS3 input.</p>
 <p>The next thing the converter does it wraps all the parameters in the XML code needed to create the SVG source code.  Lastly it creates a SVG element in the page with the same parameters for the Preview.  <del>For Firefox users there&#8217;s an additional function because that browser supports creating the SVG preview image from the code in the output box &#8211; meaning you can edit that code in the output box, click &#8220;Update&#8221; and see your changes immediately reflected in the preview.  <em>Unfortunately this isn&#8217;t supported by any of the other browsers.</em></del> (See below, v0.9 supports more browsers).</p>
+<h3>JSFiddle</h3>
+<p>If you want to contribute to this project it is recommended you <a href="http://jsfiddle.net/CG9t2/1/">play around with the code in the JSFiddle</a> or offline and when you know your changes work 
+then commit them here to GitHub.  The converter is intentionally presented as a single HTML page with all the CSS and scripting in it so anyone who wants to download it for editing or offline use can 
+be assured they have ALL the necessary code.  From JSFiddle you should open the "full screen result" of your fiddling (URL available under the "Share" button), and when you look at the source code make 
+sure you are viewing it for the IFRAME in which the result is shown (you may need to right+click > show only this frame).  JSFiddle also adds a dummy script and css link to the top of the document which 
+do not need to be included in the git commit and please change the title of the document:</p>
+<blockquote>
+ <p>&lt;title&gt; - jsFiddle demo&lt;/title&gt;<br/>  
+    &lt;script type='text/javascript' src='/js/lib/dummy.js'&gt;&lt;/script&gt;<br/>  
+    &lt;link rel="stylesheet" type="text/css" href="/css/result-light.css"&gt;</p>
+</blockquote>
 <h3>RELEASE NOTES</h3>
 <p><em>Version 0.9.5</em> (May 27, 2013)</p>
 <p>Overview of major changes, done by Anthony Martinez (http://www.linkedin.com/in/canthonymartinez/). (All other script/CSS Annotations by me are preceded by "AM:")</p>
