@@ -5,13 +5,13 @@
   <title>CSS3 Gradient &rarr; SVG Image Converter</title>
 
   <style type='text/css'>
-    *{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
+*{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
 *:not(#IE){filter:none\9} /* AM: Hide filters in IE9 since they don't work correctly with border-radius */
 html,body{height:100%;min-height:100%;margin:0;padding:0}
 :root,:root>body{height:auto} /* AM: IE8- needs 100% height for the background to fill the whole page, but that messes up IE9+ and everyone else (go-figure), so this resets the height for everyone else. */
 body{font-family:Arial,sans-serif;background:#c1c4ce;
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f5f7',endColorstr='#c1c4ce');
-	background:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxsaW5lYXJHcmFkaWVudCBpZD0iZzEiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiNmNWY1ZjciLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjMWM0Y2UiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZzEpIi8+PC9zdmc+);
+	background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxsaW5lYXJHcmFkaWVudCBpZD0iZzEiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiNmNWY1ZjciLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjMWM0Y2UiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZzEpIi8+PC9zdmc+);
 	background:-webkit-gradient(linear,0 0,0 100%,from(#f5f5f7),to(#c1c4ce));
 	background:-webkit-linear-gradient(#f5f5f7,#c1c4ce);background:-moz-linear-gradient(#f5f5f7,#c1c4ce);background:-o-linear-gradient(#f5f5f7,#c1c4ce);
 	background:linear-gradient(#f5f5f7,#c1c4ce)}
@@ -27,43 +27,36 @@ textarea,#preview{width:100%;resize:none;padding:0}
 input:focus,textarea:focus,code{outline:none;background:#eff} /* AM: Webkit browsers show an unsightly outline that doesn't respect border-radius very well. So, replace with a background */
 #cssinput{width:100%;height:75px}
 input+span{position:relative}
-input[disabled]+span{color:#ccc}input[disabled]+span>i,#base64text{display:none}
-i[data-text]{color:#00f}
+input:disabled+span{color:#ccc}input:disabled+span>i{display:none}
+i[data-text]{color:#00f;*display:none} /* AM: * star hack to hide in IE7- since it has no :after support to show the tooltip */
 i[data-text]:hover{background:#ff7;cursor:help}
-i[data-text]:hover:after{content:attr(data-text);display:block;position:absolute;top:-90px;left:0;width:400px;padding:.5em;background:#ff7}
-#userH,#userW,textarea{border:solid 1px #333;overflow:auto\9} /* AM: overflow:auto only for IE, to hide scrollbars on textarea until needed.
-
-/* AM: Gradients are simplified to save bytes. Plus, -ms- prefix is dropped since there was never a stable IE that needed it. (Only IE10 betas needed it -- IE10 final uses the unprefixed syntax.
- * If full support for Firefox 4- and Safari 5.0- isn't a priority, you can drop the -moz- and -webkit- border radius and box-shadow, as well as -webkit-gradient.
- * FF16 last year dropped -moz- for gradients, so that's another one you may consider removing. Opera 12.1 removed prefixes too late last year.
- * Can't really drop -webkit-linear for gradients yet, though, since Chrome just recently dropped the prefix (v26). Safari still needs the prefix as of 6.0.
- * SVG backgrounds are for IE9, and were generated with this updated version of the SVG generator.
- */
+i[data-text]:hover:after{content:attr(data-text);display:block;position:absolute;top:-95px;left:0;width:400px;padding:.5em;background:#ff7}
+#userH,#userW,textarea{border:solid 1px #333;overflow:auto\9} /* AM: overflow:auto only for IE, to hide scrollbars on textarea until needed. */
 
 .button,.bluebutton{border:1px solid #fff;height:35px;min-width:75px;font-weight:700;line-height:30px;
 	-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;
 	-webkit-box-shadow:0 0 3px rgba(0,0,0,.5);-moz-box-shadow:0 0 3px rgba(0,0,0,.5);box-shadow:0 0 3px rgba(0,0,0,.5)}
 .button{font-size:12px;background:#eee;
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee',endColorstr='#cccccc');
-	background:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxsaW5lYXJHcmFkaWVudCBpZD0iZzEiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiNlZWUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjY2MiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZzEpIi8+PC9zdmc+);
+	background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxsaW5lYXJHcmFkaWVudCBpZD0iZzEiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiNlZWUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjY2MiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZzEpIi8+PC9zdmc+);
 	background:-webkit-gradient(linear,0 0,0 100%,from(#eee),to(#ccc));
 	background:-webkit-linear-gradient(#eee,#ccc);background:-moz-linear-gradient(#eee,#ccc);background:-o-linear-gradient(#eee,#ccc);
 	background:linear-gradient(#eee,#ccc)}
 .bluebutton{color:#fff;background:#499bea;
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#499bea',endColorstr='#207ce5');
-	background:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxsaW5lYXJHcmFkaWVudCBpZD0iZzEiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiM0OTliZWEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyMDdjZTUiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZzEpIi8+PC9zdmc+);
+	background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxsaW5lYXJHcmFkaWVudCBpZD0iZzEiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiM0OTliZWEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyMDdjZTUiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZzEpIi8+PC9zdmc+);
 	background:-webkit-gradient(linear,0 0,0 100%,from(#499bea),to(#207ce5));
 	background:-webkit-linear-gradient(#499bea,#207ce5);background:-moz-linear-gradient(#499bea,#207ce5);background:-o-linear-gradient(#499bea,#207ce5);
 	background:linear-gradient(#499bea,#207ce5)}
 .button:hover,.button:focus{color:#fff;background:#7d7e7d;
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7d7e7d',endColorstr='#0e0e0e');
-	background:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJnMSIgeDI9IjAlIiB5Mj0iMTAwJSI+CjxzdG9wIHN0b3AtY29sb3I9IiM3ZDdlN2QiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMGUwZTBlIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNnMSkiLz4KPC9zdmc+);
+	background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJnMSIgeDI9IjAlIiB5Mj0iMTAwJSI+CjxzdG9wIHN0b3AtY29sb3I9IiM3ZDdlN2QiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMGUwZTBlIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNnMSkiLz4KPC9zdmc+);
 	background:-webkit-gradient(linear,0 0,0 100%,from(#7d7e7d),to(#0e0e0e));
 	background:-webkit-linear-gradient(#7d7e7d,#0e0e0e);background:-moz-linear-gradient(#7d7e7d,#0e0e0e);background:-o-linear-gradient(#7d7e7d,#0e0e0e);
 	background:linear-gradient(#7d7e7d,#0e0e0e)}
 .bluebutton:hover,.bluebutton:focus{color:#fff;background:#2c539e;
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#2c539e',endColorstr='#16294f');
-	background:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJnMSIgeDI9IjAlIiB5Mj0iMTAwJSI+CjxzdG9wIHN0b3AtY29sb3I9IiMyYzUzOWUiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMTYyOTRmIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNnMSkiLz4KPC9zdmc+);
+	background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJnMSIgeDI9IjAlIiB5Mj0iMTAwJSI+CjxzdG9wIHN0b3AtY29sb3I9IiMyYzUzOWUiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMTYyOTRmIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNnMSkiLz4KPC9zdmc+);
 	background:-webkit-gradient(linear,0 0,0 100%,from(#2c539e),to(#16294f));
 	background:-webkit-linear-gradient(#2c539e,#16294f);background:-moz-linear-gradient(#2c539e,#16294f);background:-o-linear-gradient(#2c539e,#16294f);
 	background:linear-gradient(#2c539e,#16294f)}
@@ -73,13 +66,14 @@ p{margin:.25em 0;padding:0}
 	-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;
 	-webkit-box-shadow:inset 0 0 20px rgba(0,0,0,.25);-moz-box-shadow:inset 0 0 20px rgba(0,0,0,.25);box-shadow:inset 0 0 20px rgba(0,0,0,.25)}
 #output,#preview{margin:.5em auto}
+#base64text{display:none}
 textarea[readonly]{background:#ccc}
 #footer{font-size:.75em}
   </style>
   
 </head>
 <body>
-  <h1>CSS3 Gradient &rarr; SVG Image Converter</h1>
+<h1>CSS3 Gradient &rarr; SVG Image Converter</h1>
 <noscript><p class="no-js">This page requires JavaScript to function correctly.</p></noscript>
 <p class="inputboxes">
 	Need to create CSS3 Gradients? I'd recommend using <a href="http://www.colorzilla.com/gradient-editor/" target="_blank">ColorZilla's Ultimate CSS Gradient Generator</a>.
@@ -90,8 +84,7 @@ textarea[readonly]{background:#ccc}
     <input type="checkbox" id="clearit" name="clearbox" value="1" />Clear Input Box on Focus 
 	<input type="button" class="bluebutton right" value="Convert!" id="convert" /> 
 	<div id="b64"><input type="checkbox" name="b64" id="b64check" value="1" />Generate CSS for IE9 (Base64 Output) 
-	<input type="checkbox" name="b64batch" id="b64batch" value="1" disabled="disabled"/><span>Batch Mode <i data-text="Have a bunch of gradients to convert? Then check this box, paste your CSS selectors above (make sure your CSS is well-formed), and click 'Convert'! (Preview will be disabled while active.)">(?)</i></span></div>
-	<!-- AM: Default dimensions changed (script plays much better with absolute units, and, preview now displays at a sensible size. Previous defaults sometimes resulted in a screen-wide prewiew.)  -->
+	<input type="checkbox" name="b64batch" id="b64batch" value="1" disabled="disabled"/><span>Batch Mode <i data-text="Have a bunch of gradients to convert? Then check this box, paste your well-formed CSS selectors containing only gradients, and click 'Convert'! (Preview and output updating will be disabled while active.)">(?)</i></span></div>
     <p>SVG Height: <input id="userH" value="300" /> SVG Width: <input id="userW" value="300" /> <input type="radio" id="userUnit" name="unit" value="%" />Percent <input type="radio" name="unit" value="px" checked="checked" />Pixels</p>
 </div>
 <div class="outputboxes" id="outputtext">
@@ -104,49 +97,18 @@ textarea[readonly]{background:#ccc}
 <textarea class="codebox" id="base64code" readonly="readonly"></textarea>
 </div>
 <div class="outputboxes" id="footer">
-<p>Version 0.9.5 &mdash; May 27, 2013</p>
-<p><em>Page compatible with Safari 5.1+, Chrome 12+, Firefox 4+, Opera 11.6+, and IE9+</em> &mdash; <a href="http://www.kmhcreative.com/labs/CSS3-2-SVG/">About This Utility</a></p>
-<p>Copyright 2011 Kristiana M. Hansen &mdash; Free To Use & Distribute<br/><a href="http://www.kmhcreative.com">www.kmhcreative.com</a></p>
+<p>Version 0.9.6 &mdash; May 28, 2013</p>
+<p><em>Page fully compatible with Safari 5.1+, Chrome 12+, Firefox 4+, Opera 11.6+, and IE9+</em> &mdash; <a href="http://www.kmhcreative.com/labs/CSS3-2-SVG/">About This Utility</a></p>
+<p>Copyright 2011 Kristiana M. Hansen &mdash; Free To Use &amp; Distribute<br/><a href="http://www.kmhcreative.com">www.kmhcreative.com</a></p>
 <p>Updates contributed by <a href="http://www.linkedin.com/in/canthonymartinez/">Anthony Martinez</a></p>
-<p><b>Did any gradient(s) not convert correctly or at all? Please feel free to report any bugs or other questions/comments in an update or fork of this <a href="http://jsfiddle.net/CG9t2/">JSFiddle</a>, or write to <i id="add"><noscript>(please enable JavaScript to see this address)</noscript></i>.</b></p>
+<p><b>Did any gradient(s) not convert correctly or at all? Please feel free to report any issues or other questions/comments in an update or fork of this <a href="http://jsfiddle.net/AnthonyM1229/CG9t2/3/">JSFiddle</a> or <a href="https://github.com/kmhcreative/css2svg">Github Repo</a>, or write to <i id="add"><noscript>(please enable JavaScript to see this address)</noscript></i>.</b></p>
 </div>
   
 
 
 <script type='text/javascript'>//<![CDATA[ 
 
-/* Overview of major changes, done by Anthony Martinez (http://www.linkedin.com/in/canthonymartinez/). (All other script/CSS Annotations by me are preceded by "AM:")
- *
- * 0.9.5 - May 27, 2013
- * 1)	Added an optional batch mode to generate base64 CSS output for multiple selectors at once. Yes! Another exclusive feature, as far as I know.
-		Born out of frustration with the limitations of existing LESS mixins and online gradient generators, this blows everything out of the water :)
-		Requires IE10 or any recent release of Chrome, FF, Safari, or Opera; it won't work in IE9-.
- * 2)	Optimized IE9 base64 output to retain original rgba/hsla/transparent colors, saving a few extra bytes per stop.
- * 3)	Migrated all JS event handlers into the < script > block to separate content and behavior.
- *
- * 0.9 - May 26, 2013
- * 1)	Added full support for new unprefixed W3C syntax gradients (using 'to <destination>' syntax).
- * 2)	Added logic to calculate degrees differently, to match the new W3C syntax. 
- * 			For example, try -moz-linear-gradient(72deg,#fff,#000) and linear-gradient(72deg,#fff,#000) in Firefox CSS -- they render differently.
- *			Then input them into this script, and they should each render in SVG the same way they do in CSS.
- * 3) 	If all color stop percentages are missing, then the script will now interpolate them, as happens in CSS.
- *			If only the start and ending stops are missing, the script will add them.
- * 4) 	If no directions or angle units are specified, the script will now assume defaults, as happens in CSS.
- * 5) 	"Angle units"? Yeah, there's now support for all valid units, (deg, rad, grad, & turns). Plus, negative values and decimals work.
- * 6) 	Improved support for old Webkit syntax -- from() and to() will work as expected, even with decimals, and even if to() comes before other color-stops (as is acceptable).
- * 7) 	Added support for RGB/A percents, HSL/A, floating points in RGB/A and HSL/A, color names, and 'transparent' keyword.
- * 8) 	Added logic to convert alpha values and 'transparent' to proper SVG 'stop-opacity' values.
- * 9) 	Overhauled the SVG vector generation logic, greatly improving accuracy.
- *10) 	Added optional IE9 base64 output for CSS.
- *11) 	Added multiple background support. Yes! No other SVG or gradient generator I'm aware of, even the awesome visualcsstools.com that I drew inspiration from, has this.
- *12) 	Extended SVG preview display/update capabilites to all capable browsers (Chrome 7+, IE9+, FF4+, Safari 5.1+, Opera 11.6+)
- *
- * Issues I'm aware of:
- *
- * 1) Still no radial-gradient support yet, but that will come hopefully not too long from now!
- * 2) For some reason, FF3.6 and below can only do one conversion per page load/refresh. Those browsers are ancient, though. So, perhaps they're not worth trying to fix? 
- *    It's odd, though. Even IE7 can do multiple conversions! Heck, so can IE6!
- * 3) Older browsers that don't fully support RGBA or HSL/A will trip on the included color validation loop, if input gradient(s) has/have RGBA and/or HSL/A.
+/* JS/CSS annotations by Anthony Martinez are preceded by "AM:")
  *
  * ---Test case---
  *
@@ -167,13 +129,13 @@ textarea[readonly]{background:#ccc}
  */
  
 // AM: Encoded address, originally generated at http://rumkin.com/tools/mailto_encoder/custom.php -- substantially modded
-var ML="a.n c\"=/i@>:ztrmklfoeu<h",MI=":07F?C41@CCA=EC9<D28=>0?04:5?C41@CCA=EC9<D28=>0?04;C=A80?56BD>G30F",OT="",e=66,em=document.getElementById("add");
-while(e--){OT+=ML.charAt(MI.charCodeAt(e)-48)};
+var ML="+t.<ma 1hn2czlgi=or@:\"e>9/f",MI="G5I34A;2=?54>C1?>0H::7<F9?1B545;GE4A;2=?54>C1?>0H::7<F9?1B545;DA1=?54E@JFB8653",OT="",e=78,em=document.getElementById("add");
+while(e--){OT+=ML.charAt(MI.charCodeAt(e)-48);}
 em.innerHTML=OT;
  
 if(!window.trim){String.prototype.trim = function(){return this.replace(/^\s+/, "").replace(/\s+$/, "");}} // AM: IE8- doesn't natively support trim()
 
-// AM: adapted from stackoverflow.com/questions/6970221/parsing-css-background-image#answer-6970814 -- allows for parsing of multiple backgrounds. Trips up FF3.6-, however--the convert button will only work once per page load.
+// AM: adapted from stackoverflow.com/questions/6970221/parsing-css-background-image#answer-6970814 -- allows for parsing of multiple backgrounds. Trips up FF3.6- & Opera 10-, however--the convert button will only work once per page load.
 function split (string) {
     var token = /((?:(?:rgb|hsl)a?\(.*?\)\s*\d{0,3}(?:\.\d+)?%?|[^"']|".*?"|'.*?')*?)([(,)]|$)/g; // AM: Modded to permit (rgb|hsl)a?(<colors>) <stop>%, -- without fix, the <stop>% gets trashed, throwing off everything else--ugh.
     return (function recurse () {
@@ -203,12 +165,13 @@ myAngle='',
 gradientType="linear",
 dir='',dirl='',
 stopsArray=[],colorArray=[],stl='',
-units="%",
+units="px",
 prev='',
 bl='',
 oldwebkit='';
 
-if(!window.btoa){document.getElementById('b64').style.cssText='display:none';} // AM: IE9- won't see the checkbox to generate base64 output for IE9.
+// AM: Define window.btoa for IE9- -- Function adapted from https://github.com/davidchambers/Base64.js
+(function(){var t="undefined"!=typeof window?window:exports,r="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",n=function(){try{document.createElement("$")}catch(t){return t}}();t.btoa||(t.btoa=function(t){for(var o,e,a=0,c=r,f="";t.charAt(0|a)||(c="=",a%1);f+=c.charAt(63&o>>8-8*(a%1))){if(e=t.charCodeAt(a+=.75),e>255)throw n;o=o<<8|e}return f})})();
 
 // AM: Toggle 'batch mode' checkbox based on status of IE9 CSS checkbox
 b64cb.onclick=function(){var checked=this.checked;b64batch.disabled=!checked;}
@@ -220,6 +183,9 @@ b64batch.onclick=function(){
 	outputtext.style.cssText = this.checked ? 'display:none' : 'display:block';
 	base64text.style.cssText = this.checked ? 'display:block' : 'display:none';
 }
+
+// AM: Test for RGBA support. RGBA supporting browsers also fully support HSL/A.
+function notAnAncientBrowser(){var div=document.createElement('div'); div.style.cssText="color:rgba(0,0,0,0)"; return(div.style.color);}
 
 /* AM: More browsers can manipulate the preview now. Any browser that has inline SVG support (IE9+, Chrome 7+, FF4+, Opera 11.6+, and Safari 5.1+) can do so.
  * Function borrowed from https://gist.github.com/mstalfoort/1293822.
@@ -237,7 +203,8 @@ input.onfocus=function(){if(clearit.checked){this.value='';}}
 
 document.getElementById('convert').onclick=function(){
 if(b64batch.checked) // AM: Batch Mode enabled
-	{// AM: The magic sauce that makes Batch Mode possible. Following line is adapted from http://stackoverflow.com/questions/6205017/parse-a-string-of-css-declarations-and-convert-it-to-an-array#answer-6205047.
+	{batchb64output='', // AM: Reset output on each convert. Otherwise, strange things happen.
+	// AM: The magic sauce that makes Batch Mode possible. Following line is adapted from http://stackoverflow.com/questions/6205017/parse-a-string-of-css-declarations-and-convert-it-to-an-array#answer-6205047.
 	css=input.value.replace(/}/g,'}~'),cssa=css.split('~');
 	cssa.pop(); // AM: Last item seems to reliably be an empty string, so, toss it.
 	var csl=cssa.length;cssa.reverse(); // AM: Reverse array order so the while loop will process items in the correct order.
@@ -249,7 +216,7 @@ else{splitGradient(input.value)}
 }
 
 function init(){prev = hasInlineSvg() ? document.getElementById('preview') : ''; // AM: preview only visible to browsers with inline SVG support.
-	oldwebkit='',tofromfix='',svgAngle='',svg='',svg64='',x1=0,y1=0,x2=100,y2=0; // AM: reset key variables upon each convert. Otherwise, strange gradient renderings may occur.
+	error='',oldwebkit='',tofromfix='',svgAngle='',svg='',svg64='',x1=0,y1=0,x2=100,y2=0; // AM: reset key variables upon each convert. Otherwise, strange gradient renderings may occur.
 	if(document.getElementById('userH')!=''){svgHeight=document.getElementById('userH').value;}
 	if(document.getElementById('userW')!=''){svgWidth=document.getElementById('userW').value;}
 	if(!document.getElementById('userUnit').checked){units="px";}
@@ -259,7 +226,7 @@ function init(){prev = hasInlineSvg() ? document.getElementById('preview') : '';
 function splitGradient(string){init();
 	if(string.match('radial')){alert('This converter currently only supports LINEAR Gradients');
 	output.value="Error: Please enter a valid linear gradient in the box above.";}
-	var bgs = split(string),bl=bgs.length;
+	var bgs = split(string),bl=bgs.length,error='';
 	while(bl--){
 		// Find Direction //
 		if(bgs[bl].match(/\-?\d{1,3}(?:\.\d+)?(?:deg|g?rad|turn)/)){dir=bgs[bl].match(/\-?\d{1,3}(?:\.\d+)?(?:deg|g?rad|turn)/gi); // AM: Allow negative angles and decimals, plus allow other (rarer) standard units
@@ -301,24 +268,31 @@ function splitGradient(string){init();
 		bgs[bl]=bgs[bl].replace(/.*?{|color-stop|repeating|linear|radial|gradient|-(moz|webkit|o|ms)-|background(-image)?\:|deg|rad|g?rad|turn|to\s|\btop\b|right|left|bottom|center|-| /g,'') // AM: Moved, plus adjusted and expanded
 		//Match 3 or 6 Hex, RGB Decimal, RGBA Decimal // // AM: Now includes color names, RGB/A %, and HSL/A, with floating points permitted
 		colorArray=bgs[bl].match(/(?:from\(|to\()?(#([\da-f]{3}){1,2}|(rgb|hsl)a?\((\d{1,3}(\.\d+)?%?,?){3}[0-1]?\.?\d*\)|[a-z]+)/gi),col=colorArray.length;
+		
 		/* AM: test for parse-able colors in gradient. Ex: Browsers should throw an error (at least FF does) if rgb() has 4 values, which above regex permits. 
-		 * If support for IE8-,FF2-,O9.6-,or S3.1- is needed, this test may trip those browsers since they don't all support RGB/A & HSL/A.
+		 * Test will only execute in modern browsers supporting CSS3 colors. Older browsers like IE8-, FF2-, O9.6-, and S3.0- will skip this test.
 		 * Test is permissive. Chances are, it will let RGB values >255, alpha values >1, HSL hues >360, and percents >100 pass even when technically invalid. Browsers usually parse such values as allowable max, anyway.
 		 * However, there's no error-checking here for totally invalid values that colorArray will miss above, such as negative RGB decimal values.
 		 * Test will also pick up any stray values not processed by the direction check above.
 		 */
-		var div=document.createElement('div');
-		while(col--)
-			{colorArray[col]=colorArray[col].replace(/(?:from|to)\(/,'');
-			div.style.cssText="color:"+colorArray[col];
-				if(!div.style.color){output.value="Error: Please enter a valid linear gradient in the box above. Check your direction and/or color values.";return false;}
-			;}
-		div=null;
-		// AM: Check for stop %s or floating-points (old Webkit syntax), preceded by #XXX; #XXXXXX; ')' at end of RGB/A or HSL/A; '(' in 'to', 'from', or 'color-stop' functions; or color name, but ignore RGB/A+HSL/A %s themselves.
+		if(notAnAncientBrowser())
+			{var div=document.createElement('div');
+			while(col--)
+				{colorArray[col]=colorArray[col].replace(/(?:from|to)\(/,'');
+				div.style.cssText="color:"+colorArray[col];
+					if(!div.style.color){error="ERROR: Please enter a valid linear gradient in the box above. Check your direction and/or color values.";
+					output.value=error;	if(b64batch.checked){batchb64output+=sel+' <<<<'+error+'>>>>> }\n\n';} return false;}
+				;}
+			div=null;}
+		
+		// AM: Check for stop %s or floating-points (old Webkit syntax), preceded by #RGB; #RRGGBB; ')' at end of RGB/A or HSL/A; '(' in 'to', 'from', or 'color-stop' functions; or color name, but ignore RGB/A+HSL/A %s themselves.
 		stopsArray=bgs[bl].match(/(?:\)|#(?:[\da-f]{3}){1,2}|(?:from|to|[^bla])\(|,[a-z]+)(1?\d{1,2}\.?\d*%|0?\.\d+)/ig);
 		if(stopsArray === null) {stopsArray=['0%','100%'];getMiddleStops(colorArray.length-2)} // AM: no stop values defined, so use starting and ending defaults, then interpolate middle stop values
 		else if(colorArray.length-stopsArray.length==2){stopsArray.unshift('0%');stopsArray.push('100%')} // AM: only starting and ending stop values missing? Then add them at respective ends.
-		else if(colorArray.length-stopsArray.length>0){output.value="Error: Gradient could not be parsed. Please check your stop values. For best results, make sure to specify all of them in order using percent values only, or leave them all off for the script to calculate equal stops for you.";return false;}
+		else if(colorArray.length-stopsArray.length>0){
+			error="ERROR: Gradient could not be parsed. Please check your stop values. For best results, make sure to specify all of them in order using percent values only, or leave them all off for the script to calculate equal stops for you.";
+			output.value=error; if(b64batch.checked){batchb64output+=sel+' <<<<<'+error+'>>>>> }\n\n';} return false;
+			}
 		
 		stl=stopsArray.length;
 		while(stl--)
@@ -356,7 +330,8 @@ function normalizeAngle(st,bl){
 		else if(st=="tobottomleft"||st=="topright"){x1=100,x2=0,y2=100}
 		else if(st=="tobottom"||st=="top"){x2=0,y2=100}
 		else if(st=="tobottomright"||st=="topleft"){x2=100,y2=100}
-		else{output.value="Error: Please enter a valid linear gradient in the box above. Check your direction value(s). Valid keywords are 'top', 'right', 'bottom', and 'left'.";return false;}
+		else{error="ERROR: Please enter a valid linear gradient in the box above. Check your direction value(s). Valid keywords are 'top', 'right', 'bottom', and 'left'.";
+		output.value=error;	if(b64batch.checked){batchb64output+=sel+' <<<<<'+error+'>>>>> }\n\n';} return false;}
 		buildSVG(bl);
 	}
 }
@@ -446,11 +421,14 @@ else if(c.match(/rgba?|hsla?|[a-z]{8,}|black|white|yellow|fuchsia|magenta/))
 		d.style.color = c.match(/[a-z]{8,}|black|white|yellow|fuchsia|magenta/i)[0];
 		document.body.appendChild(d);
 		crgb = window.getComputedStyle(d,null).color; // AM: returns color in rgb()
+		if(!crgb.match(/rgb/)){return c;} // AM: Abort and return original input color if color not understood or processed correctly (older browsers not supporting CSS3/SVG color names, for instance).
 		crgb = crgb.replace(/rgb\(/,'').split(', ');}
 	else if(c.match(/hsla?/))
 		{hsl = c.match(/(\d{1,3}(?:\.\d+)?)/g);
 		hslToRgb(parseFloat(hsl[0])/360,parseFloat(hsl[1])/100,parseFloat(hsl[2])/100);				// AM: I don't like the double conversion from HSL to RGB to hex, but I
 		crgb = hslToRgb(parseFloat(hsl[0])/360,parseFloat(hsl[1])/100,parseFloat(hsl[2])/100);}		// couldn't find anything to do a direct HSL to hex conversion. Oh well.
+	else{return c;}
+	
 	rgbToHex(parseInt(crgb[0],10),parseInt(crgb[1],10),parseInt(crgb[2],10));
 	return '#'+hex;
 	}
@@ -504,7 +482,7 @@ var svend='</svg>';
 svg=svhead+svdefs+rects+svend;
 // Show source code
 output.value=svg;
-prev.innerHTML=svg; // AM: this one-liner replaces your SVG preview build code
+prev.innerHTML=svg; // AM: show preview
 // AM: Generate base64 output of SVG, usable in CSS as a gradient fallback for IE9.
 if(b64cb.checked){svg64=svhead+svg64+rects+svend; svgToBase64(svg64)}
 }
@@ -514,7 +492,7 @@ b64output=window.btoa(svg64);
 b64code.value=b64output;
 b64text.style.cssText='display:block';
 
-if(b64batch.checked){batchb64output+=sel+'background:url("data:image/svg+xml;base64,'+b64output+'")}\n'}
+if(b64batch.checked){batchb64output+=sel+'background:url("data:image/svg+xml;base64,'+b64output+'")}\n\n'}
 
 }
 
@@ -539,10 +517,5 @@ if(b64cb.checked){svgToBase64(output.value)}
 //]]>  
 
 </script>
-
-
 </body>
-
-
 </html>
-
