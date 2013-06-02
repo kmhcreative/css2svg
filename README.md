@@ -1,7 +1,7 @@
 <h3>WHAT IS IT?</h3>
 <p>A JavaScript-based utility for converting CSS3 Gradients to SVG images to help maintain a website's appearance in browsers that do not support CSS3 gradients but do support SVG graphics (such as Internet Explorer 9).</p>
 <p>The CSS3 to SVG converter is pure JS and does not require any libraries (though you could certainly fork a version that does if you want).  It is also presented in a single HTML page for easy usage and editing.</p>
-<h1><a href="http://jsfiddle.net/AnthonyM1229/CG9t2/3/show/light/" target="_blank">Try It!</a></h1>
+<h1><a href="http://jsfiddle.net/camartinez1229/thSxh/show/light/" target="_blank">Try It!</a></h1>
 <h3>BASIC USAGE INSTRUCTIONS</h3>
 <ol>
 <li>Copy and paste any CSS3 Linear Gradient code into the input box at the top of the utility page.  It will accept W3C unprefixed syntax and Mozilla, Webkit (both old and new syntax), Opera, and Microsoft proprietary vendor prefixes <em>(see the "Release Notes"; at the end of this page for details). It will even accept multiple gradients at once (new in 0.9.0).</em></li>
@@ -26,7 +26,7 @@
 <li>and finally builds an SVG file with the complete gradient(s).</li>
 </ol>
 <h3>JSFiddle</h3>
-<p>If you want to contribute to this project, then we recommend you <a href="http://jsfiddle.net/AnthonyM1229/CG9t2/3/" target="_blank">play around with the code in the JSFiddle</a> or offline and when you know your changes work 
+<p>If you want to contribute to this project, then we recommend you <a href="http://jsfiddle.net/camartinez1229/thSxh/" target="_blank">play around with the code in the JSFiddle</a> or offline and when you know your changes work 
 then commit them here to GitHub.  The converter is intentionally presented as a single HTML page with all the CSS and scripting in it so anyone who wants to download it for editing or offline use can 
 be assured they have ALL the necessary code.  From JSFiddle, you should open the "full screen result" of your fiddling (URL available under the "Share" button), and when you look at the source code make 
 sure you are viewing it for the IFRAME in which the result is shown (you may need to right+click > show only this frame).  JSFiddle also adds a dummy script and css link to the top of the document which 
