@@ -1,33 +1,34 @@
 <h3>WHAT IS IT?</h3>
-<p>A Javascript-based utility for converting CSS3 Gradients to SVG images to help maintain the same look in a website viewed in browsers that do not support CSS3 gradients but do support SVG graphics.</p>
-<p>The CSS3 to SVG converter is pure JS and does not require any libraries (though you could certainly fork a version that does if you want).  It is also presented in a single HTML page to make it easy for 
-anyone who wants to use it or work on it offline to download it and know they have all the necessary code.</p>
-<h1><a href="http://fiddle.jshell.net/CG9t2/1/show/light/" target="_blank">Try It!</a></h1>
-<h3>HOW TO USE IT</h3>
+<p>A JavaScript-based utility for converting CSS3 Gradients to SVG images to help maintain a website's appearance in browsers that do not support CSS3 gradients but do support SVG graphics (such as Internet Explorer 9).</p>
+<p>The CSS3 to SVG converter is pure JS and does not require any libraries (though you could certainly fork a version that does if you want).  It is also presented in a single HTML page for easy usage and editing.</p>
+<h1><a href="http://jsfiddle.net/camartinez1229/thSxh/show/light/" target="_blank">Try It!</a></h1>
+<h3>BASIC USAGE INSTRUCTIONS</h3>
 <ol>
-<li>Copy and paste almost any CSS3 Linear Gradient code into the input box at the top of the utility page.  It will accept W3C standards or Mozilla, Webkit (both old and new syntax), Opera, and Microsoft proprietary &#8220;vendor&#8221; versions <em>(see the &#8220;Release Notes&#8221; at the end of this page for details).</em></li>
-<li>If you are converting a lot of gradients to SVGs then you&#8217;ll probably want to leave it so it automatically clears the input box each time you click in it to paste in a new string.  However, if you want to &#8220;play around&#8221; with the variables in the CSS code and see what changes you can turn off the auto-clearing feature.</li>
-<li>Set a size for your SVG image.  Typically for tiled background images it is best to leave this at &#8220;percent&#8221; because it will automatically stretch and compress to fill the background of the element.  On the other hand if you know the gradient will fill the background of an element with a specific size you can set it in pixels instead.</li>
-<li>Click the &#8220;Convert&#8221; button.</li>
-<li>The source code for your SVG file appears in the output box.  Copy and paste it into any plain text editor and save it with the file extension &#8220;.svg&#8221; and you&#8217;ll have your SVG image file.</li>
-<li>The &#8220;Preview&#8221; takes the same information in the source code and builds an actual SVG file into the page for you to see exactly how it will look.  Obviously your browser needs to support SVG images for this to work!<br />
-<em>Note to Firefox users: Your browser allows you to edit the source code and press the &#8220;Update&#8221; button and see a live update in the preview of your changes. </em></li>
+<li>Copy and paste any CSS3 Linear Gradient code into the input box at the top of the utility page.  It will accept W3C unprefixed syntax and Mozilla, Webkit (both old and new syntax), Opera, and Microsoft proprietary vendor prefixes <em>(see the "Release Notes"; at the end of this page for details). It will even accept multiple gradients at once (new in 0.9.0).</em></li>
+<li>If you are converting a lot of gradients to SVGs, then you'll probably want to mark the "Clear Input on Focus" checkbox so it automatically clears your input each time you click in it to paste a new string.  Otherwise, if you want to fiddle with the variables in the CSS and see what will change in the output, you should leave the auto-clearing feature off.</li>
+<li>Set a size for your SVG image.  Typically for tiled background images, a percentage size is best because it will automatically stretch to fill the background of the element.  On the other hand, if you know the gradient is to fill the background of an element with a specific size, you can leave it as pixel-based dimensions. For accurate rendering of angles, pixel dimensions are recommended.</li>
+<li>Click the "Convert" button.</li>
+<li>The source code for your SVG file appears in the output box. Copy and paste it into any plain text editor and save it with the ".svg" file extension, and then you''ll have your SVG image file.</li>
+<li>The "Preview" output box takes the same information in the source code and builds an actual SVG file into the page for you to see exactly how it will look.  You may also edit the source code and press "Update" to see the preview with your changes. <em>Please note the browser compatibility list: older browsers may not support the SVG preview/editing functionality.</em></li>
 </ol>
-<h3>HOW IT WORKS</h3>
-<p>First it parses the CSS gradient string into the component parts.  If the string uses words (such as top, top left, bottom, bottom left, left, right) to indicate rotation rather than degrees (i.e., 45deg) then it first normalizes the verbose parameters to their degree value equivalents.</p>
-<p>Next it takes the angle in degrees and converts it to radians.  CSS3 gradients rotate in degrees, but Javascript rotates in radians, so it needs to convert the value first.</p>
-<p>Once it has radians it then converts the result into vector coordinates.  SVG can rotate either in degrees or with vector coordinates.  You may be wondering why I didn&#8217;t just preserver the CSS degrees and use it for the SVG?  Well, it doesn&#8217;t give you exactly the same results as the vector coordinates.  With vector coordinates you can make sure the gradient properly fills the space.  SVG gradient rotation (with the <em>gradientTransform=rotate(n) </em>attribute) doesn&#8217;t change the length of the vectors. However, another problem I discovered was that certain angles didn&#8217;t map properly using the SVG rotate attribute!  It was most noticeable with 315 degrees and its mirror 135 degrees, but the problem affected all degrees within each of those quadrants of the circle.  The rotate attribute offers no real options to correct this so I had to get the vector coordinate method to work.</p>
-<p>Initially I thought the script was wrong because I reasoned a 45 degree angle should have vector coordinates like this: <em>x1=&#8221;0%&#8221; y1=&#8221;100%&#8221; x2=&#8221;100%&#8221; y2=&#8221;0%&#8221; </em>but my script was producing this: <em>x1=&#8221;0%&#8221; y1=&#8221;70%&#8221; x2=&#8221;70%&#8221; y2=&#8221;0%&#8221;</em></p>
-<p>Oddly enough at a small scale this still looks like a proper 45 degree angle.  So does its mirror of 225 degrees.  But when I made the CSS gradient fill the browser it became apparent that even in CSS3 gradients a 45 degree angle doesn&#8217;t <em>actually</em> hit at the corners of a square &#8211; it&#8217;s slightly offset just like the SVG images.</p>
-<p>But the vector coordinates suffered the same problem as the rotation attribute in that 135 degrees, 315 degrees, and all the other degrees within their quadrants were offset from where they should be.</p>
-<p>CSS3 Gradient: <em>background: -webkit-linear-gradient(135deg, #779ae8 0%,#376fe0 50%,#2260dd 51%,#3690f0 51%,#2463de 100%);</em></p>
-<p>SVG Rotation: <em>&lt;linearGradient id=&#8221;grad&#8221;  gradientTransform=&#8221;rotate(135)&#8221; &gt; </em>or SVG Vector:<em> &lt;linearGradient id=&#8221;grad&#8221;  x1=&#8221;70%&#8221; y1=&#8221;70%&#8221; x2=&#8221;0%&#8221; y2=&#8221;0%&#8221;&gt;</em></p>
-<p>After about a day of trying to figure out why this was happening I finally just settled on a hack to correct it.  The offset in both quadrants was consistent so in my checks for negative numbers I simply told it if it was a positive value for a degree setting that fell in between 90 and 180 degrees or between 270 and 360 to add .3 to the radians value before converting to vector coordinate percentages, which effectively turns each &#8220;70%&#8221; in the examples above to &#8220;100%.&#8221;  As you can see from the images above it fixes the problem perfectly, though I&#8217;m still not clear why it happens in the first place at least my converter now makes SVG image consistent with the CSS3 input.</p>
-<p>The next thing the converter does it wraps all the parameters in the XML code needed to create the SVG source code.  Lastly it creates a SVG element in the page with the same parameters for the Preview.  <del>For Firefox users there&#8217;s an additional function because that browser supports creating the SVG preview image from the code in the output box &#8211; meaning you can edit that code in the output box, click &#8220;Update&#8221; and see your changes immediately reflected in the preview.  <em>Unfortunately this isn&#8217;t supported by any of the other browsers.</em></del> (See below, v0.9 supports more browsers).</p>
+<h3>ADVANCED USAGE TECHNIQUES</h3>
+<ol>
+<li><b>CSS Output for IE9</b> (Added in 0.9.0)<br> Mark the "Generate CSS for IE9 (Base64 Output)" checkbox before clicking "Convert", and then along with the standard SVG output, you'll see another text box with base64 output. This takes the text of the SVG file and embeds it, so you can then plug it into your CSS file without the need of adding another HTTP request for an image file. <em>Note that this feature is IE9-specific. If you want to apply an SVG file as base64 to all browsers, then feel free to paste the SVG output text at <a href="http://decodebase64.com/">decodebase64.com</a> to get cross-browser base64 output.</em></li>
+<li><b>Batch Mode</b> (Added in 0.9.5)<br> Mark both the "Generate CSS for IE9 (Base64 Output)" and "Batch Mode" checkboxes, and you'll enable a special mode that lets you convert a whole bunch of gradients at once! Mark these checkboxes before adding any text input, and you'll see an example of how to use Batch Mode, show up in the input text box. Just paste your CSS selectors (containing only gradients) in the input, click "Convert", and you'll see base64 output for each selector appear in the output below. There is no preview or code updating enabled while Batch Mode is active, however.
+</li>
+</ol>
+<h3>HOW THE SCRIPT WORKS</h3>
+<p>Check out the embedded comments in the script for further explanations of the steps it carries out. In short, the script</p>
+<ol>
+<li>parses input gradient(s) to separate angles or origin/destination keywords and individual color stops;</li>
+<li>calculates SVG vector coordinates based on the angles or keywords;</li>
+<li>generates color stops with your specified colors and offsets (or calculates missing offsets);</li>
+<li>and finally builds an SVG file with the complete gradient(s).</li>
+</ol>
 <h3>JSFiddle</h3>
-<p>If you want to contribute to this project it is recommended you <a href="http://jsfiddle.net/CG9t2/1/" target="_blank">play around with the code in the JSFiddle</a> or offline and when you know your changes work 
+<p>If you want to contribute to this project, then we recommend you <a href="http://jsfiddle.net/camartinez1229/thSxh/" target="_blank">play around with the code in the JSFiddle</a> or offline and when you know your changes work 
 then commit them here to GitHub.  The converter is intentionally presented as a single HTML page with all the CSS and scripting in it so anyone who wants to download it for editing or offline use can 
-be assured they have ALL the necessary code.  From JSFiddle you should open the "full screen result" of your fiddling (URL available under the "Share" button), and when you look at the source code make 
+be assured they have ALL the necessary code.  From JSFiddle, you should open the "full screen result" of your fiddling (URL available under the "Share" button), and when you look at the source code make 
 sure you are viewing it for the IFRAME in which the result is shown (you may need to right+click > show only this frame).  JSFiddle also adds a dummy script and css link to the top of the document which 
 do not need to be included in the git commit and please change the title of the document:</p>
 <blockquote>
@@ -36,37 +37,59 @@ do not need to be included in the git commit and please change the title of the 
     &lt;link rel="stylesheet" type="text/css" href="/css/result-light.css"&gt;</p>
 </blockquote>
 <h3>RELEASE NOTES</h3>
-<p><em>Version 0.9.5</em> (May 27, 2013)</p>
-<p>Overview of major changes, done by Anthony Martinez (http://www.linkedin.com/in/canthonymartinez/). (All other script/CSS Annotations by me are preceded by "AM:")</p>
+<em>Current Browser Support:</em>
+<ul>
+<li><b>Full Support: </b> Chrome 7+, IE9+, FF4+, Safari 5.1+, Opera 11.6+</li>
+<li><b>SVG Preview/Editing Unavailable</b>: Chrome 6-, IE8-, FF3.6-, Safari 5.0-, Opera 11.5-</li>
+<li><b>Limited Support (can only do one conversion per page load/refresh):</b> FF3.6-, Opera 10-</li>
+</ul>
+<p>Overview of major changes, done by Anthony Martinez. (All script/CSS annotations by him in the script file download are preceded by "AM:")</p>
+<p><em>Version 0.9.6</em> (May 28, 2013)</p>
 <ol>
-<li>Added an optional batch mode to generate base64 CSS output for multiple selectors at once. Yes! Another exclusive feature, as far as I know. Born out of frustration with the limitations of existing LESS mixins and online gradient generators, this blows everything out of the water :) Requires IE10 or any recent release of Chrome, FF, Safari, or Opera; it won't work in IE9-.</li>
-<li>Optimized IE9 base64 output to retain original rgba/hsla/transparent colors, saving a few extra bytes per stop.</li>
-<li>Migrated all JS event handlers into the < script > block to separate content and behavior.</li>
+<li>Improved support for IE9-. They can now generate CSS base64 output and execute Batch Mode, thanks to the tiny shim he found for the <code>window.btoa</code> function.</li>
+<li>Improved error-handling in Batch Mode. If any individual gradients return an error, processing continues to the end, and those gradients that returned an error are noted in the output.</li>
+<li>Improved support for IE8-, FireFox 2-, Safari 3.0-, and Opera 9.6-. They will now skip over the CSS color validation loop, thereby avoiding any errors caused by having RGBA and/or HSL/A colors in the input gradient(s). Fixes issue #3 on the bottom.</li>
+<li>Bug fix for IE8-: most input color names smaller than 8 letters would output a dud string in the SVG. Now the input color names get output as is, as expected.</li>
 </ol>
-<p><em>Version 0.9</em> (May 26, 2013)</p>
-<p>Overview of major changes, done by Anthony Martinez (http://www.linkedin.com/in/canthonymartinez/). All other script/CSS Annotations by him are preceded by &#8220;AM:&#8221;</p>
+<p><em>Version 0.9.5</em> (May 27, 2013)</p>
 <ol>
-<li>Added full support for new unprefixed W3C syntax gradients (using &#8216;to &lt;destination&gt;&#8217; syntax).</li>
-<li>Added logic to calculate degrees differently, to match the new W3C syntax.For example, try -moz-linear-gradient(72deg,#fff,#000) and linear-gradient(72deg,#fff,#000) in CSS &#8212; they render differently.Then input them into this script, and they should each render in SVG the same way they do in CSS.</li>
-<li>If all color stop percentages are missing, then the script will now interpolate them, as happens in CSS.If only the start and ending stops are missing, the script will add them.</li>
+<li>Added an optional batch mode to generate base64 CSS output for multiple selectors at once. Yes! An exclusive feature, as far as he knows. Born out of frustration with the limitations of existing LESS mixins and online gradient generators, this blows everything out of the water :) Requires <del>IE10</del> <ins>IE9</ins> or any recent release of Chrome, FF, Safari, or Opera; <del>it won't work in IE9-</del>.</li>
+<li>Optimized IE9 base64 output to retain original rgba/hsla/transparent colors, saving a few extra bytes per stop.</li>
+<li>Migrated all JS event handlers into the <code>&lt;script&gt;</code> block to separate content and behavior.</li>
+</ol>
+<p><em>Version 0.9.0</em> (May 26, 2013)</p>
+<ol>
+<li>Added full support for new unprefixed W3C syntax gradients (using <code>to &lt;destination&gt;</code> syntax).</li>
+<li>Added logic to calculate degrees differently, to match the new W3C syntax.For example, try <code>-moz-linear-gradient(72deg,#fff,#000)</code> and <code>linear-gradient(72deg,#fff,#000)</code> in FireFox CSS &#8212; they render differently.Then input them into this script, and they should each render in SVG the same way they do in CSS.</li>
+<li>If all color stop percentages are missing, then the script will now interpolate them, as happens in CSS. If only the start and ending stops are missing, the script will add them.</li>
 <li>If no directions or angle units are specified, the script will now assume defaults, as happens in CSS.</li>
-<li>&#8220;Angle units&#8221;? Yeah, there&#8217;s now support for all valid units, (deg, rad, grad, &amp; turns). Plus negative values and decimals work.</li>
-<li>Improved support for old Webkit syntax &#8212; from() and to() will work as expected, even with decimals, and even if to() comes before other color-stops (as is acceptable).</li>
-<li>Added support for RGB/A percents, HSL/A, floating points in RGB/A and HSL/A, color names, and &#8216;transparent&#8217; keyword.</li>
-<li>Added logic to convert alpha values and &#8216;transparent&#8217; to proper SVG &#8216;stop-opacity&#8217; values.</li>
+<li>"Angle units"? Yeah, there's now support for all valid units, (<code>deg</code>, <code>rad</code>, <code>grad</code>, &amp; <code>turn</code>). Plus negative values and decimals work.</li>
+<li>Improved support for old Webkit syntax &#8212; <code>from()</code> and <code>to()</code> will work as expected, even with decimals, and even if <code>to()</code> comes before other color-stops (as is acceptable).</li>
+<li>Added support for RGB/A percents, HSL/A, floating points in RGB/A and HSL/A, color names, and <code>transparent</code> keyword.</li>
+<li>Added logic to convert alpha values and <code>transparent</code> to proper SVG <code>stop-opacity</code> values.</li>
 <li>Overhauled the SVG vector generation logic, greatly improving accuracy.</li>
 <li>Added optional IE9 base64 output for CSS.</li>
-<li>Added multiple background support. Yes! No other SVG or gradient generator I&#8217;m aware of, even the awesome visualcsstools.com that I drew inspiration from, has this.</li>
+<li>Added multiple background support. Yes! No other SVG or gradient generator he's aware of, even the awesome visualcsstools.com that he drew inspiration from, has this.</li>
 <li>Extended SVG preview display/update capabilites to all capable browsers (Chrome 7+, IE9+, FF4+, Safari 5.1+, Opera 11.6+)</li>
 </ol>
-<p>Known Issues:</p>
+<h3>KNOWN ISSUES:</h3>
 <ol>
-<li>Still no radial-gradient support yet, but I plan to figure that out not too long from now!</li>
-<li>For some reason, FF3.6 and below can only do one conversion per page load/refresh. Those browsers are ancient, though. So, perhaps they&#8217;re not worth trying to fix? It&#8217;s odd, though. Even IE7 works the script flawlessly!</li>
-<li>Older browsers that don&#8217;t fully support RGBA or HSL/A will trip on the color validation loop I included, if input gradient(s) has/have RGBA and/or HSL/A.</li>
+<li>Still no radial-gradient support yet, but he plans to figure that out eventually!</li>
+<li>For some reason, FF3.6 and below (and Opera 10 and below) can only do one conversion per page load/refresh. Those browsers are ancient, though. So, any fixes for them will be of lowest priority for us, but you're welcome to contribute a fix! This issue is odd, though. Even IE7 can do multiple conversions! Heck, so can IE6!</li>
+<li><ins>&#8212;Fixed in 0.9.6&#8212;</ins> <del>Older browsers that don&#8217;t fully support RGBA or HSL/A will trip on the included color validation loop, if input gradient(s) has/have RGBA and/or HSL/A.</del></li>
 </ol>
-<p>&nbsp;</p>
-<p><em>Version 0.1 (<a href="http://www.kmhcreative.com/downloads/CSS2SVG/">Archived</a>)</em></p>
+<h3>ROADMAP</h3>
+<p>Anthony intends to continue updating this script as time allows. Here's what he plans to implement:</p>
+<p><em>Version 1.X</em>
+<ol>
+<li><code>canvas</code> output support, to facilitate converting SVG output into bitmap images (e.g., PNG) that IE8- and other ancient browsers lacking SVG support can read.</li>
+</ol>
+<p><em>Version 2.X</em></p>
+<ol>
+<li>Radial gradient support.</li>
+</ol>
+<h3>ARCHIVED VERSIONS</h3>
+<p><em><a href="http://www.kmhcreative.com/downloads/CSS2SVG/">Version 0.1</a></em></p>
 <p>Preview does not work in Internet Explorer, however the source code output does so you can still make SVG images with it.</p>
 <p>CSS3 Gradient parameters that are <span style="color: #800000;"><strong>NOT</strong></span> supported:</p>
 <ul>
