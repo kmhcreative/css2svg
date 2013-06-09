@@ -8,31 +8,31 @@
 *{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
 *:not(#IE){filter:none\9} /* AM: Hide filters in IE9 since they don't work correctly with border-radius */
 html,body{min-height:100%;margin:0}
-body{font:1em/1.35 Arial,sans-serif;background:#c1c4ce;overflow-x:hidden; /* AM: overflow-x to hide horizontal scrollbar caused by GitHub ribbon */
+body{font:1em/1.35 Arial,'Liberation Sans',sans-serif;background:#c1c4ce;overflow-x:hidden; /* AM: overflow-x to hide horizontal scrollbar caused by GitHub ribbon */
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f5f7',endColorstr='#c1c4ce');	background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxsaW5lYXJHcmFkaWVudCBpZD0iZzEiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2Y1ZjVmNyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2MxYzRjZSIvPjwvbGluZWFyR3JhZGllbnQ+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNnMSkiLz48L3N2Zz4=);
 	background:-webkit-gradient(linear,0 0,0 100%,from(#f5f5f7),to(#c1c4ce));
 	background:-webkit-linear-gradient(#f5f5f7,#c1c4ce);background:-moz-linear-gradient(#f5f5f7,#c1c4ce);background:-o-linear-gradient(#f5f5f7,#c1c4ce);
 	background:linear-gradient(#f5f5f7,#c1c4ce)}
 	
 a{text-decoration:none;border-bottom:solid 1px}span>a{border:0;font-size:.9em;font-style:italic}a:hover{background:#ff7}
-div,svg,textarea,#output{display:block;margin:.25em auto}.left{float:left}.right{float:right}
-h1,#footer,.button,.bluebutton,.no-js,p.inputboxes{text-align:center}
-.inputboxes,.outputboxes,#preview{width:80%;max-width:1200px;margin:.5em auto}
-textarea,#preview{width:100%;resize:none}
-.no-js{color:#822}
+div,svg,textarea,#output{display:block;margin:.25em auto}
+h1,h2,.no-js,p.inputboxes,button,.bluebutton,#footer{text-align:center}
 
+p{margin:.25em 0}.no-js,#preview>p{color:#822}
+.inputboxes,.outputboxes,#preview{width:80%;max-width:1400px;margin:.5em auto}
 .inputboxes{border:1px solid #333;margin-bottom:20px;padding:10px;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px}
-input:focus,textarea:focus,code,kbd{outline:none;background:#eff;font-style:normal}
+textarea{width:100%;resize:vertical}
+input:focus,textarea:focus,code,kbd{outline:0;background:#eff}
 #cssinput{width:100%;height:100px;padding:5px}
 input:disabled+span{color:#ccc}
-#userH,#userW,textarea{border:solid 1px #333;overflow:auto\9} /* AM: overflow:auto only for IE, to hide scrollbars on textarea until needed. */
+#userH,#userW,textarea,code,kbd{font:normal 1em Consolas,'Courier New',monospace}
+#userH,#userW,textarea{border:solid 1px #333;font-size:12px;overflow:auto\9} /* AM: overflow:auto only for IE, to hide scrollbars on textarea until needed. */
+#userH,#userW{width:60px;text-align:right}
 
-.button,.bluebutton{border:1px solid #fff;height:35px;min-width:75px;font-weight:700;line-height:30px;
+button,.bluebutton{border:1px solid #fff;float:right;margin:0 0 0 2em;height:35px;min-width:75px;font-weight:700;
 	-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;
 	-webkit-box-shadow:0 0 3px #555;-moz-box-shadow:0 0 3px #555;box-shadow:0 0 3px #555}
-.button,.button[disabled]:hover{font-size:12px;background:#eee;
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee',endColorstr='#cccccc');	background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxsaW5lYXJHcmFkaWVudCBpZD0iZzEiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2VlZSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2NjYyIvPjwvbGluZWFyR3JhZGllbnQ+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNnMSkiLz48L3N2Zz4=);
-	background:-webkit-gradient(linear,0 0,0 100%,from(#eee),to(#ccc));
+button,button:disabled:hover{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxsaW5lYXJHcmFkaWVudCBpZD0iZzEiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2VlZSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2NjYyIvPjwvbGluZWFyR3JhZGllbnQ+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNnMSkiLz48L3N2Zz4=);
 	background:-webkit-linear-gradient(#eee,#ccc);background:-moz-linear-gradient(#eee,#ccc);background:-o-linear-gradient(#eee,#ccc);
 	background:linear-gradient(#eee,#ccc)}
 button:hover{cursor:pointer}
@@ -41,9 +41,7 @@ button:hover{cursor:pointer}
 	background:-webkit-gradient(linear,0 0,0 100%,from(#499bea),to(#207ce5));
 	background:-webkit-linear-gradient(#499bea,#207ce5);background:-moz-linear-gradient(#499bea,#207ce5);background:-o-linear-gradient(#499bea,#207ce5);
 	background:linear-gradient(#499bea,#207ce5)}
-.button:hover,.button:focus{color:#fff;background:#7d7e7d;
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7d7e7d',endColorstr='#0e0e0e');	background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxsaW5lYXJHcmFkaWVudCBpZD0iZzEiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzdkN2U3ZCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBlMGUwZSIvPjwvbGluZWFyR3JhZGllbnQ+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNnMSkiLz48L3N2Zz4=);
-	background:-webkit-gradient(linear,0 0,0 100%,from(#7d7e7d),to(#0e0e0e));
+button:hover,button:focus{color:#fff;background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxsaW5lYXJHcmFkaWVudCBpZD0iZzEiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzdkN2U3ZCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBlMGUwZSIvPjwvbGluZWFyR3JhZGllbnQ+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNnMSkiLz48L3N2Zz4=);
 	background:-webkit-linear-gradient(#7d7e7d,#0e0e0e);background:-moz-linear-gradient(#7d7e7d,#0e0e0e);background:-o-linear-gradient(#7d7e7d,#0e0e0e);
 	background:linear-gradient(#7d7e7d,#0e0e0e)}
 button:disabled:hover{cursor:not-allowed;color:#6d6d6d}
@@ -53,20 +51,20 @@ button:disabled:hover{cursor:not-allowed;color:#6d6d6d}
 	background:-webkit-linear-gradient(#2c539e,#16294f);background:-moz-linear-gradient(#2c539e,#16294f);background:-o-linear-gradient(#2c539e,#16294f);
 	background:linear-gradient(#2c539e,#16294f)}
 
-p{margin:.25em 0}
-.codebox{height:200px;padding:10px;font-size:12px;font-family:"Courier New",monospace;
+.codebox{height:200px;padding:10px;
 	-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;
 	-webkit-box-shadow:inset 0 0 20px #999;-moz-box-shadow:inset 0 0 20px #999;box-shadow:inset 0 0 20px #999}
 #output,#preview{margin:.5em auto}
-#base64text,#warn{display:none}
+#preview{width:100%}
 textarea[readonly]{background:#ccc}
+svg{margin:0 auto;box-shadow:0 0 8px #777;background:#fff}
+#base64text,#warn,#git{display:none}
 #footer{font-size:.75em}
-#git{display:none}
 
 /* AM: GitHub ribbon with no image (inspired by https://github.com/codepo8/css-fork-on-github-ribbon)! However, it will not show (properly if at all) in IE8-, FF3-, or O10.1- -- the media query filters them out */
 @media screen and (min-width:800px){
 #git{position:fixed;display:block;top:38px;right:-45px;border:dotted #fff;border-width:1px 0;width:198px;padding:5px 20px;text-align:center;
-font:700 1em/1.4 Collegiate,Candara,'Segoe UI','Liberation Sans',Arial,sans-serif;
+font:700 1em/1.4 Collegiate,Corbel,Candara,'Segoe UI',Arial,'Liberation Sans',sans-serif;
 background:#a00;color:#fff;text-shadow:1px 1px 5px #444;-webkit-transition:.5s;-moz-transition:.5s;-o-transition:.5s;transition:.5s;
 -webkit-box-shadow:0 0 0 1px #a00,0 0 9px #999;-moz-box-shadow:0 0 0 1px #a00,0 0 9px #999;box-shadow:0 0 0 1px #a00,0 0 9px #777;
 /* AM: Webkit needs special treatment (the translate3d) to compensate for awful font rendering. Blech! */
@@ -79,7 +77,7 @@ background:#a00;color:#fff;text-shadow:1px 1px 5px #444;-webkit-transition:.5s;-
 <h1>CSS3 Gradient &rarr; SVG Image Converter</h1>
 <noscript><p class="no-js">This page requires JavaScript to function correctly.</p></noscript>
 <p class="inputboxes">
-	Need to create CSS3 Gradients? I'd recommend using <a href="http://www.colorzilla.com/gradient-editor/" target="_blank">ColorZilla's Ultimate CSS Gradient Generator</a>.
+	Need to create CSS3 Gradients? We'd recommend using <a href="http://www.colorzilla.com/gradient-editor/" target="_blank">ColorZilla's Ultimate CSS Gradient Generator</a>.
 </p>
 <div class="inputboxes">
 	<p>Enter any CSS3 linear gradient below. <code>-moz-</code>, <code>-webkit-</code>, <code>-o-</code>, <code>-ms-</code>, or W3C unprefixed syntaxes are supported, as are multiple gradients in <a href="http://www.css3.info/preview/multiple-backgrounds/">CSS multiple background syntax</a>. The <code><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-size">background-size</a></code> property is also supported.</p>
@@ -88,10 +86,10 @@ background:#a00;color:#fff;text-shadow:1px 1px 5px #444;-webkit-transition:.5s;-
 	<button class="bluebutton right" id="convert">Convert!</button>
 	<div id="b64"><input type="checkbox" id="b64check" value="1" /><span>Generate CSS for IE9 (Base64 Output) <a href="http://css-tricks.com/data-uris/" title="Learn more about base64">(?)</a></span>
 	<input type="checkbox" id="b64batch" value="1" disabled="disabled"/><span>Batch Mode <a href="https://github.com/kmhcreative/css2svg#batch" title="Read explanation of feature on Github page">(?)</a></span></div>
-    <p>SVG Height: <input id="userH" value="300" /> SVG Width: <input id="userW" value="300" /> <input type="radio" id="userUnit" value="%" />Percent <input type="radio" value="px" checked="checked" />Pixels</p>
+    <p>SVG Width: <input id="userW" value="300" /> SVG Height: <input id="userH" value="300" /> <input type="radio" name="userUnit" value="%" />Percent <input type="radio" name="userUnit" id="userUnit" value="px" checked="checked" />Pixels</p>
 </div>
 <div class="outputboxes" id="outputtext">
-<p>For the most accurate rendering, please specify a height and width as close as possible to the dimensions at which you plan to use the SVG. After clicking "Convert", copy &amp; paste the code below into a text document and save with the <kbd>.svg</kbd> file extension.</p>
+<p>For the most accurate rendering, specify a width and height above, as close as possible to the dimensions at which you plan to use the SVG. After clicking "Convert", copy &amp; paste the output below into a text editor and save as an <kbd>.svg</kbd> file.</p>
 <textarea class="codebox" id="output" readonly="readonly"></textarea>
 </div>
 <div class="outputboxes" id="updatetext"></div>
@@ -100,7 +98,7 @@ background:#a00;color:#fff;text-shadow:1px 1px 5px #444;-webkit-transition:.5s;-
 <textarea class="codebox" id="base64code" readonly="readonly"></textarea>
 </div>
 <div class="outputboxes" id="footer">
-<p>Version 1.0.0 &mdash; June 7, 2013</p>
+<p>Version 1.1.0 &mdash; June 9, 2013</p>
 <p><em>Page fully compatible with Chrome 7+, Firefox 4+, IE9+, Safari 5.1+, and Opera 11.6+</em> &mdash; <a href="http://www.kmhcreative.com/labs/CSS3-2-SVG/">About This Utility</a></p>
 <p>Copyright 2011 Kristiana M. Hansen &mdash; Free To Use &amp; Distribute<br/><a href="http://www.kmhcreative.com">www.kmhcreative.com</a></p>
 <p>Updates contributed by <a href="http://www.linkedin.com/in/canthonymartinez/">Anthony Martinez</a></p>
@@ -164,7 +162,7 @@ myAngle,x1,y1,x2,y2,
 gradientType="linear",
 dir,dirl,bgs,col,
 stopsArray=[],colorArray=[],stl,
-units,prev,bl,oldwebkit,error,bgsize,updateb;
+units,prev,prevW,bl,oldwebkit,error,bgsize,updateb;
 
 // AM: Toggle 'batch mode' checkbox based on status of IE9 CSS checkbox
 function b64cbtog(){b64batch.disabled=!b64cb.checked;}
@@ -197,17 +195,17 @@ function notAnAncientBrowser(){var div=document.createElement('div'); div.style.
 function hasInlineSvg(){var svgd = document.createElement('div');svgd.innerHTML='<svg/>';return(svgd.firstChild && svgd.firstChild.namespaceURI)=='http://www.w3.org/2000/svg';}
 
 if(hasInlineSvg())
-	{update.innerHTML='<button class="button right" id="updateb" disabled="disabled">Update</button><p>You can also edit the code in the box directly, then click the "Update" button to apply the changes to the preview below.</p><h2 class="prevhead">Preview:</h2><div id="preview"></div>';
+	{update.innerHTML='<button id="updateb" disabled>Update</button><p>You can edit the output and click "Update" to generate a new preview. If you need to edit the width/height, then you should edit your original input and convert again, to properly update the SVG angle calculation.</p><h2>Preview</h2><div id="preview"><svg width="300px" height="300px" style="background:#ccc"></svg></div>';
 	updateb=document.getElementById('updateb');
 	updateb.onclick=function(){updatePreview();};}
-	else output.readOnly=1; // AM: disable editing of codebox if update function won't work anyway.
 
 // AM: Init function modified and migrated to here.
 document.getElementById('convert').onclick=function(){
-	if(hasInlineSvg()){prev=document.getElementById('preview');prev.innerHTML='';} // AM: preview only visible to browsers with inline SVG support. Also clear preview on each convert.
+	if(input.value===''){output.value='ERROR: This script currently cannot read minds. Please input at least one gradient for it to work with\u2014thanks!';return 0}
+	if(hasInlineSvg()){prev=document.getElementById('preview'),prev.innerHTML='',prevW=prev.clientWidth} // AM: preview only visible to browsers with inline SVG support. Also clear preview on each convert.
 	error=oldwebkit=tofromfix=svgAngle=svg=bgsize=bgsb64output=batchb64output=sel=''; // AM: reset key variables upon each convert. Otherwise, strange gradient renderings may occur.
 	svgHeight = uH!=='' ? uH.value : '300',svgWidth = uW!=='' ? uW.value : '300',
-	units = !document.getElementById('userUnit').checked ? 'px' : '%';
+	units = document.getElementById('userUnit').checked ? 'px' : '%';
 	
 	if(b64batch.checked) // AM: Batch Mode enabled
 		{// AM: The magic sauce that makes Batch Mode possible. Following line is adapted from http://stackoverflow.com/questions/6205017/parse-a-string-of-css-declarations-and-convert-it-to-an-array#answer-6205047.
@@ -215,12 +213,12 @@ document.getElementById('convert').onclick=function(){
 		cssa.pop(); // AM: Last item seems to reliably be an empty string, so, toss it.
 		var csl=cssa.length;cssa.reverse(); // AM: Reverse array order so the while loop will process items in the correct order.
 		// AM: throw error if no CSS selectors found
-		if(csl===0){batchb64output='ERROR: You must have at least one well-formed CSS selector, e.g., .selector{background:linear-gradient(#fff,#000)}, in order for Batch Mode to work.';}
+		if(csl===0){batchb64output='ERROR: You must have at least one well-formed CSS selector, e.g., ".selector{background:linear-gradient(#fff,#000)}", in order for Batch Mode to work.';return 0}
 		while(csl--){sel=cssa[csl].match(/.*?{/);splitGradient(cssa[csl]);} // AM: for each selector, capture the selector and then process the gradient(s)
 		b64code.value=batchb64output;
 		}
 	else{splitGradient(input.value);if(error!==''){b64code.value=error;}}
-	updateb.disabled=output.readOnly=0; // AM: Enable update button and output codebox after successful convert.
+	if(hasInlineSvg()) updateb.disabled=output.readOnly=0; // AM: Enable update button and output codebox after successful convert.
 }
 
 function splitGradient(string){svg64=''; // AM: This must get reset upon each iteration of the css loop above.
@@ -494,7 +492,8 @@ function finishSVG(svg,svg64,bl){var rects='',
 	var svend='</svg>';
 	svg=svhead+svdefs+rects+svend;
 	// Show source code and Preview
-	output.value=svg;prev.innerHTML=svg;
+	output.value=svg;
+	if(hasInlineSvg()){downSizePreview(svg);}
 	// AM: Generate base64 output of SVG, usable in CSS as a gradient fallback for IE9.
 	if(b64cb.checked||bgsize=='yes'){svg64=svhead+svg64+rects+svend; svgToBase64(svg64)}
 }
@@ -505,9 +504,24 @@ function svgToBase64(svg64){svg64=svg64.replace(/\n|<\/?defs>/g,'').replace(/svg
 	if(b64batch.checked&&bgsize==='') batchb64output+=sel+'background:'+b64output+'}\n\n';
 }
 
-function updatePreview(){// AM: function greatly simplified
-	prev.innerHTML=output.value;
+function updatePreview(){
+	downSizePreview(output.value);
 	if(b64cb.checked) svgToBase64(output.value); // AM: Update base64 output
+}
+
+function downSizePreview(svg){ // AM: See if SVG dimensions are bigger than #preview div max-width (1400px), and if so, downsize the dimensions.
+	var editW = svg.match(/" width="(\d+(px|%))/) ? svg.match(/" width="(\d+(px|%))/)[1] : '',editWpx='',
+	editH = svg.match(/height="(\d+(px|%))">/) ? svg.match(/height="(\d+(px|%))">/)[1] : '',editHpx='';
+	if(editW===''||editH===''){alert('Please make sure your SVG width and height are only in integer px or % values, then try updating again.');return 0;}
+	if(editW.match(/%/)){editWpx=parseFloat(editW)/100*prevW} // AM: Convert %s to px.
+	if(editH.match(/%/)){editHpx=parseFloat(editH)/100*prevW}
+	var editWf = editWpx==='' ? parseFloat(editW) : editWpx,
+	editHf = editHpx==='' ? parseFloat(editH) : editHpx;
+	
+	if(editWf>prevW){editWnew=Math.round(editWf/(editWf/prevW)), editHnew=Math.round(editHf/(editWf/prevW));
+	newoutput=svg.replace(editW,editWnew+'px').replace(editH,editHnew+'px');
+	prev.innerHTML='<p><em>The preview has been downsized to fit within the page boundaries. Your output above and the original aspect ratio have been preserved, however.</em></p>'+newoutput;}
+	else prev.innerHTML=svg;
 }
 </script>
 </body>
