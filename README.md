@@ -44,6 +44,15 @@ do not need to be included in the git commit and please change the title of the 
 <li><b>Limited Support (can only do one conversion per page load/refresh):</b> FF3.6-, Opera 10-</li>
 </ul>
 <h3>Overview of major changes, done by Anthony Martinez:</h3>
+<h4><i>Version 1.1.0</i> (June 9, 2013)</h4>
+<ol>
+<li>Improved error-handling, such as to catch empty input and non-pixel/non-percentage dimensions when editing the output to generate a new SVG preview.</li>
+<li>Bug fix: SVG dimensions exceeding available page width would cause previews to get cropped. Now the script detects when the SVG dimensions exceed available page width, and scales the preview down accordingly (without touching your output code).</li>
+<li>Bug fix: After conversion, the SVG element in the preview now has a white background, for more accurate rendering of semi-transparent or transparent gradient colors. Previously, the page's background gradient would alter the rendering of semi-transparent or transparent gradient colors.</li>
+<li>Bug fix: The appearance of all monospaced text (in <code>&lt;code&gt;</code>, <code>&lt;kbd&gt;</code>, <code>&lt;input&gt;</code>, and <code>&lt;textarea&gt;</code> elements) is now standardized, correcting Opera's maverick rendering behavior. Although, to Opera's credit, the new default font of Consolas is the result of Opera's behavior.</li>
+<li>Bug fix: <code>&lt;facepalm&gt;</code> Restored proper functionality to the percent and pixel radio buttons after breaking them in 1.0.0. D'oh! <code>&lt;/facepalm&gt;</code></li>
+<li>Performed further tweaks to HTML and CSS to improve page usability, including adding a placeholder for the SVG preview, and removing of some unnecessary CSS.</li>
+</ol>
 <h4><i>Version 1.0.0</i> (June 7, 2013)</h4>
 <ol>
 <li>The script now detects <code>background-size</code> in input and adjusts behavior accordingly, outputting individual SVG files instead of one layered file, when multiple gradients are used. This allows for gradients to display correctly even when <code>background-size</code> is used.</li>
