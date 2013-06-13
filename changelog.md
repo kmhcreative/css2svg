@@ -1,4 +1,5 @@
-<h1>Changelog for Previous Releases & Archived Versions</h1>
+<h1>Changelog for Previous & Archived Releases</h1>
+<p><em>By Anthony Martinez</em></p>
 <h2>Previous Releases</h2>
 <h3><i>Version 0.9.6</i> (May 28, 2013)</h3>
 <ol>
@@ -28,7 +29,7 @@
 <li>Added multiple background support. Yes! No other SVG or gradient generator he's aware of, even the awesome visualcsstools.com that he drew inspiration from, has this.</li>
 <li>Extended SVG preview display/update capabilites to more browsers (Chrome 7+, IE9+, FF4+, Safari 5.1+, Opera 11.6+).</li>
 </ol>
-<h2>Archived Versions</h2>
+<h2>Archived Versions by KMH Creative</h2>
 <h3><a href="http://www.kmhcreative.com/downloads/CSS2SVG/">Version 0.1</a></h3>
 <p>Preview does not work in Internet Explorer, however the source code output does so you can still make SVG images with it.</p>
 <p>CSS3 Gradient parameters that are <span style="color: #800000;"><strong>NOT</strong></span> supported:</p>
