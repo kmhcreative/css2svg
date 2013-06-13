@@ -1,5 +1,6 @@
 <h1>Advanced Usage Techniques</h1>
-<p>Check out what else the script offers for those who need more power and/or control over the output:</p>
+<p><em>By Anthony Martinez</em></p>
+<p>Check out what else the script offers for those who need more power and/or control over the output!</p>
 <h2>CSS Output for IE9</h2>
 <p><em>(Added in 0.9.0; modified in 1.2.0)</em> Mark the "Generate CSS for IE9 (Data URI Output)" checkbox before clicking "Convert", and then along with the standard SVG output, you'll see another text box with data URI output. This takes the text of the SVG file and embeds it, so you can then plug it into your CSS file without the need for adding extra HTTP requests for images.</p>
 <h3>Extra Thoughts</h3>
