@@ -4,22 +4,18 @@
 <h2><a href="http://jsfiddle.net/camartinez1229/thSxh/show/light/" target="_blank">Try It!</a></h2>
 <h2>Basic Usage Instructions</h2>
 <ol>
-<li>Copy and paste any CSS3 linear gradients into the input box at the top of the utility page. It will accept W3C unprefixed syntax and <code>-moz-</code>, <code>-webkit-</code> (both old and new syntaxes), <code>-o-</code>, and <code>-ms-</code> prefixed syntaxes. It will even accept multiple gradients at once <em>(new in 0.9.0)</em>.</li>
-<li>If you are converting a lot of gradients to SVG, then you may want to mark the "Clear Input on Focus" checkbox so it automatically clears your input each time you click in it to paste/type a new string. Otherwise, if you want to fiddle with the variables in the CSS and see what will change in the output, you should leave the auto-clearing feature off.</li>
-<li>Set a size for your SVG image. Typically for tiled background images, a percentage size is best because it will automatically stretch to fill the background of the element. On the other hand, if you know the gradient is to fill the background of an element with a specific size, you can leave it as pixel-based dimensions. For accurate rendering of angles, pixel dimensions are recommended.</li>
-<li>Click the "Convert" button.</li>
-<li>The source code for your SVG file appears in the output box. Copy and paste it into any plain text editor and save it with the <kbd>.svg</kbd> file extension, and then you'll have your SVG image file.</li>
-<li>The "Preview" output box takes the same information in the source code and builds an actual SVG file into the page for you to see exactly how it will look. You may also edit the source code and click "Update" to see the preview with your changes. <em>Please note the browser compatibility list; older browsers may not support the SVG preview/editing functionality.</em></li>
+<li>For offline usage, download CSS2SVG.htm from the file listing above; that's the only file you need!</li>
+<li>Copy and paste any CSS3 linear gradients into the input box at the top of the script page.</li>
+<li>If you're converting many gradients to SVG, then you may want to mark the "Clear Input on Focus" checkbox so the script automatically clears your input each time you click to paste/type a new string. Otherwise, if you want to fiddle with the variables in the CSS and see what will change in the output, you should leave the auto-clearing feature off.</li>
+<li>Set a size for your SVG image. Typically for tiled background images, a percentage size is best because it will automatically stretch to fill the background of the element. On the other hand, if you know the gradient is to fill the background of an element with a specific size, you can leave it as pixel-based dimensions. <em>For accurate rendering of angles, pixel dimensions are recommended.</em></li>
+<li>Click "Convert".</li>
+<li>Copy and paste the SVG output into any plain text editor and save it as an <kbd>.svg</kbd> file.</li>
+<li><b>That's all you have to do!</b> You'll also see that the "Preview" section takes the same code in your output and inserts an actual SVG file into the page for you to see exactly how the image will look. If you're not satisfied with the appearance, or you just want to change it, then edit the output and click "Update" to refresh the preview. <em>Please note the browser compatibility list; older browsers may not support the SVG preview/editing functionality.</em></li>
 </ol>
+<h2>Gradient Test Cases</h2>
+<p><a href="https://github.com/camartinez1229/css2svg/blob/master/gradient-test-cases.md">Check out some sample gradients</a> to work with to demonstrate the script's functionality.</p>
 <h2>Advanced Usage Techniques</h2>
-<h3>CSS Output for IE9</h3>
-<p><em>(Added in 0.9.0)</em> Mark the "Generate CSS for IE9 (Base64 Output)" checkbox before clicking "Convert", and then along with the standard SVG output, you'll see another text box with base64 output. This takes the text of the SVG file and embeds it, so you can then plug it into your CSS file without the need of adding another HTTP request for an image file. <em>Note that this feature is IE9-specific. If you want to apply an SVG file as base64 to all browsers, then feel free to paste the SVG output text at <a href="http://decodebase64.com/" target="_blank">decodebase64.com</a> to get cross-browser base64 output.</em></p>
-<h3 id="batch">Batch Mode</h3>
-<p><em>(Added in 0.9.5)</em> Mark both the "Generate CSS for IE9 (Base64 Output)" and "Batch Mode" checkboxes, and you'll enable a special mode that lets you convert a whole bunch of gradients at once! Mark these checkboxes before adding any text input, and you'll see an example of how to use Batch Mode, show up in the input text box. Just paste your CSS selectors (containing only gradients) in the input, click "Convert", and you'll see base64 output for each selector appear in the output below. There is no preview or code updating enabled while Batch Mode is active, however.</p>
-<h3>Consideration for <code>background-size</code></h3>
-<p><em>(Added in 1.0.0)</em> If you use <code>background-size</code> in your CSS for custom sizing of your gradients, then include <code>background-size</code> in the script input to alter the script's behavior. The behavior change will only be apparent with input of multiple gradients; the script will make an SVG file for each individual gradient (instead of the default of one layered file for all gradients), then output cross-browser base64 (or IE9-specific if you have the relevant checkbox marked). That way, your CSS <code>background-size</code> will work as expected.</p>
-<p>Why automatic base64 output, however? Because, adding HTTP requests in the form of a bunch of external SVG files reduces performance for your website visitors and therefore is not recommended. Also, if the script detects <code>background-size</code>, it will disable the preview display/update functionality, as the preview won't render properly at this time. A possible fix to re-instate that functionality may come in later releases, however.
-</p>
+<p><a href="https://github.com/camartinez1229/css2svg/blob/master/advanced-usage-techniques.md">Check out advanced usage documentation here.</a></p>
 <h2>How the Script Works</h2>
 <p>Check out the embedded comments in the script for further explanations of the steps it carries out. In short, the script</p>
 <ol>
@@ -37,13 +33,27 @@ do not need to be included in the git commit and please change the title of the 
   &lt;link rel="stylesheet" type="text/css" href="/css/result-light.css"&gt;</p>
 </blockquote>
 <h2>Release Notes</h2>
-<h3>Current Browser Support:</h3>
+<h3>Current Browser Support</h3>
 <ul>
 <li><b>Full Support: </b> Chrome 7+, IE9+, FF4+, Safari 5.1+, Opera 11.6+</li>
 <li><b>SVG Preview/Editing Unavailable</b>: Chrome 6-, IE8-, FF3.6-, Safari 5.0-, Opera 11.5-</li>
-<li><b>Limited Support (can only do one conversion per page load/refresh):</b> FF3.6-, Opera 10-</li>
 </ul>
 <h3>Overview of major changes, done by Anthony Martinez:</h3>
+<h4><i>Version 1.2.0</i> (June 12, 2013)</h4>
+<ol>
+<li>Support for SVG output as base64 is now dropped in favor of partially encoded ASCII, which is more efficient than base64 and is at least somewhat legible, too. Credit for inspiration goes to this <a href="http://coding.smashingmagazine.com/?p=126525">clever article he read on Smashing Magazine</a>, showing him for the first time that data URIs don't always have to be in base64.</li>
+<li>Preview display is now available when using <code>background-size</code> in input. There is and will likely not be any support for editing/updating the output, however. Instead, to make changes, edit your original input and convert again.</li>
+<li>The output boxes and preview get cleared or reset upon toggling Batch Mode.</li>
+<li>Support for FireFox 3.6-, Opera 10-, and perhaps a few other older browsers now have support for performing multiple conversions. Fixes issue #2 on the bottom. It was an old regex parsing quirk, fixed by just adding one line: <code>token.lastIndex=0</code>. Don't you love easy fixes?</li>
+<li>Bug fix: Using <code>background-size</code> in Batch Mode input led to awful errors in output.</li>
+<li>Bug fix: The script did not previously allow for decimal angle measurements lacking at least one leading digit. For example: <code>0.5deg</code> would work, but not <code>.5deg</code>.</li>
+<li>Bug fix: When doing multiple conversions of varying dimensions (including any that exceed available page width and therefore get scaled down to fit the page), the preview may display at an incorrect aspect ratio.</li>
+<li>Bug fix / improvement in error-handling: The SVG output text box and Update button should not activate after a failed conversion.</li>
+<li>Bug fix / improvement in error-handling: The error message for use of the non-standard <code>center</code> keyword in input was not always being thrown properly.</li>
+<li>The script now complies with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode">ECMAScript 5's Strict Mode</a>.</li>
+<li>Further tweaks to the page to improve usability, including adding <code>label</code> elements, making input element text now clickable (not just the radio buttons or checkboxes themselves).</li>
+<li>The CSS component is now slimmed down by a further 20%, thanks to the removal of unneeded code and optimization of the remaining code. Now, if getting the size of the JS component under control were only as simple... Actually, despite all the changes in this release, the JS is about 5% smaller compared to 1.1.0, but that could be attributed mostly to the migration of the mammoth test case out of the script and into a separate file (<a href="https://github.com/camartinez1229/css2svg/blob/master/gradient-test-cases.md">test case file</a>) for better discoverability. Ignoring that removal, the JS actually saw a 5% gain in file size.</li>
+</ol>
 <h4><i>Version 1.1.0</i> (June 9, 2013)</h4>
 <ol>
 <li>Improved error-handling, such as to catch empty input and non-pixel/non-percentage dimensions when editing the output to generate a new SVG preview.</li>
@@ -60,38 +70,11 @@ do not need to be included in the git commit and please change the title of the 
 <li>Bug fix: Colors defined as three-digit hex notation at a color-stop explicitly labeled 100% would get incorrectly detected as a six-digit color, e.g., <code>#RGB100</code> instead of <code>#RGB</code>. The script's regex is now updated to avoid this error.</li>
 <li>Tweaked HTML and CSS to improve page usability.</li>
 </ol>
-<h4><i>Version 0.9.6</i> (May 28, 2013)</h4>
-<ol>
-<li>Improved support for IE9-. They can now generate CSS base64 output and execute Batch Mode, thanks to the tiny shim he found for the <code>window.btoa</code> function.</li>
-<li>Improved error-handling in Batch Mode. If any individual gradients return an error, processing continues to the end, and those gradients that returned an error are noted in the output.</li>
-<li>Improved support for IE8-, FireFox 2-, Safari 3.0-, and Opera 9.6-. They will now skip over the CSS color validation loop, thereby avoiding any errors caused by having <code>rgba</code> and/or <code>hsl/a</code> colors in the input gradient(s). Fixes issue #3 on the bottom.</li>
-<li>Bug fix for IE8-: most input color names smaller than 8 letters would output a dud string in the SVG. Now the input color names get output as is, as expected.</li>
-</ol>
-<h4><i>Version 0.9.5</i> (May 27, 2013)</h4>
-<ol>
-<li>Added a Batch Mode to generate base64 CSS output for multiple selectors at once. Yes! An exclusive feature, as far as he knows. Born out of frustration with the limitations of existing LESS mixins and online gradient generators, this blows everything out of the water :) Requires <del>IE10</del> <ins>any IE</ins> or any recent release of Chrome, FF, Safari, or Opera; <del>it won't work in IE9-</del>.</li>
-<li>Optimized IE9 base64 output to retain original <code>rgba</code>/<code>hsla</code>/<code>transparent</code> colors, saving a few extra bytes per stop.</li>
-<li>Migrated all JS event handlers into the <code>&lt;script&gt;</code> block to separate content and behavior.</li>
-</ol>
-<h4><i>Version 0.9.0</i> (May 26, 2013)</h4>
-<ol>
-<li>Added full support for new unprefixed W3C syntax gradients (using <code>to &lt;destination&gt;</code> syntax).</li>
-<li>Added logic to calculate degrees differently, to match the new W3C syntax. For example, try <code>-moz-linear-gradient(72deg,#fff,#000)</code> and <code>linear-gradient(72deg,#fff,#000)</code> in FireFox CSS &#8212; they render differently. Then input them into this script, and they should each render in SVG the same way they do in CSS.</li>
-<li>If all color stop percentages are missing, then the script will now interpolate them, as happens in CSS. If only the start and ending stops are missing, the script will add them.</li>
-<li>If no direction keywords or angle measurements are specified, the script will now assume defaults, as happens in CSS.</li>
-<li>"Angle units"? Yeah, there's now support for all valid units, (<code>deg</code>, <code>rad</code>, <code>grad</code>, &amp; <code>turn</code>). Plus negative values and decimals work.</li>
-<li>Improved support for old Webkit syntax &#8212; <code>from()</code> and <code>to()</code> will work as expected, even with decimals, and even if <code>to()</code> comes before other color-stops (as is acceptable).</li>
-<li>Added support for <code>rgb/a</code> percents, <code>hsl/a</code>, floating points in <code>rgb/a</code> and <code>hsl/a</code>, <a href="http://www.w3.org/TR/SVG/types.html#ColorKeywords" title="List of valid color keywords in CSS3/SVG" target="_blank">color names</a>, and the <code>transparent</code> keyword.</li>
-<li>Added logic to convert alpha values and <code>transparent</code> to proper SVG <code>stop-opacity</code> values.</li>
-<li>Overhauled the SVG vector generation logic, greatly improving accuracy.</li>
-<li>Added optional IE9 base64 output for CSS.</li>
-<li>Added multiple background support. Yes! No other SVG or gradient generator he's aware of, even the awesome visualcsstools.com that he drew inspiration from, has this.</li>
-<li>Extended SVG preview display/update capabilites to more browsers (Chrome 7+, IE9+, FF4+, Safari 5.1+, Opera 11.6+).</li>
-</ol>
+<p><a href="https://github.com/camartinez1229/css2svg/blob/master/changelog.md">See Full Changelog Here</a></p>
 <h2>Known Issues</h2>
 <ol>
 <li>Still no radial-gradient support yet, but Anthony plans to figure that out eventually!</li>
-<li>For some reason, FF3.6 and below (and Opera 10 and below) can only do one conversion per page load/refresh. Those browsers are ancient, though. So, any fixes for them will be of lowest priority for us, but you're welcome to contribute a fix! This issue is odd, though. Even IE7 can do multiple conversions! Heck, so can IE6!</li>
+<li><ins>&#8212;Fixed in 1.2.0&#8212;</ins> <del>For some reason, FF3.6 and below (and Opera 10 and below) can only do one conversion per page load/refresh. Those browsers are ancient, though. So, any fixes for them will be of lowest priority for us, but you're welcome to contribute a fix! This issue is odd, though. Even IE7 can do multiple conversions! Heck, so can IE6!</del></li>
 <li><ins>&#8212;Fixed in 0.9.6&#8212;</ins> <del>Older browsers that don't fully support <code>rgba</code> or <code>hsl/a</code> will trip on the included color validation loop, if input gradient(s) has/have <code>rgba</code> and/or <code>hsl/a</code>.</del></li>
 </ol>
 <h2>Road Map</h2>
@@ -99,25 +82,12 @@ do not need to be included in the git commit and please change the title of the 
 <h3>Version 1.X</h3>
 <ol>
 <li><code>canvas</code> output support, to facilitate converting SVG output into bitmap images (e.g., PNG) that IE8- and other ancient browsers lacking SVG support can read.</li>
-<li>If possible, reinstate preview functionality for when <code>background-size</code> is used.</li>
+<li><ins>&#8212;Done in 1.2.0&#8212;</ins> <del>If possible, reinstate preview functionality for when <code>background-size</code> is used.</del></li>
 </ol>
 <h3>Version 2.X</h3>
 <ol>
 <li>Radial gradient support.</li>
 </ol>
-<h2>Archived Versions</h2>
-<h3><a href="http://www.kmhcreative.com/downloads/CSS2SVG/">Version 0.1</a></h3>
-<p>Preview does not work in Internet Explorer, however the source code output does so you can still make SVG images with it.</p>
-<p>CSS3 Gradient parameters that are <span style="color: #800000;"><strong>NOT</strong></span> supported:</p>
-<ul>
-<li>color stops expressed as decimals (ex. &#8220;0.7&#8243;) instead of percentages (ex. &#8220;70%&#8221;)</li>
-<li>The old webkit &#8220;from&#8221; and &#8220;to&#8221; syntax is not supported. So this will not work:<br />
-<em>-webkit-gradient(linear, 0% 0%, 0% 100%, from(#666666), to(#666666), color-stop(.6,#333))<br />
-</em>However, the old syntax in this format IS supported:<br />
-<em>background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#666666), color-stop(100%,#666666), color-stop(60%,#333333));</em></li>
-<li>No support for &#8220;hsl&#8221; or &#8220;hsla&#8221; color stops. Only &#8220;hex,&#8221; &#8220;rgb&#8221; and &#8220;rgba&#8221; are supported. However &#8220;rgba&#8221; (alpha channel) support varies across browsers so you will probably want to change them to &#8220;rgb&#8221; instead for better compatibility.</li>
-<li>The converter currently does not support &#8220;radial&#8221; gradients at all!</li>
-</ul>
 <h2>Acknowledgments</h2>
 <p>Original Project Page: <a href="http://www.kmhcreative.com/labs/css3-2-svg/" target="_blank">http://www.kmhcreative.com/labs/css3-2-svg/</a></p>
 <p>I&#8217;m not very good with math so I would never have been able to figure out how to build this without the following:</p>
