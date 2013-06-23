@@ -1,6 +1,13 @@
 <h1>Changelog for Previous & Archived Releases</h1>
 <p><em>By Anthony Martinez</em></p>
 <h2>Previous Releases</h2>
+<h3><i>Version 1.0.0</i> (June 7, 2013)</h3>
+<ol>
+<li>The script now detects <code>background-size</code> in input and adjusts behavior accordingly, outputting individual SVG files instead of one layered file, when multiple gradients are used. This allows for gradients to display correctly even when <code>background-size</code> is used.</li>
+<li>Bug fix: When input consists of multiple gradients, and more than one of those gradients have destination or origin keywords, e.g., <code>top right</code> or <code>to bottom</code>, the script would calculate the SVG coordinates incorrectly (reusing the coords from a previous gradient). This should happen no more.</li>
+<li>Bug fix: Colors defined as three-digit hex notation at a color-stop explicitly labeled 100% would get incorrectly detected as a six-digit color, e.g., <code>#RGB100</code> instead of <code>#RGB</code>. The script's regex is now updated to avoid this error.</li>
+<li>Tweaked HTML and CSS to improve page usability.</li>
+</ol>
 <h3><i>Version 0.9.6</i> (May 28, 2013)</h3>
 <ol>
 <li>Improved support for IE9-. They can now generate CSS base64 output and execute Batch Mode, thanks to the tiny shim he found for the <code>window.btoa</code> function.</li>
