@@ -102,7 +102,7 @@ background:#a00;color:#fff;text-shadow:1px 1px 5px #444;-webkit-transition:.5s;-
 <textarea id="uricode" readonly="readonly"></textarea>
 </div>
 <div id="footer">
-<p>Version 1.5.0 &mdash; June 23, 2013</p>
+<p>Version 1.5.1 &mdash; June 23, 2013</p>
 <p><em>Page fully compatible with Chrome 7+, Firefox 4+, IE9+, Safari 5.1+, and Opera 11.6+</em> &mdash; <a href="http://www.kmhcreative.com/labs/CSS3-2-SVG/">About This Utility</a></p>
 <p>&copy; 2011 Kristiana M. Hansen &mdash; Free To Use &amp; Distribute<br/><a href="http://www.kmhcreative.com">www.kmhcreative.com</a></p>
 <p>Updates contributed by <a href="http://www.linkedin.com/in/canthonymartinez/">Anthony Martinez</a></p>
@@ -113,7 +113,7 @@ background:#a00;color:#fff;text-shadow:1px 1px 5px #444;-webkit-transition:.5s;-
 <a id="git" href="https://github.com/kmhcreative/css2svg">Fork Us On GitHub</a>
 <script>
 /*!
-* CSS2SVG 1.5.0 -- June 23, 2013
+* CSS2SVG 1.5.1 -- June 23, 2013
 * Original script by Kristiana M. Hansen -- www.kmhcreative.com
 * Updates by Anthony Martinez -- www.linkedin.com/in/canthonymartinez/
 * Licensed Under Creative Commons Attribution-Sharealike 3.0 -- creativecommons.org/licenses/by-sa/3.0/
@@ -233,7 +233,7 @@ convert.onclick=function(){
 }
 
 function splitGradient(string){bgsUriOut=dir=error=uri=''; // AM: These must get reset upon each iteration of the css loop above
-	if(!string.indexOf('radial')){error="The script currently supports only LINEAR gradients.";return 0;}
+	if(string.match(/radial/)){error="The script currently supports only LINEAR gradients.";return 0;}
 	else if(string.match(/\d(r?em|ex|ch|vh|vm|vmin|vmax)/)){error='Font- or viewport-relative units are not supported. Valid units are "%", "px", "cm", "mm", "in", "pt", and "pc".';return 0;}
 	// AM: Check for incorrect hex colors here since they may escape the color check below and affect rendering, cause the script to trip, or other weird stuff.
 	else if(string.match(/#[\da-f]{4,5}\W|#[\da-f]{1,2}\W/)){error=cocheck;return 0;}
@@ -244,20 +244,20 @@ function splitGradient(string){bgsUriOut=dir=error=uri=''; // AM: These must get
 	if(!!bgSize){bgs.reverse();} // AM: Reverse gradients to process in correct order if background-size detected
 
 	while(bl--){rep='';stopArr=[];
-		if(!bgs[bl].indexOf('repeating')){rep='yes';}
+		if(bgs[bl].match(/repeating/)){rep='yes';}
 		// AM: Find angle
 		if(bgs[bl].match(/\-?\d{0,3}(\.\d+)?(deg|g?rad\b|turn)/)){dir=bgs[bl].match(/\-?\d{0,3}(?:\.\d+)?(?:deg|g?rad|turn)/gi);
 			if(dir[1].match(/g?rad|turn/)) // AM: convert other units to degrees
 				{var pf1=parseFloat(dir[1]);
-				if(!dir[1].indexOf('grad')){dir[1]=pf1/1.1111111;}
-				else if(!dir[1].indexOf('rad')){dir[1]=pf1/0.0174532925199;}
+				if(dir[1].match(/grad/)){dir[1]=pf1/1.1111111;}
+				else if(dir[1].match(/rad/)){dir[1]=pf1/0.0174532925199;}
 				else{dir[1]=pf1*360;}
 				}
 			dir=parseFloat(dir[1]);
 			if(!bgs[bl].match(/-(moz|webkit|o|ms)-/)){dir=90-dir;} // AM: Degrees in unprefixed W3C syntax are measured differently
 		}
 		// AM: isolate old WebKit syntax
-		else if(!bgs[bl].indexOf('-webkit-gradient')){var s=/left|right|\btop\b|bottom|center/g;dl=4;
+		else if(bgs[bl].match(/-webkit-gradient/)){var s=/left|right|\btop\b|bottom|center/g;dl=4;
 			if(bgs[bl].match(s))
 				{dir=bgs[bl].match(s);
 				while(dl--){dir[dl]=dir[dl].replace(/left|top/g,0).replace(/right|bottom/g,100).replace(/center/g,50);} // AM: convert keywords to corresponding percents
@@ -281,7 +281,7 @@ function splitGradient(string){bgsUriOut=dir=error=uri=''; // AM: These must get
 			if(dir[0].match(/(right|left)/)){dir[0]=dir[0].replace(/(right|left)\s(top|bottom)/g,"$2$1");} // AM: normalize keyword order for normalizeAngle
 			dir=dir[0].replace(/\s/g,'');
 		}
-		else if(!bgs[bl].indexOf('center')){dir='tobottom';} // AM: no angle or keywords defined; use default 'to bottom'. If 'center' is found, error will be thrown below in normalizeAngle.
+		else if(!bgs[bl].match('center')){dir='tobottom';} // AM: no angle or keywords defined; use default 'to bottom'. If 'center' is found, error will be thrown below in normalizeAngle.
 
 		bgs[bl]=bgs[bl].replace(/.*?{|color-stop|repeating|linear|radial|gradient|-(moz|webkit|o|ms)-|background(-image)?\:|deg|g?rad|turn|to\s|\btop\b|right|left|bottom|center|-|^\(,|\)$| /gm,'').
 		// AM: If stop-values are present, bound them with '
@@ -417,6 +417,7 @@ function buildSvg(bl){var sGrad='',uGrad='',sj=stopArr.join(),
 
 	if(!!rep) // AM: Logic for repeating gradients. It finds the difference between the last & first offsets, multiplies coords by that to resize the gradient and adjusts offsets to make them relative to the new size.
 		{var stops=sGrad.match(/t='(\d?\.?\d+)'/g),sl,sl2,nStops=[];sl=sl2=stops.length;
+		console.log('stops='+stops);
 		while(sl--){stops[sl]=stops[sl].replace(/t='|'/g,'');}
 		var pso=parseFloat(stops[sl2-1]),diff=pso-parseFloat(stops[0]),mul=1/pso;
 		while(sl2--)
