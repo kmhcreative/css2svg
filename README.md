@@ -5,12 +5,12 @@
 <h2>Basic Usage Instructions</h2>
 <ol>
 <li>For offline usage, download CSS2SVG.htm from the file listing above; that's the only file you need!</li>
-<li>Copy and paste any CSS3 linear gradients into the input box at the top of the script page.</li>
-<li>If you're converting many gradients to SVG, then you may want to mark the "Clear Input on Focus" checkbox so the script automatically clears your input each time you click to paste/type a new string. Otherwise, if you want to fiddle with the variables in the CSS and see what will change in the output, you should leave the auto-clearing feature off.</li>
-<li>Set a size for your SVG image. Typically for tiled background images, a percentage size is best because it will automatically stretch to fill the background of the element. On the other hand, if you know the gradient is to fill the background of an element with a specific size, you can leave it as pixel-based dimensions. <em>For accurate rendering of angles, pixel dimensions are recommended.</em></li>
+<li>Copy and paste any gradients into the input box at the top of the script page. <code>linear-gradient</code> and now <code>repeating-linear-gradient</code> <em>(new in Version 1.5.0)</em> are supported, with or without prefixes.</li>
+<li>If you're converting many gradients, then you may want to mark the "Clear Input on Focus" checkbox to expedite pasting/typing new gradients.</li>
+<li>Declare a size. Typically for tiled background images, a percentage is best because it will stretch to fill the element's background. However, if you know the gradient is to fill the background of an element with a specific size, you can leave it as pixel-based dimensions. <em>For accurate rendering of angles, pixels are recommended.</em></li>
 <li>Click "Convert".</li>
 <li>Copy and paste the SVG output into any plain text editor and save it as an <kbd>.svg</kbd> file.</li>
-<li><b>That's all you have to do!</b> You'll also see that the "Preview" section takes the same code in your output and inserts an actual SVG file into the page for you to see exactly how the image will look. If you're not satisfied with the appearance, or you just want to change it, then edit the output and click "Update" to refresh the preview. <em>Please note the browser compatibility list; older browsers may not support the SVG preview/editing functionality.</em></li>
+<li><b>That's all you have to do!</b> You'll also see that the "Preview" section takes the same code in your output and inserts an actual SVG file into the page for you to see how the image will look. If you're not satisfied with the appearance, or you just want to change it, then edit the output and click "Update" to refresh the preview. <em>Please note the browser compatibility list; older browsers may not support the SVG preview/editing functionality.</em></li>
 </ol>
 <h2>Gradient Test Cases</h2>
 <p><a href="https://github.com/camartinez1229/css2svg/blob/master/gradient-test-cases.md">Check out some sample gradients</a> to work with to demonstrate the script's functionality.</p>
@@ -39,12 +39,31 @@ do not need to be included in the git commit and please change the title of the 
 <li><b>SVG Preview/Editing Unavailable</b>: Chrome 6-, IE8-, FF3.6-, Safari 5.0-, Opera 11.5-</li>
 </ul>
 <h3>Overview of major changes, done by Anthony Martinez:</h3>
+<h4><i>Version 1.5.1</i> (June 23, 2013)</h4>
+<ol>
+<li>This is a quick maintenance release to quash a few bugs that had somehow crept in just before committing 1.5.0 (and that escaped detection for all of a few minutes after committing)&#8212;d'oh!</li>
+<li>Bug fix: Logic for calculating <code>repeating-linear-gradient</code> color-stops was not being triggered properly.</li>
+<li>Bug fix: Error message was being thrown unnecessarily for gradients with no angle or origin/destination keywords defined.</li>
+</ol>
+<h4><i>Version 1.5.0</i> (June 23, 2013)</h4>
+<ol>
+<li>Significantly improved gradient stops calculation. Now, any gradient with any number of missing stops should get converted properly.</li>
+<li>Added support for absolute units in gradient color-stops: you may now use <code>px</code>, <code>cm</code>, <code>mm</code>, <code>in</code>, <code>pt</code>, and <code>pc</code>.</li>
+<li>Added experimental support for <code>repeating-linear-gradient</code>. The script produces output with correct angles (arguably the most important part); however, eagle-eyed observers will notice discrepancies from CSS rendering&#8212;this is especially the case when the first color stop is not equal to zero. Future updates may correct such discrepancies if possible.</li>
+<li>Bug fix: Due to the way the script previously handled missing color-stops, some gradients with at least three stops, where the initial color-stop(s) is/are defined and the last two left off, were not rendering properly.</li>
+<li>Bug fix: A temporary <code>div</code> variable used in converting color names to hex was not being cleaned up properly after execution, leading to accumulation of unneeded divs in the page DOM with multiple conversions.</li>
+<li>Bug fix: Gradients with no angle or origin/destination keywords defined, with a color name at the first color-stop would not convert properly when the first color-stop is explicitly labeled (e.g., <code>linear-gradient(transparent 0%, ...)</code> were not working).</li>
+<li>Bug fix / improvement in error-handling: <code>hsl/a</code> colors with hues >360 degrees were not converting to the proper color.</li>
+<li>Bug fix / improvement in error-handling: The script was silently allowing hex colors not in proper three- or six-digit notation, instead of throwing an error in the color validation check.</li>
+<li>Added further enhancements to the page's usability. Now, you can perform a conversion or update by pressing <kbd>shift</kbd>+<kbd>enter</kbd> inside the input/output <code>textarea</code>s, or pressing <kbd>enter</kbd> when the radio buttons, checkboxes, or dimension inputs have focus.</li>
+<li>Despite the significant updates as listed above, the page code is now about 5% smaller compared to Version 1.2.0, thanks to various micro-optimizations.</li>
+</ol>
 <h4><i>Version 1.2.0</i> (June 12, 2013)</h4>
 <ol>
 <li>Support for SVG output as base64 is now dropped in favor of partially encoded ASCII, which is more efficient than base64 and is at least somewhat legible, too. Credit for inspiration goes to this <a href="http://coding.smashingmagazine.com/?p=126525">clever article he read on Smashing Magazine</a>, showing him for the first time that data URIs don't always have to be in base64.</li>
 <li>Preview display is now available when using <code>background-size</code> in input. There is and will likely not be any support for editing/updating the output, however. Instead, to make changes, edit your original input and convert again.</li>
 <li>The output boxes and preview get cleared or reset upon toggling Batch Mode.</li>
-<li>Support for FireFox 3.6-, Opera 10-, and perhaps a few other older browsers now have support for performing multiple conversions. Fixes issue #2 on the bottom. It was an old regex parsing quirk, fixed by just adding one line: <code>token.lastIndex=0</code>. Don't you love easy fixes?</li>
+<li>Firefox 3.6-, Opera 10-, and perhaps a few other older browsers now have support for performing multiple conversions. Fixes issue #2 on the bottom. It was an old regex parsing quirk, fixed by just adding one line: <code>token.lastIndex=0</code>. Don't you love easy fixes?</li>
 <li>Bug fix: Using <code>background-size</code> in Batch Mode input led to awful errors in output.</li>
 <li>Bug fix: The script did not previously allow for decimal angle measurements lacking at least one leading digit. For example: <code>0.5deg</code> would work, but not <code>.5deg</code>.</li>
 <li>Bug fix: When doing multiple conversions of varying dimensions (including any that exceed available page width and therefore get scaled down to fit the page), the preview may display at an incorrect aspect ratio.</li>
@@ -63,13 +82,6 @@ do not need to be included in the git commit and please change the title of the 
 <li>Bug fix: <code>&lt;facepalm&gt;</code> Restored proper functionality to the percent and pixel radio buttons after breaking them in 1.0.0. D'oh! <code>&lt;/facepalm&gt;</code></li>
 <li>Performed further tweaks to HTML and CSS to improve page usability, including adding a placeholder for the SVG preview, and removing of some unnecessary CSS.</li>
 </ol>
-<h4><i>Version 1.0.0</i> (June 7, 2013)</h4>
-<ol>
-<li>The script now detects <code>background-size</code> in input and adjusts behavior accordingly, outputting individual SVG files instead of one layered file, when multiple gradients are used. This allows for gradients to display correctly even when <code>background-size</code> is used.</li>
-<li>Bug fix: When input consists of multiple gradients, and more than one of those gradients have destination or origin keywords, e.g., <code>top right</code> or <code>to bottom</code>, the script would calculate the SVG coordinates incorrectly (reusing the coords from a previous gradient). This should happen no more.</li>
-<li>Bug fix: Colors defined as three-digit hex notation at a color-stop explicitly labeled 100% would get incorrectly detected as a six-digit color, e.g., <code>#RGB100</code> instead of <code>#RGB</code>. The script's regex is now updated to avoid this error.</li>
-<li>Tweaked HTML and CSS to improve page usability.</li>
-</ol>
 <p><a href="https://github.com/camartinez1229/css2svg/blob/master/changelog.md">See Full Changelog Here</a></p>
 <h2>Known Issues</h2>
 <ol>
@@ -78,15 +90,15 @@ do not need to be included in the git commit and please change the title of the 
 <li><ins>&#8212;Fixed in 0.9.6&#8212;</ins> <del>Older browsers that don't fully support <code>rgba</code> or <code>hsl/a</code> will trip on the included color validation loop, if input gradient(s) has/have <code>rgba</code> and/or <code>hsl/a</code>.</del></li>
 </ol>
 <h2>Road Map</h2>
-<p>Anthony intends to continue updating this script as time allows. Here's what he plans to implement:</p>
-<h3>Version 1.X</h3>
-<ol>
-<li><code>canvas</code> output support, to facilitate converting SVG output into bitmap images (e.g., PNG) that IE8- and other ancient browsers lacking SVG support can read.</li>
-<li><ins>&#8212;Done in 1.2.0&#8212;</ins> <del>If possible, reinstate preview functionality for when <code>background-size</code> is used.</del></li>
-</ol>
+<p>Anthony intends to continue updating this script as time allows. Here's what he plans to implement (subject to change):</p>
 <h3>Version 2.X</h3>
 <ol>
 <li>Radial gradient support.</li>
+</ol>
+<h3>Version 3.X</h3>
+<ol>
+<li><code>canvas</code> output support, to facilitate converting SVG output into bitmap images (e.g., PNG) that IE8- and other ancient browsers lacking SVG support can read.</li>
+<li>(Maybe?) A tabbed interface to group the SVG code output, data URI output, canvas output, and SVG preview into one central location.</li>
 </ol>
 <h2>Acknowledgments</h2>
 <p>Original Project Page: <a href="http://www.kmhcreative.com/labs/css3-2-svg/" target="_blank">http://www.kmhcreative.com/labs/css3-2-svg/</a></p>
