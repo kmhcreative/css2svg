@@ -42,3 +42,6 @@ mediumaquamarine,mediumspringgreen,lightgoldenrodyellow)
 <pre><code>linear-gradient(124deg,rgba(248,248,248,.66),rgba(0,128,0,.44),rgba(0,0,128,.22)),
 linear-gradient(to bottom left,red,orange,yellow,green,blue,indigo,violet);
 background-size:25% 25%,100% 100%</code></pre>
+<h2><code>repeating-linear-gradient</code> Test Case</h2>
+<p>Try out this gradient to showcase the repeating functionality added to Version 1.5.0+:</p>
+<pre><code>repeating-linear-gradient(112deg,gold,gray,white 45px,purple 46px,white 47px,blue 125px)</code></pre>

@@ -13,7 +13,7 @@ body{font:1em/1.35 sans-serif;background:#c1c4ce;overflow-x:hidden;
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f5f7',endColorstr='#c1c4ce');
 	background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3ClinearGradient id='g1' x2='0' y2='1'%3E%3Cstop stop-color='%23f5f5f7'/%3E%3Cstop offset='1' stop-color='%23c1c4ce'/%3E%3C/linearGradient%3E%3Crect width='100%25' height='100%25' fill='url(%23g1)'/%3E%3C/svg%3E");
 	background:-moz-linear-gradient(#f5f5f7,#c1c4ce);background:linear-gradient(#f5f5f7,#c1c4ce)}
-	
+
 a{text-decoration:none;border-bottom:solid 1px}label>a{border:0;vertical-align:super;font:italic 90%/0 sans-serif}a:hover{background:#ff7}
 div,svg,textarea,#output{display:block;margin:.25em auto}
 h1,h2,.no-js,p.inputboxes,button,#footer,#git{text-align:center}
@@ -28,6 +28,7 @@ input:disabled+label{color:#aaa}
 #userH,#userW,textarea,code,kbd{font:normal 1em Consolas,monospace,serif}
 #userH,#userW,textarea{border:solid 1px #333;font-size:75%;overflow:auto\9} /* AM: overflow:auto only for IE, to hide scrollbars on textarea until needed. */
 #userH,#userW{width:60px;text-align:right}
+#wrap{position:relative}
 
 button{border:1px solid #fff;float:right;margin:0 0 0 2em;height:35px;min-width:75px;font-weight:700;cursor:pointer;
 	-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;
@@ -38,7 +39,7 @@ button:disabled{cursor:not-allowed}
 button:not(:disabled):hover,button:focus{color:#fff;
 	background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3ClinearGradient id='g1' x2='0' y2='1'%3E%3Cstop stop-color='%237d7e7d'/%3E%3Cstop offset='1' stop-color='%230e0e0e'/%3E%3C/linearGradient%3E%3Crect width='100%25' height='100%25' fill='url(%23g1)'/%3E%3C/svg%3E");
 	background:linear-gradient(#7d7e7d,#0e0e0e)}
-#convert{color:#fff;background:#499bea;
+#convert{position:absolute;top:0;right:0;color:#fff;background:#499bea;
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#499bea',endColorstr='#207ce5');
 	background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3ClinearGradient id='g1' x2='0' y2='1'%3E%3Cstop stop-color='%23499bea'/%3E%3Cstop offset='1' stop-color='%23207ce5'/%3E%3C/linearGradient%3E%3Crect width='100%25' height='100%25' fill='url(%23g1)'/%3E%3C/svg%3E");
 	background:-moz-linear-gradient(#499bea,#207ce5);background:linear-gradient(#499bea,#207ce5)}
@@ -62,7 +63,7 @@ svg{margin:0 auto;box-shadow:0 0 8px #777;background:#fff}
 font:700 1em/1.4 Corbel,Candara,'Segoe UI';
 background:#a00;color:#fff;text-shadow:1px 1px 5px #444;-webkit-transition:.5s;-moz-transition:.5s;-o-transition:.5s;transition:.5s;
 -webkit-box-shadow:0 0 0 1px #a00,0 0 9px #999;-moz-box-shadow:0 0 0 1px #a00,0 0 9px #999;box-shadow:0 0 0 1px #a00,0 0 9px #777;
-/* AM: Webkit needs special treatment (the translate3d) to compensate for awful font rendering. Blech! */
+/* AM: WebKit needs special treatment (the translate3d) to compensate for awful font rendering. Blech! */
 -webkit-transform:rotate(45deg) translate3d(0,0,0);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);-o-transform:rotate(45deg);transform:rotate(45deg)}
 #git:hover{background:#fc0;-webkit-box-shadow:0 0 0 1px #fc0,0 0 9px #777;-moz-box-shadow:0 0 0 1px #fc0,0 0 9px #777;box-shadow:0 0 0 1px #fc0,0 0 9px #777}
 }
@@ -76,19 +77,23 @@ background:#a00;color:#fff;text-shadow:1px 1px 5px #444;-webkit-transition:.5s;-
 </p>
 <div class="inputboxes">
 	<p>Enter any CSS3 linear gradient below. <code>-moz-</code>, <code>-webkit-</code>, <code>-o-</code>, <code>-ms-</code>, or W3C unprefixed syntaxes are supported, as are multiple gradients in <a href="http://www.css3.info/preview/multiple-backgrounds/">CSS multiple background syntax</a>. The <code><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-size">background-size</a></code> property is also supported.</p>
+	<form action="javascript:void(0)">
 	<textarea id="cssinput"></textarea>
-	<input type="checkbox" id="clearit"/><label for="clearit">Clear Input Box on Focus</label> 
-	<button id="convert">Convert!</button>
+	<div id="wrap">
+	<input type="checkbox" id="clearit"/><label for="clearit">Clear Input Box on Focus</label>
 	<div><input type="checkbox" id="uricheck"/><label for="uricheck">Generate CSS for IE9 (Data URI Output) <a href="http://css-tricks.com/data-uris/" title="Learn more about data URIs">(?)</a></label>
 	<input type="checkbox" id="batch" disabled="disabled"/><label for="batch">Batch Mode <a href="https://github.com/camartinez1229/css2svg/blob/master/advanced-usage-techniques.md#batch-mode" title="Read explanation of feature on Github page">(?)</a></label></div>
-	<p>SVG Width: <input id="userW" value="300"/> SVG Height: <input id="userH" value="300"/>
+	<p>Width: <input id="userW"/> Height: <input id="userH"/>
 	<input type="radio" name="userUnit" id="per"/><label for="per">Percent</label>
 	<input type="radio" name="userUnit" id="userUnit" checked="checked"/><label for="userUnit">Pixels</label></p>
+	<button id="convert">Convert!</button>
+	</div>
+	</form>
 </div>
 
 <div class="outputboxes">
 <div id="outputtext">
-<p>For accurate rendering, specify a width and height above, at or close to the dimensions at which you plan to use the SVG. After clicking "Convert", paste the output below into a text editor and save as an <kbd>.svg</kbd> file.</p>
+<p>For accurate rendering, specify a width and height above matching the size at which you plan to use the SVG. Otherwise, the script assumes a 300x300 pixel default. After clicking "Convert", paste the output below into a text editor and save as an <kbd>.svg</kbd> file.</p>
 <textarea id="output" readonly="readonly"></textarea>
 </div>
 <div id="updatetext"></div>
@@ -97,7 +102,7 @@ background:#a00;color:#fff;text-shadow:1px 1px 5px #444;-webkit-transition:.5s;-
 <textarea id="uricode" readonly="readonly"></textarea>
 </div>
 <div id="footer">
-<p>Version 1.2.0 &mdash; June 12, 2013</p>
+<p>Version 1.5.1 &mdash; June 23, 2013</p>
 <p><em>Page fully compatible with Chrome 7+, Firefox 4+, IE9+, Safari 5.1+, and Opera 11.6+</em> &mdash; <a href="http://www.kmhcreative.com/labs/CSS3-2-SVG/">About This Utility</a></p>
 <p>&copy; 2011 Kristiana M. Hansen &mdash; Free To Use &amp; Distribute<br/><a href="http://www.kmhcreative.com">www.kmhcreative.com</a></p>
 <p>Updates contributed by <a href="http://www.linkedin.com/in/canthonymartinez/">Anthony Martinez</a></p>
@@ -107,12 +112,13 @@ background:#a00;color:#fff;text-shadow:1px 1px 5px #444;-webkit-transition:.5s;-
 
 <a id="git" href="https://github.com/kmhcreative/css2svg">Fork Us On GitHub</a>
 <script>
-/*! CSS2SVG 1.2.0 -- June 12, 2013
- * Original script by Kristiana M. Hansen -- www.kmhcreative.com
- * Updates by Anthony Martinez -- www.linkedin.com/in/canthonymartinez/
- * Licensed Under Creative Commons Attribution-Sharealike 3.0 -- creativecommons.org/licenses/by-sa/3.0/
- * Permission hereby granted to use or modify in any way you see fit, as long as this notice stays intact.
- */
+/*!
+* CSS2SVG 1.5.1 -- June 23, 2013
+* Original script by Kristiana M. Hansen -- www.kmhcreative.com
+* Updates by Anthony Martinez -- www.linkedin.com/in/canthonymartinez/
+* Licensed Under Creative Commons Attribution-Sharealike 3.0 -- creativecommons.org/licenses/by-sa/3.0/
+* Permission hereby granted to use or modify in any way you see fit, as long as this notice stays intact.
+*/
 
 (function(){"use strict"; // AM: Activate stricter JS mode on modern browsers.
 
@@ -121,12 +127,12 @@ var ML="+t.<ma 1hn2czlgi=or@:\"e>9/f",MI="G5I34A;2=?54>C1?>0H::7<F9?1B545;GE4A;2
 while(e--){OT+=ML.charAt(MI.charCodeAt(e)-48);}
 em.innerHTML=OT;
 
-if(!window.trim){String.prototype.trim=function(){return this.replace(/^\s+/,"").replace(/\s+$/,"");};} // AM: IE8- doesn't natively support trim()
+if(!window.trim){String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g,'');};} // AM: IE8- doesn't natively support trim()
 
 // AM: Define window.btoa for IE9- -- Function adapted from github.com/davidchambers/Base64.js; currently unused in Version >=1.2.0, but will be used again once canvas support is introduced.
 //(function(){var t="undefined"!=typeof window?window:exports,r="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",n=function(){try{document.createElement("$");}catch(t){return t;}}();t.btoa||(t.btoa=function(t){for(var o,e,a=0,c=r,f="";t.charAt(0|a)||(c="=",a%1);f+=c.charAt(63&o>>8-8*(a%1))){if(e=t.charCodeAt(a+=0.75),e>255){throw n;}o=o<<8|e;}return f;});})();
 
-// AM: adapted from stackoverflow.com/q/6970814 -- allows for parsing of multiple backgrounds.
+// AM: adapted from stackoverflow.com/a/6970814 -- allows for parsing of multiple backgrounds.
 function split(string){
     var token = /((?:(?:rgb|hsl)a?\(.*?\)\s*\d{0,3}(?:\.\d+)?%?|[^"']|".*?"|'.*?')*?)([(,)]|$)/g; // AM: Modded to permit (rgb|hsl)a?(<colors>) <stop>%, -- without fix, the <stop>% gets trashed, throwing off everything else--ugh.
     token.lastIndex=0;
@@ -143,328 +149,369 @@ function split(string){
     })();
 }
 
-var svgAngle,svg,svgUri,svgHeight,svgWidth,
-defsvg='<svg width="300px" height="300px" style="background:#ccc"></svg>',
+var vect,svg,uri,h,w,
+defSvg='<svg width="300px" height="300px" style="background:#ccc"></svg>',
 uH=document.getElementById('userH'),uW=document.getElementById('userW'),
-input=document.getElementById('cssinput'),output=document.getElementById('output'),
-update=document.getElementById('updatetext'),
-uriCb=document.getElementById('uricheck'),batch=document.getElementById('batch'),
-uriText=document.getElementById('uritext'),uriCode=document.getElementById('uricode'),
+inp=document.getElementById('cssinput'),out=document.getElementById('output'),
+convert=document.getElementById('convert'),update=document.getElementById('updatetext'),
+u=document.getElementById('uricheck'),b=document.getElementById('batch'),
+uTxt=document.getElementById('uritext'),uCode=document.getElementById('uricode'),
 bWarn=document.getElementById('warn'),bExp=document.getElementById('bexp'),
-UriOutput,bgsUriOutput,batchUriOutput,sel,
-myAngle,x1,y1,x2,y2,
-// gradientType="linear", // AM: currently unused. Will likely have a use when radial-gradient support is introduced.
-dir,dirL,bgs,col,
-stopsArray=[],colorArray=[],stl,
-units,prev,prevW,bl,oldWebkit,error,bgSize,bgSizeString,updateB,toFromFix,hex,downWarnDiv,
-trans=/rgba|hsla|transparent/;
+uOut,bgsUriOut,bUriOut,sel,rep,
+x1,y1,x2,y2,tx1,ty1,tx2,ty2,c=100,
+// gradientType="linear", // AM: currently unused. May have a use when radial-gradient support is introduced.
+dir,dl,bgs,co,col,
+colorArr=[],stopArr,stl,
+units,prev,prevW,bl,oldWebkit,error,bgSize,bgSizeStr,updateB,toFromFix,hex,downWarnDiv,
+cocheck="Check your gradient direction and/or color values.",
+trans=/rgba|hsla|transparent/,bgSt=/background-size:[^;}]+/i;
 
-/* AM: More browsers can manipulate the preview now. Any browser that has inline SVG support (IE9+, Chrome 7+, FF4+, Opera 11.6+, and Safari 5.1+) can do so.
- * Function borrowed from https://gist.github.com/mstalfoort/1293822.
- */
+// AM: This function borrowed from gist.github.com/mstalfoort/1293822
 function hasInlineSvg(){var svgd = document.createElement('div');svgd.innerHTML='<svg/>';return(svgd.firstChild && svgd.firstChild.namespaceURI)==='http://www.w3.org/2000/svg';}
 
 // AM: Toggle 'batch mode' checkbox based on status of IE9 CSS checkbox
-function uriCbTog(){batch.disabled=!uriCb.checked;}
+function uTog(){b.disabled=!u.checked;}
 
 // AM: Add batch mode explanatory text if box is checked and input is empty, and toggle display of some elements (also executes when background-size is detected in input).
-function batchTog(){
-	var d='display:',blo=d+'block',inl=d+'inline',no=d+'none';
-	if(batch.checked&&input.value===''){input.value='.example1{background:linear-gradient(75deg,#fff,#000)}\n.example2{background:linear-gradient(to top right,rgba(234,200,199,.5),#fc0,#fedcba)}';}
-	update.style.cssText = document.getElementById('outputtext').style.cssText = batch.checked ? no : blo;
-	uriText.style.cssText = batch.checked ? blo : no;
-	uriCb.disabled = batch.checked;
-	if(batch.checked && hasInlineSvg())
-		{bWarn.style.cssText=inl; if(batch.checked){bExp.style.cssText=no;}}
-	else{bExp.style.cssText=inl;bWarn.style.cssText=no;}
-	output.value=uriCode.value='';
+function bTog(){
+	var blo='block',inl='inline',no='none';
+	if(b.checked&&!inp.value){inp.value='.ex1{background:linear-gradient(75deg,#fff,#000)}\n.ex2{background:linear-gradient(to top left,rgba(34,62,99,.5),#fc0,#fedcba)}';}
+	update.style.display = document.getElementById('outputtext').style.display = b.checked ? no : blo;
+	uTxt.style.display = b.checked ? blo : no;
+	u.disabled = b.checked;
+	if(b.checked && hasInlineSvg())
+		{bWarn.style.display=inl; if(b.checked){bExp.style.display=no;}}
+	else{bExp.style.display=inl;bWarn.style.display=no;}
+	out.value=uCode.value='';
 	// AM: preview only visible to browsers with inline SVG support. Also reset preview on each convert or page load.
 	if(hasInlineSvg())
 		{prev=document.getElementById('preview'),downWarnDiv=document.getElementById('downwarn');
 		downWarnDiv.innerHTML=prev.style.cssText='';
-		prev.innerHTML=defsvg;prevW=update.clientWidth;
-		updateB.disabled=output.readOnly=1;}
+		prev.innerHTML=defSvg;prevW=update.clientWidth;
+		updateB.disabled=out.readOnly=1;}
 }
 
-uriCb.onclick=uriCbTog; batch.onclick=batchTog;
+u.onclick=uTog; b.onclick=bTog;
+window.onload=function(){uTog();bTog();}; // AM: Check status of checkboxes on page load/refresh
+inp.onfocus=function(){if(document.getElementById('clearit').checked){this.value='';}}; // AM: Clear input only if clear on focus checkbox is checked
+inp.onkeydown=function(e){ent(e,convert);};
 
-function start(){uriCbTog();batchTog();} // AM: Check status of checkboxes on page load/refresh.
-window.onload=start;
-
-// AM: Clear input only if clear on focus checkbox is checked.
-input.onfocus=function(){if(document.getElementById('clearit').checked){this.value='';}};
-
-// AM: Test for RGBA support. RGBA supporting browsers also fully support HSL/A.
-function notAnAncientBrowser(){var div=document.createElement('div'); div.style.cssText="color:rgba(0,0,0,0)"; return(div.style.color);}
+// AM: Allow shift+enter to fire convert or update. Code adapted from astackoverflow.com/a/155265.
+function ent(e,id){e=e||event;
+	if(e.keyCode===13&&e.shiftKey){id.click();
+		e.preventDefault ? e.preventDefault() : e.returnValue=0; // AM: IE8- uses returnValue
+	}
+}
 
 if(hasInlineSvg())
-	{update.innerHTML='<button id="updateb" disabled>Update</button><p>You can edit the output and click "Update" to generate a new preview. If you need to edit the width/height, then you should edit your original input and convert again, so that the SVG angle calculation properly updates.</p><h2>Preview</h2><div id="downwarn"></div><div id="preview">'+defsvg+'</div>';
+	{update.innerHTML='<button id="updateb" disabled>Update</button><p>You can edit the output and click "Update" to refresh the preview. If you need to edit the dimensions, then you should edit your original input and convert again, to properly update the SVG angle calculation.</p><h2>Preview</h2><div id="downwarn"></div><div id="preview">'+defSvg+'</div>';
 	updateB=document.getElementById('updateb');
-	updateB.onclick=function(){updatePreview();};}
+	out.onkeydown=function(e){ent(e,updateB);};
+	updateB.onclick=updatePreview;}
 
-document.getElementById('convert').onclick=function(){
-	if(input.value===''){error='ERROR: This script currently cannot read minds. Please input at least one gradient for it to work with\u2014thanks!';output.value=uriCode.value=error;return 0;}
-	oldWebkit=toFromFix=svgAngle=svg=bgSize=bgsUriOutput=batchUriOutput=sel=''; // AM: reset key variables upon each convert. Otherwise, strange gradient renderings may occur.
-	svgWidth = uW.value!=='' ? uW.value : '300', svgHeight = uH.value!=='' ? uH.value : '300',
+convert.onclick=function(){
+	if(!inp.value){error='This script currently cannot read minds. Please input at least one gradient for it to work with\u2014thanks!';out.value=uCode.value=error;return 0;}
+	oldWebkit=toFromFix=vect=svg=bgSize=bgsUriOut=bUriOut=sel=''; // AM: reset key variables upon each convert, otherwise, strange gradient renderings may occur
+	w = !!uW.value ? parseFloat(uW.value) : 300, h = !!uH.value ? parseFloat(uH.value) : 300,
 	units = document.getElementById('userUnit').checked ? 'px' : '%';
-	
-	if(batch.checked) // AM: Batch Mode enabled
-		{// AM: The magic sauce that makes Batch Mode possible. Following line is adapted from http://stackoverflow.com/q/6205047.
-		var css=input.value.replace(/}/g,'}~'),cssA=css.split('~');
-		cssA.pop(); // AM: Last item seems to reliably be an empty string, so, toss it.
-		var csl=cssA.length;cssA.reverse(); // AM: Reverse array order so the while loop will process items in the correct order.
+
+	if(b.checked) // AM: Batch Mode enabled
+		{// AM: The magic sauce that makes Batch Mode possible -- next line adapted from stackoverflow.com/a/6205047
+		var css=inp.value.replace(/}/g,'}~'),cssA=css.split('~');
+		cssA.pop(); // AM: Last item seems to reliably be an empty string, so, toss it
+		var csl=cssA.length;cssA.reverse(); // AM: Reverse array order so the while loop will process items in the correct order
 		// AM: throw error if no CSS selectors found
-		if(csl===0){batchUriOutput='ERROR: You must have at least one well-formed CSS selector, e.g., ".selector{background:linear-gradient(#fff,#000)}", in order for Batch Mode to work.';}
-		while(csl--){sel=cssA[csl].match(/.*?{/);splitGradient(cssA[csl]);} // AM: for each selector, capture the selector and then process the gradient(s)
-		uriCode.value=batchUriOutput;
+		if(!csl){bUriOut='ERROR: You must have at least one well-formed CSS selector, e.g., ".selector{background:linear-gradient(#fff,#000)}", in order for Batch Mode to work.';}
+		while(csl--){sel=cssA[csl].match(/.*?{/);splitGradient(cssA[csl]); // AM: for each selector, capture the selector and then process the gradient(s)
+			if(!!error){bUriOut+=sel+' <<<<<ERROR: '+error+'>>>>> }\n\n';}}
+		uCode.value=bUriOut;
 		}
-	else{splitGradient(input.value);if(error!==''){uriCode.value=error;}}
-	if(hasInlineSvg()&&bgSize===''){updateB.disabled=output.readOnly=!!error;} // AM: Enable update button and output codebox only after successful convert
+	else{splitGradient(inp.value);
+		if(!!error){bTog();out.value=uCode.value='ERROR: '+error;}
+	}
+	if(hasInlineSvg()&&!bgSize){updateB.disabled=out.readOnly=!!error;} // AM: Enable update button and output codebox only after successful convert
 }
 
-function splitGradient(string){bgsUriOutput=dir=error=svgUri=''; // AM: These must get reset upon each iteration of the css loop above.
-	if(string.match('radial')){error="ERROR: Please enter only LINEAR gradient(s) in the input box above.";
-	output.value=error; if(batch.checked){batchUriOutput+=sel+' <<<<<'+error+'>>>>> }\n\n';} return 0;}
-	if(string.match(/background-size:[^;]+/)) {bgSize='yes'; bgSizeString=string.match(/background-size:[^;]+/i)[0].replace(/}/,''); string=string.replace(/background-size:[^;]+/i,'');}
-	batchTog();
+function splitGradient(string){bgsUriOut=dir=error=uri=''; // AM: These must get reset upon each iteration of the css loop above
+	if(string.match(/radial/)){error="The script currently supports only LINEAR gradients.";return 0;}
+	else if(string.match(/\d(r?em|ex|ch|vh|vm|vmin|vmax)/)){error='Font- or viewport-relative units are not supported. Valid units are "%", "px", "cm", "mm", "in", "pt", and "pc".';return 0;}
+	// AM: Check for incorrect hex colors here since they may escape the color check below and affect rendering, cause the script to trip, or other weird stuff.
+	else if(string.match(/#[\da-f]{4,5}\W|#[\da-f]{1,2}\W/)){error=cocheck;return 0;}
+	if(string.match(bgSt)){bgSize='yes'; bgSizeStr=string.match(bgSt)[0]; string=string.replace(bgSt,'');}
+	bTog();
 	bgs = split(string),bl=bgs.length;
-	
-	if(bgSize==='yes'){bgs.reverse();} // AM: Reverse gradients to process in correct order, if background-size detected.
-	
-	while(bl--){
-		// Find Direction //
+
+	if(!!bgSize){bgs.reverse();} // AM: Reverse gradients to process in correct order if background-size detected
+
+	while(bl--){rep='';stopArr=[];
+		if(bgs[bl].match(/repeating/)){rep='yes';}
+		// AM: Find angle
 		if(bgs[bl].match(/\-?\d{0,3}(\.\d+)?(deg|g?rad\b|turn)/)){dir=bgs[bl].match(/\-?\d{0,3}(?:\.\d+)?(?:deg|g?rad|turn)/gi);
 			if(dir[1].match(/g?rad|turn/)) // AM: convert other units to degrees
-				{if(dir[1].match(/grad/)){dir[1]=parseFloat(dir[1])/1.1111111;}
-				else if(dir[1].match(/rad/)){dir[1]=parseFloat(dir[1])/0.0174532925199;}
-				else{dir[1]=parseFloat(dir[1])*360;}
+				{var pf1=parseFloat(dir[1]);
+				if(dir[1].match(/grad/)){dir[1]=pf1/1.1111111;}
+				else if(dir[1].match(/rad/)){dir[1]=pf1/0.0174532925199;}
+				else{dir[1]=pf1*360;}
 				}
 			dir=parseFloat(dir[1]);
 			if(!bgs[bl].match(/-(moz|webkit|o|ms)-/)){dir=90-dir;} // AM: Degrees in unprefixed W3C syntax are measured differently
 		}
-		// AM: isolate old webkit syntax
-		else if(bgs[bl].match(/-webkit-gradient/)){var s=/left|right|\btop\b|bottom|center/g;
+		// AM: isolate old WebKit syntax
+		else if(bgs[bl].match(/-webkit-gradient/)){var s=/left|right|\btop\b|bottom|center/g;dl=4;
 			if(bgs[bl].match(s))
-				{dir=bgs[bl].match(s),dirL=dir.length;
-				while(dirL--){dir[dirL]=dir[dirL].replace(/left|top/g,'0').replace(/right|bottom/g,'100').replace(/center/g,'50');} // AM: convert keywords to corresponding percents.
+				{dir=bgs[bl].match(s);
+				while(dl--){dir[dl]=dir[dl].replace(/left|top/g,0).replace(/right|bottom/g,100).replace(/center/g,50);} // AM: convert keywords to corresponding percents
 				}
 			else{ // AM: Point-to-point figures
 				dir=bgs[bl].match(/(\-?\d+\.?\d*%?)/g);
-				dir=dir.slice(0,4),dirL=dir.length; // AM: Get only what's needed, the first four #'s or %'s
-				while(dirL--)
-					{if(!dir[dirL].match(/%/)) // AM: Convert pixel values to %
-						{var wh = dirL % 2 === 1 ? svgHeight : svgWidth; // AM: Make sure x-points get divided by width and y, by height.
-						dir[dirL]=dir[dirL]/wh*100;}}
+				dir=dir.slice(0,4); // AM: Get only what's needed, the first four #s or %s
+				while(dl--)
+					{if(!dir[dl].match(/%/)) // AM: Convert pixel values to %
+						{var wh = dl % 2 === 1 ? h : w; // AM: Make sure x-points get divided by width and y, by height
+						dir[dl]=dir[dl]/wh*c;}
+					dir[dl]=parseFloat(dir[dl]);
+					}
 			}
-			x1=Math.round(parseFloat(dir[0])*100)/100,y1=Math.round(parseFloat(dir[1])*100)/100,
-			x2=Math.round(parseFloat(dir[2])*100)/100,y2=Math.round(parseFloat(dir[3])*100)/100;
-			oldWebkit = 'yes', toFromFix = bgs[bl].match(/from\(.*?\),\s*to\(.*?\),\s*color-stop/) ? 'yes' : ''; // AM: Webkit allows to() to come before color-stops. If that happens, then extra processing will happen below.
+			x1=Math.round(dir[0]*c)/c,y1=Math.round(dir[1]*c)/c,
+			x2=Math.round(dir[2]*c)/c,y2=Math.round(dir[3]*c)/c;
+			oldWebkit = 'yes', toFromFix = bgs[bl].match(/from\(.*?\),\s*to\(.*?\),\s*color-stop/) ? 'yes' : ''; // AM: WebKit allows to() to come before color-stops. If that happens, then extra processing will happen below.
 		}
 		// AM: No angle defined, so check for origin or destination keywords
 		else if(bgs[bl].match(/(to )?(top|left|right|bottom)/)){dir=bgs[bl].match(/(to )?(top|left|right|bottom)\s?(top|left|right|bottom)?/gi); 
 			if(dir[0].match(/(right|left)/)){dir[0]=dir[0].replace(/(right|left)\s(top|bottom)/g,"$2$1");} // AM: normalize keyword order for normalizeAngle
 			dir=dir[0].replace(/\s/g,'');
 		}
-		else if(!bgs[bl].match(/center/)){dir='tobottom';} // AM: no angle or keywords defined; use default 'to bottom'. If 'center' is found, error will be thrown below in normalizeAngle.
+		else if(!bgs[bl].match('center')){dir='tobottom';} // AM: no angle or keywords defined; use default 'to bottom'. If 'center' is found, error will be thrown below in normalizeAngle.
 
-		bgs[bl]=bgs[bl].replace(/.*?{|color-stop|repeating|linear|radial|gradient|-(moz|webkit|o|ms)-|background(-image)?\:|deg|rad|g?rad|turn|to\s|\btop\b|right|left|bottom|center|-| /g,'');
-		//Match 3 or 6 Hex, RGB Decimal, RGBA Decimal // // AM: Now includes color names, RGB/A %, and HSL/A, with floating points permitted
-		colorArray=bgs[bl].match(/(?:from\(|to\()?(#([\da-f]{3}){1,2}(?!%)|(rgb|hsl)a?\((\d{1,3}(\.\d+)?%?,?){3}[0-1]?\.?\d*\)|[a-z]+)/gi),col=colorArray.length;
-		
-		/* AM: test for parse-able colors in gradient. Ex: Browsers should throw an error (at least FF does) if rgb() has 4 values, which above regex permits. 
-		 * Test only runs in modern browsers supporting CSS3 colors. Older browsers like IE8-, FF2-, O9.6-, and S3.0- skip it.
-		 * Test is permissive. Chances are, it will let RGB values >255, alpha values >1, HSL hues >360, and percents >100 pass even when technically invalid. Browsers usually parse such values as allowable max, anyway.
-		 * However, there's no error-checking here for totally invalid values that colorArray will miss above, such as negative RGB decimal values.
-		 * Test will also pick up any stray values not processed by the direction check above.
-		 * Minor bug present: colors in errant 4 or 5-digit hex notation will get parsed as a valid (but incorrect) 3-digit hex color instead of throwing an error.
-		 */
-		if(notAnAncientBrowser())
-			{var div=document.createElement('div');
-			while(col--)
-				{colorArray[col]=colorArray[col].replace(/(?:from|to)\(/,'');
-				div.style.cssText="color:"+colorArray[col];
-					if(!div.style.color){error="ERROR: Check your gradient direction and/or color values.";
-					output.value=error;	if(batch.checked||bgSize==='yes'){batchUriOutput+=sel+' <<<<<'+error+'>>>>> }\n\n';} return 0;}
-				}
-			div=null;}
-		
-		// AM: Check for stop %s or floating-points (old Webkit syntax), preceded by #RGB; #RRGGBB; ')' at end of RGB/A or HSL/A; '(' in 'to', 'from', or 'color-stop' functions; or color name, but ignore RGB/A+HSL/A %s themselves.
-		stopsArray=bgs[bl].match(/(?:\)|#(?:[\da-f]{3}){1,2}|(?:from|to|[^bla])\(|,[a-z]+)(\d{0,3}\.?\d*%|0?\.\d+)/ig);
-		if(stopsArray===null) {stopsArray=['0%','100%'];getMiddleStops(colorArray.length-2);} // AM: no stop values defined, so use starting and ending defaults, then interpolate middle stop values.
-		else if(colorArray.length-stopsArray.length===2){stopsArray.unshift('0%');stopsArray.push('100%');} // AM: only starting and ending stop values missing? Then add them at respective ends.
-		else if(colorArray.length-stopsArray.length>0){
-			error="ERROR: Gradient could not be parsed. Please check your stop values. For best results, make sure to specify all of them in order using percent values only, or leave them all off for the script to calculate equal stops for you.";
-			output.value=error; if(batch.checked){batchUriOutput+=sel+' <<<<<'+error+'>>>>> }\n\n';} return 0;
+		bgs[bl]=bgs[bl].replace(/.*?{|color-stop|repeating|linear|radial|gradient|-(moz|webkit|o|ms)-|background(-image)?\:|deg|g?rad|turn|to\s|\btop\b|right|left|bottom|center|-|^\(,|\)$| /gm,'').
+		// AM: If stop-values are present, bound them with '
+		replace(/(\)|#(?:[\da-f]{3}){1,2}(?!(?:%|px|cm|mm|in\b|pt|pc))|(?:from|to|[^bla])\(|(?:,|\()[a-z]+)(\d{0,3}\.?\d*(%|px|cm|mm|in\b|pt|pc)|0?\.\d+)/ig,"$1'$2'");
+		// AM: Match colors and stop-values when present
+		colorArr=bgs[bl].match(/(?:from\(|to\()?('.*?',)?(#([\da-f]{3}){1,2}(?!%|px|cm|mm|in\b|pt|pc)|(rgb|hsl)a?\((\d{0,3}(\.\d+)?%?,?){3}[0-1]?\.?\d*\)|[a-z]{5,}|[a-eg-z]{3,})('.*?')?/gi),col=colorArr.length,co=col;
+		while(col--)
+			{stopArr[col]=colorArr[col].replace(/.*?'|[^']*/,"'").replace(/'(.*?)'.*?,/,"$1").replace(/'/g,''); // AM: Separate stop-values into new array
+			colorArr[col]=colorArr[col].replace(/(from|to)\(|'.*?',?/g,''); // AM: Remove stops and other junk to leave colors
+			/* AM: Test for parsable colors in gradient. Ex: Browsers should throw an error (at least FF does) if rgb() has 4 values, which above regex allows. 
+			 * Test only runs in browsers supporting CSS3 colors. Older ones like IE8-, FF2-, O9.6-, and S3.0- skip it.
+			 * Test is permissive. Chances are, it will let RGB values >255, alpha values >1, HSL hues >360, and percents >100 pass even when invalid. Browsers usually cap such values, anyway.
+			 * However, there's no error-checking here for totally invalid values that colorArr will miss above, such as negative RGB decimal values.
+			 * Test will also pick up any stray values not processed by the direction check above.
+			 */
+			var d=document.createElement('div');
+			d.style.cssText="color:rgba(0,0,0,0)";
+			if(d.style.color){
+				d.style.color=colorArr[col];
+				if(!d.style.color){error=cocheck;return 0;}
 			}
-		
-		stl=stopsArray.length;
-		while(stl--)
-			{stopsArray[stl]=stopsArray[stl].replace(/\)|#(?:[\da-f]{3}){1,2}(?!%)|(?:from|to|[^bla])\(|,[a-z]+|/i,''); // AM: get rid of junk to leave the percents.
-			if(!stopsArray[stl].match(/%/)){stopsArray[stl]=parseFloat(stopsArray[stl])*100+'%';}} // AM: convert Webkit-style decimals to %s.
-		if(toFromFix==='yes'){var tofix=colorArray.splice(1,1);colorArray.push(tofix.toString());} // AM: Move color in to() function to end of array.
-		if(oldWebkit===''){normalizeAngle(dir,bl);}
-		else{buildSVG(bl);}
-		if(bgSize==='yes'){finishSVG(svg,svgUri,1);} // AM: Process each gradient into individual SVG files... inefficient, but it's the only way I know of currently to allow for proper usage of background-size in CSS.
+			d=null;
+		}
+		stl=stopArr.length;
+		if(!!oldWebkit){
+			while(stl--){if(!stopArr[stl].match(/%/)){stopArr[stl]=parseFloat(stopArr[stl])*c+'%';}} // AM: convert WebKit-style decimals to %s
+			if(!!toFromFix){var fix=colorArr.splice(1,1);colorArr.push(fix.toString());stopArr.splice(1,1);stopArr.push('100%');} // AM: Move color in to() function to end of array
+			}
+		if(!oldWebkit){normalizeAngle(dir,bl);}
+		else{buildSvg(bl);}
+		if(!!error){return 0;}
+		if(!!bgSize){finishSVG(svg,uri,1);} // AM: Process each gradient into individual SVG files... inefficient, but it's the only way I know of currently to allow for proper usage of background-size in CSS.
 	}
-	if(bgSize===''&&!error){finishSVG(svg,svgUri,bgs.length);}
+	if(!bgSize&&!error){finishSVG(svg,uri,bgs.length);}
 	else{
-		if(batch.checked){batchUriOutput+=sel+'background:'+bgsUriOutput+'}\n\n'; batchUriOutput=batchUriOutput.replace(/,\n}/g,'}');}
-		bgsUriOutput=bgsUriOutput.replace(/,\n$|,$/g,''); uriCode.value=bgsUriOutput;
-		output.readOnly=1;output.value='Output display, editing, and updating is unavailable while using "background-size" in your input. To make changes, edit your original input and convert again.';
-		if(hasInlineSvg()){updateB.disabled=1;downSizePreview(bgsUriOutput);}
+		if(b.checked){bUriOut+=sel+'background:'+bgsUriOut+'}\n\n'; bUriOut=bUriOut.replace(/,\n}/g,'}');}
+		bgsUriOut=bgsUriOut.replace(/,\n$|,$/g,''); uCode.value=bgsUriOut;
+		out.readOnly=1;out.value='Output display, editing, and updating is unavailable while using "background-size" in your input. To make changes, edit your original input and convert again.';
+		if(hasInlineSvg()){updateB.disabled=1;sizePreview(bgsUriOut);}
 	}
 }
 
-function getMiddleStops(s){
-	if(s===0){return 1;} // AM: there are only 2 color stops
-	else{var i=s;
-		while(i--)
-			{var middleStop=100-((100/(s+1))*(i+1))+"%"; // AM: Ex - For 3 middle stops, progression will be 25%, 50%, and 75%, plus 0% and 100% at the ends.
-			stopsArray.splice(-1,0,middleStop);} // AM: add into stopsArray before 100%
+function normalizeAngle(st,bl){var d='to',t='top',r='right',b='bottom',l='left';
+	if(isNum(st)){svgAngle(st,bl);} // AM: Angle defined, proceed to calculate vector coords
+	else{ 
+	/* AM: Direction keywords defined -- use pre-determined vector coords and then go to buildSvg.
+	 * Also sets up variables needed for converting pixel-based color-stops to SVG offset values.
+	 * 'center' is a missing keyword. It's invalid in the new W3C syntax, and was poorly supported in the previous prefixed syntax (apparently, only FF supported it).
+	 * Old Webkit syntax is entirely isolated and processed separately before ever reaching this point, thus making it possible to keep the below matrix simple.
+	 */
+	x1=y1=y2=tx1=ty1=tx2=ty2=0,x2=c; // AM: reset default coords with each convert. Otherwise, strange things happen, especially with multiple gradients.
+		if(st===d+r||st===l){tx2=w;}
+		else if(st===d+t+r||st===b+l){y1=c,ty1=h,tx2=w;}
+		else if(st===d+t||st===b){x1=y1=c,tx1=tx2=w,ty1=h;}
+		else if(st===d+t+l||st===b+r){x1=y1=c,x2=0,tx1=w,ty1=h;}
+		else if(st===d+l||st===r){x1=y1=y2=c,x2=0,tx1=ty2=w,ty1=h;}
+		else if(st===d+b+l||st===t+r){x1=y2=c,x2=0,tx1=w,ty2=h;}
+		else if(st===d+b||st===t){x2=0,y2=c,ty2=h;}
+		else if(st===d+b+r||st===t+l){y2=c,tx2=w,ty2=h;}
+		else{error="Check your direction value(s). Valid keywords are 'top', 'right', 'bottom', and 'left'.";return 0;}
+		buildSvg(bl);
 	}
 }
 
-function normalizeAngle(st,bl){
-x1=0,y1=0,x2=100,y2=0; // AM: reset default coords with each convert. Otherwise, strange things happen, especially with multiple gradients.
-/* AM: Greatly simplified this check to limit to only valid strings (including new W3C syntax). See https://developer.mozilla.org/docs/Web/CSS/linear-gradient for valid syntax.
- * However, 'center' is a missing keyword. It's invalid in the new W3C syntax, and was poorly supported in the previous prefixed syntax (apparently, only FF supported it).
- * Old Webkit syntax is entirely isolated and processed separately before ever reaching this point, thus making it possible to simplify the below matrix even further.
- */
-	if(isNumber(st)===true){myAngle=st;SVGangle(myAngle,bl);} // AM: Angle defined, proceed to calculate vector coords
-	else { // AM: Direction keywords defined -- use corresponding pre-determined vector coords and then go straight to buildSVG
-		if(st==="toright"||st==="left"){} // AM: SVG default vector coords will be used
-		else if(st==="totopright"||st==="bottomleft"){y1=100;}
-		else if(st==="totop"||st==="bottom"){x1=100,y1=100;}
-		else if(st==="totopleft"||st==="bottomright"){x1=100,y1=100,x2=0;}
-		else if(st==="toleft"||st==="right"){x1=100,y1=100,x2=0,y2=100;}
-		else if(st==="tobottomleft"||st==="topright"){x1=100,x2=0,y2=100;}
-		else if(st==="tobottom"||st==="top"){x2=0,y2=100;}
-		else if(st==="tobottomright"||st==="topleft"){y2=100;}
-		else{error="ERROR: Check your direction value(s). Valid keywords are 'top', 'right', 'bottom', and 'left'.";
-		output.value=error;	if(batch.checked){batchUriOutput+=sel+' <<<<<'+error+'>>>>> }\n\n';} return 0;}
-		buildSVG(bl);
-	}
-}
+// AM: check if variable is a number -- stackoverflow.com/a/1421988
+function isNum(o){return!isNaN(o-0)&&o!==null&&o!==""&&o!==false;}
 
-// AM: check if variable is a number -- stackoverflow.com/q/1421988
-function isNumber(o){return!isNaN(o-0)&&o!==null&&o!==""&&o!==false;}
-
-function SVGangle(v,bl){
-	// AM: Code is adapted from visualcsstools.com.
-	var w=parseFloat(svgWidth),h=parseFloat(svgHeight),ang=parseFloat(v),
-	wc=w/2,hc=h/2,
-	o,n,tx1,ty1,tx2,ty2,
-	k=(((ang % 360)+360) % 360),
-	j=(360-k)*Math.PI/180,
+function svgAngle(v,bl){
+	// AM: Code is adapted from visualcsstools.com -- determines vect coords based on angle
+	var wc=w/2,hc=h/2,
+	m,n=0,o=0,r=360,mx=10000,
+	k=((v%r)+r)%r,
+	j=(r-k)*Math.PI/180,
 	i=Math.tan(j),
 	l=hc-i*wc;
-	if(k===0){tx1=w,ty1=hc,tx2=0,ty2=hc;}
-	else if(k<90){n=w,o=0;}
-	else if(k===90){tx1=wc,ty1=0,tx2=wc,ty2=h;}
-	else if(k<180){n=0,o=0;}
-	else if(k===180){tx1=0,ty1=hc,tx2=w,ty2=hc;}
-	else if(k<270){n=0,o=h;}
-	else if(k===270){tx1=wc,ty1=h,tx2=wc,ty2=0;}
-	else{n=w,o=h;}
-	// AM: I could not quite figure out what m, n, and o are supposed to represent from the original code on visualcsstools.com.
-	var m=o+(n/i),
-	tx1 = tx1==null ? i*(m-l)/(Math.pow(i,2)+1) : tx1,
-	ty1 = ty1==null ? i*tx1+l : ty1,
-	tx2 = tx2==null ? w-tx1 : tx2,
-	ty2 = ty2==null ? h-ty1 : ty2;
-	x1=Math.round(tx2/w*10000)/100,y1=Math.round(ty2/h*10000)/100,
-	x2=Math.round(tx1/w*10000)/100,y2=Math.round(ty1/h*10000)/100;
-	buildSVG(bl);
+	tx1=ty1=tx2=ty2=null;
+	if(k===0){tx1=w,ty1=ty2=hc,tx2='0';}
+	else if(k<90||k>270){n=w;}
+	else if(k===90){tx1=tx2=wc,ty1='0',ty2=h;}
+	else if(k===180){tx1='0',ty1=ty2=hc,tx2=w;}
+	else if(k===270){tx1=tx2=wc,ty1=h,ty2='0';}
+	if(k>180){o=h;}
+	m=o+(n/i);
+	// AM: I could not quite figure out what m, n, and o are supposed to represent from the original code on visualcsstools.com
+	tx1 = !tx1 ? i*(m-l)/(Math.pow(i,2)+1) : tx1;
+	ty1 = !ty1 ? i*tx1+l : ty1,
+	tx2 = !tx2 ? w-tx1 : tx2,
+	ty2 = !ty2 ? h-ty1 : ty2;
+	x1=Math.round(tx2/w*mx)/c,y1=Math.round(ty2/h*mx)/c,
+	x2=Math.round(tx1/w*mx)/c,y2=Math.round(ty1/h*mx)/c,
+	buildSvg(bl);
 }
 
-function buildSVG(bl){
-	var sal = stopsArray.length, sr = sal < 20 ? 100 : 1000; // AM: With a large number of stops, a greater decimal precision of the offsets could be useful.
-	svgAngle=" gradientUnits='userSpaceOnUse' x1='"+x1+"%' y1='"+y1+"%' x2='"+x2+"%' y2='"+y2+"%'";
-	svgAngle=svgAngle.replace(/ x1='0%'| x2='100%'| y1='5?0%'| y2='5?0%'/g,'').replace(/'0%'/,"'0'"); // AM: remove default or equal values when present, as well as units from zero values.
+function buildSvg(bl){var sGrad='',uGrad='',sj=stopArr.join(),
+	sal = stopArr.length, sr = sal < 20 ? 1000 : 10000, // AM: With many stops, a greater decimal precision of offsets may help
+	rl=Math.sqrt(Math.pow(tx1-tx2,2) + Math.pow(ty1-ty2,2)); // AM: This calculation (for some hypotenuse, maybe?) needed for later converting pixel color-stops to offset values. Adapted from visualcsstools.com.
+	// AM: Add first and last stops if missing
+	if(!isNum(parseFloat(stopArr[0]))){stopArr[0]='0%';}
+	if(!isNum(parseFloat(stopArr[co-1]))){stopArr[co-1]= !sj.match(/px|cm|mm|in\b|pt|pc/) ? '100%' : rl+"px";}
+	calcStops(); // AM: check if any more stops are missing, and if so, calculate them
+	if(!!error){return 0;}
+	
+	if(y1===y2){y1=y2=0;} // AM: equal y-values safe to zero out
+	vect=" gradientUnits='userSpaceOnUse' x1='"+x1+"%' y1='"+y1+"%' x2='"+x2+"%' y2='"+y2+"%'";
 	// AM: remove gradientUnits if coords are within bounding box...except in case of old Webkit syntax, which apparently (and oddly) depends on it for accurate rendering. Go figure.
-	if (x1>=0&&x1<=100 && y1>=0&&y1<=100 && x2>=0&&x2<=100 && y2>=0&&y2<=100 && oldWebkit===''){svgAngle=svgAngle.replace(/ gradientUnits='userSpaceOnUse'/,'');}
+	if (x1>=0&&x1<=c && y1>=0&&y1<=c && x2>=0&&x2<=c && y2>=0&&y2<=c && !oldWebkit){vect=vect.replace(" gradientUnits='userSpaceOnUse'",'');}
 
-	if(!svgAngle.match(/gradientUnits/))
-	/* AM: Convert vector coords to decimal to save a few more bytes (also, since % signs have to be encoded as '%25' anyway in data-URI output, costing a few extra bytes),
+	if(!vect.match(/gradientUnits/))
+	/* AM: Convert vect coords to decimal to save more bytes (also, since % signs have to be encoded as '%25' anyway in data-URI output, costing a few extra bytes),
 	 * but only when gradientUnits='userSpaceOnUse' is not present -- in that case, they must remain unchanged, or else the rendering will be wrong.
 	 */
-	{svgAngle=svgAngle.replace(/x1='.*?'/,"x1='"+x1/100+"'").replace(/y1='.*?'/,"y1='"+y1/100+"'").replace(/x2='.*?'/,"x2='"+x2/100+"'").replace(/y2='.*?'/,"y2='"+y2/100+"'").replace(/0\./g,'.');}
+	{vect=vect.replace(/x1='[^']+/,"x1='"+x1/c).replace(/y1='[^']+/,"y1='"+y1/c).replace(/x2='[^']+/,"x2='"+x2/c).replace(/y2='[^']+/,"y2='"+y2/c);}
+	
+	bl = !bgSize ? bl : 0; // AM: If background-size in use, reset id on each gradient
+	vect="<linearGradient id='g"+(bl+1)+"'"+vect+">\n";
+	for(var i=0;i<sal;i++){var s=stopArr[i],ps=parseFloat(s); s = !s.match(/px/) ? ps/c : ps/rl; // AM: plug in pre-calculated offset or convert pixel color-stops to proper offset value
+		var off=Math.round(s*sr)/sr,color=fixColor(colorArr[i]),opac=addOpacity(colorArr[i]);
+		sGrad+="<stop offset='"+off+"' stop-color='"+color+"'";
+		if(colorArr[i].match(trans)){sGrad+=" stop-opacity='"+opac+"'";}
+		sGrad+="/>\n";
 
-	bl=bgSize===''?bl:0; // AM: Fix id when processing individual gradients due to use of background-size.
-	svgAngle="<linearGradient id='g"+(bl+1)+"'"+svgAngle+">\n";
-
-	if(bgSize===''){svg+=svgAngle,svgUri+=svgAngle;}
-	else{svg=svgAngle,svgUri=svgAngle;}
-
-	for(var i=0;i<sal;i++){svg+="<stop offset='"+Math.round(parseFloat(stopsArray[i])/100*sr)/sr+"' stop-color='"+fixColor(colorArray[i])+"'";
-	if(colorArray[i].match(trans)){svg+=" stop-opacity='"+addStopOpacity(colorArray[i])+"'";}
-	svg+="/>\n";}
-
-	// AM: For IE9 data URI, preserve original rgba/hsla/transparent colors since IE9 renders them correctly anyway, and they take fewer bytes than stop-color + stop-opacity.
-	// AM: Input with background-size will get cross-browser data URI output unless IE9 checkbox is marked.
-	if(uriCb.checked||bgSize==='yes')
-		{for(i=0;i<sal;i++)
-			{svgUri+="<stop offset='"+Math.round(parseFloat(stopsArray[i])/100*sr)/sr+"'";
-			var colorfunc = uriCb.checked&&colorArray[i].match(trans) ? colorArray[i] : fixColor(colorArray[i]);
-			svgUri+=" stop-color='"+colorfunc+"'";
-			if(!uriCb.checked&&colorArray[i].match(trans)){svgUri+=" stop-opacity='"+addStopOpacity(colorArray[i])+"'";}
-			svgUri+='/>\n';
+		/* AM: For IE9 data URI, preserve original (semi)transparent colors since IE9 renders them correctly anyway, and they take fewer bytes than stop-color + stop-opacity.
+		 * Input with background-size will get cross-browser data URI output unless IE9 checkbox is marked.
+		 */
+		if(u.checked||!!bgSize)
+			{uGrad+="<stop offset='"+off+"'";
+			color = u.checked&&colorArr[i].match(trans) ? colorArr[i] : color;
+			uGrad+=" stop-color='"+color+"'";
+			if(!u.checked&&colorArr[i].match(trans)){uGrad+=" stop-opacity='"+opac+"'";}
+			uGrad+='/>\n';
 			}
+	}
+
+	if(!!rep) // AM: Logic for repeating gradients. It finds the difference between the last & first offsets, multiplies coords by that to resize the gradient and adjusts offsets to make them relative to the new size.
+		{var stops=sGrad.match(/t='(\d?\.?\d+)'/g),sl,sl2,nStops=[];sl=sl2=stops.length;
+		while(sl--){stops[sl]=stops[sl].replace(/t='|'/g,'');}
+		var pso=parseFloat(stops[sl2-1]),diff=pso-parseFloat(stops[0]),mul=1/pso;
+		while(sl2--)
+			{nStops[sl2]=Math.round(parseFloat(stops[sl2])*mul*sr)/sr,nStops[0]=0,
+			sGrad=sGrad.replace(stops[sl2],nStops[sl2]);
+			if(u.checked||!!bgSize){uGrad=uGrad.replace(stops[sl2],nStops[sl2]);}
+			}
+		var xy=[x1,y1,x2,y2],z=4;while(z--){xy[z]=Math.round(xy[z]*diff*c)/c+'%';}
+		vect=vect.replace(/x1='[^']+/,"x1='"+xy[0]).replace(/y1='[^']+/,"y1='"+xy[1]).replace(/x2='[^']+/,"x2='"+xy[2]).replace(/y2='[^']+/,"y2='"+xy[3]).replace("ent ","ent spreadMethod='repeat' ");
 		}
-	// AM: remove default values and leading zeros when present.
-	var s1=/offset='0' | stop-opacity='1'/g,s2=/offset='0\./g,r="offset='.",en="</linearGradient>\n";
-	svg=svg.replace(s1,'').replace(s2,r)+en;
-	svgUri=svgUri.replace(s1,'').replace(s2,r)+en;
-	return svg,svgUri;
+
+	vect=vect.replace(/ x1='0%?'| x2='(100%|1)'| y1='0%?'| y2='0%?'/g,'').replace("'0%","'0"); // AM: remove defaults and units from zeros
+
+	if(!bgSize){svg+=vect,uri+=vect;}
+	else{svg=vect,uri=vect;}
+	svg=svg+sGrad,uri=uri+uGrad;
+
+	// AM: remove default values and leading zeros when present
+	var s2=/offset='0' | stop-opacity='1'/g,s3=/'0\./g,r="'.",en="</linearGradient>\n";
+	svg=svg.replace(s2,'').replace(s3,r)+en;
+	uri=uri.replace(s2,'').replace(s3,r)+en;
+	return svg,uri;
 }
 
-function fixColor(c){
-	/* AM: To conform to the SVG spec, colors should be CSS2-compatible values, which technically excludes RGBA and HSL/A.
-	 * This function will convert RGB/A and HSL/A, as well as most valid SVG/CSS3 color names, to hex to not only satisfy the SVG spec,
+function calcStops(){var u=0,y=0,stp=0;
+	while(y<stl){
+		if(stopArr[y].match(/\d/)){
+			if(stopArr[y].match(/cm|mm|in|pt|pc/)){stopArr[y]=fixUnits(stopArr[y]);}
+			var unit=stopArr[y].match(/%|px/),s=y,z=0,st=parseFloat(stopArr[s]);
+			while(z<s){
+				if(!stopArr[z].match(/\d/)){stopArr[z]=stp+((st-stp)/(s-u))*(z-u)+unit;}
+			z++;
+			}
+		u=z,stp=parseFloat(stopArr[s]);
+		}
+	y++;
+	}
+}
+
+// AM: Convert rarer units to pixels
+function fixUnits(x){var f = parseFloat(x);
+	if(x.match(/cm/)){f*=37.79527559;}
+	else if(x.match(/mm/)){f*=3.779527559;}
+	else if(x.match(/in/)){f*=96;}
+	else if(x.match(/pt/)){f*=1.33333333;}
+	else{f*=16;}
+	return Math.round(f*c)/c+'px';
+}
+
+function fixColor(hu){
+	/* AM: To conform to the SVG spec, colors should be CSS2-compatible values, which excludes RGBA and HSL/A.
+	 * This function will convert RGB/A and HSL/A, as well as most SVG/CSS3 color names, to hex to not only satisfy the SVG spec,
 	 * but also make the output SVG more efficient.
 	 */
-	var crgb,crgbp,hsl;
-	if(c.match(/transparent/))
+	var crgb,cl,cp,cpl,hsl,flo=/(\d+(\.\d+)?)|\.\d+/g,na=/[a-z]{8,}|black|white|yellow|fuchsia|magenta/i;
+	if(hu.match(/transparent/))
 		{return '#000';} 
-		/* AM: Browsers don't agree with this (FF and IE for example, render 'transparent' as white), but black follows the CSS3 spec, and Chrome/Safari/Opera follow it.
+		/* AM: Browsers don't agree here. FF and IE render 'transparent' as white, but black follows the CSS3 spec, and Chrome/Safari/Opera follow it.
 		 * However, the keyword appears to be undefined in the SVG spec, so, this could be a matter up for debate.
 		 */
-	else if(c.match(/rgba?|hsla?|[a-z]{8,}|black|white|yellow|fuchsia|magenta/))
-		{if(c.match(/rgba?/))
-			{if(c.match(/%/))
-			/* AM: Convert %s to dec. Could simplify "/100*255" to "*2.55", but somehow, that causes a floating point error.
-			 * For example, 100% will evaluate to 254.99999999999997, which then gets rounded down to 254
-			 * and thus translates to 'fe' instead of the expected 'ff'. D'oh!
-			 */
-			{crgbp=c.match(/(\d+(?:\.\d+)?%)/g); crgbp[0]=parseFloat(crgbp[0])/100*255; crgbp[1]=parseFloat(crgbp[1])/100*255; crgbp[2]=parseFloat(crgbp[2])/100*255;}
-			crgb = !crgbp ? c.match(/\d{1,3}/g) : crgbp; var cl = crgb.length;
+	else if(hu.match(/rgba?|hsla?/)||hu.match(na))
+		{if(hu.match(/rgba?/))
+			{if(hu.match(/%/)) // AM: Convert %s to dec
+				{cp=hu.match(flo),cpl=cp.length;
+					while(cpl--){cp[cpl]=cp[cpl]/c*255;}
+				}
+			crgb = !cp ? hu.match(/\d{1,3}/g) : cp, cl=crgb.length;
 			while(cl--){crgb[cl] = crgb[cl]>255 ? 255 : crgb[cl];}} // AM: Cap any errant values over max
-		// AM: convert color names larger than 7 letters into hex notation (since the resulting code takes fewer bytes). The additional listed colors will shrink down to 3-digit hex.
-		// AM: FF2- and IE8- do not support getComputedStyle, so, those browsers will just return the original input name.
-		else if(c.match(/[a-z]{8,}|black|white|yellow|fuchsia|magenta/i) && window.getComputedStyle)
+		/* AM: convert colors >7 letters into hex since #RRGGBB takes fewer bytes. The additional listed colors will shrink down to #RGB.
+		 * FF2- and IE8- do not support getComputedStyle, so, those browsers will just return the original input.
+		 */
+		else if(hu.match(na) && window.getComputedStyle)
 			{var d = document.createElement("div");
-			d.style.color = c.match(/[a-z]{8,}|black|white|yellow|fuchsia|magenta/i)[0];
+			d.style.color = hu.match(na)[0];
 			document.body.appendChild(d);
-			crgb = window.getComputedStyle(d,null).color; // AM: returns color in rgb()
-			if(!crgb.match(/rgb/)){return c;} // AM: Abort and return original input color if color not understood or processed correctly (older browsers not supporting CSS3/SVG color names, for instance).
-			crgb = crgb.replace(/rgb\(/,'').split(', ');}
-		else if(c.match(/hsla?/))
-			{hsl = c.match(/(\d{1,3}(?:\.\d+)?)/g);
-			// AM: Convert HSL to RGB first (making sure any errant percentages above 100 get capped), then convert result to hex below.
-			crgb = hslToRgb(parseFloat(hsl[0])/360,Math.min(parseFloat(hsl[1])/100,1),Math.min(parseFloat(hsl[2])/100,1));}
-		else{return c;}
-		
-		rgbToHex(parseInt(crgb[0],10),parseInt(crgb[1],10),parseInt(crgb[2],10));
+			crgb = window.getComputedStyle(d,null).color; // AM: gives color in rgb()
+			if(!crgb.match(/rgb/)){return hu;} // AM: Abort and return input if not processed correctly (older browsers not supporting CSS3/SVG color names, for instance)
+			crgb = crgb.replace(/[^\d,]/g,'').split(',');
+			document.body.removeChild(d);}
+		else if(hu.match(/hsla?/))
+			{hsl = hu.match(flo);
+			// AM: Convert HSL to RGB first (making sure any errant s & l >100 get capped), then convert result to hex below
+			crgb = hslToRgb(hsl[0]%360/360,Math.min((hsl[1])/c,1),Math.min((hsl[2])/c,1));}
+		else{return hu;}
+		rgbToHex(crgb[0]|0,crgb[1]|0,crgb[2]|0); // AM: |0 forces int value
 		return '#'+hex;
 		}
-	else{return c;}
+	else{return hu;}
 }
 
-function addStopOpacity(op){// AM: translate alpha or 'transparent' to stop-opacity
+function addOpacity(op){// AM: convert alpha or 'transparent' to stop-opacity
 	if(op.match(trans))
-		{if(op.match(/(?:\d+(?:\.\d+)?%?,){3}0?(\.\d+)?\)/)) // AM: slightly convoluted syntax to search for a color triplet and capture the alpha decimal value.
-			{var opv = op.match(/0?(\.\d+)?\)/)[0];
-			return opv.replace(/0\./g,'.').replace(/\)/,'');}
+		{if(op.match(/(?:\d*(?:\.\d+)?%?,){3}0?(\.\d+)?\)/)) // AM: search for a color triplet and capture its alpha value
+			{var opv = op.match(/(0?(\.\d+)?)\)/)[1];
+			return opv.replace('0.','.');}
 		else if(op.match(/transparent/))
 			{return '0';}
 		else{return '1';}
@@ -472,18 +519,16 @@ function addStopOpacity(op){// AM: translate alpha or 'transparent' to stop-opac
 	else{return '';}
 }
 
-function rgbToHex(r,g,b){// AM: Code adapted from stackoverflow.com/q/5624139
+function rgbToHex(r,g,b){// AM: Code adapted from stackoverflow.com/a/5624139
 	hex=((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1);
 	var s=/(\w)\1(\w)\2(\w)\3/i;
-	// AM: If hex can be shrank to 3-digits, then do it. \w searches a-z, A-Z, and 0-9, but generated hex pattern will only have a-f and 0-9.
+	// AM: If hex can be shrank to 3-digits, then do it. \w searches a-z, A-Z, & 0-9, but hex will only have a-f and 0-9.
 	hex=hex.match(s) ? hex.replace(s,'$1$2$3') : hex;
 	return hex;
 }
 
-// AM: This function adapted from stackoverflow.com/q/9493060
-function hslToRgb(h,s,l){
-	var r, g, b;
-
+// AM: This function adapted from stackoverflow.com/a/9493060
+function hslToRgb(h,s,l){var r,g,b;
 	function hue2rgb(p,q,t){
 		if(t<0){t += 1;}
 		if(t>1){t -= 1;}
@@ -501,58 +546,57 @@ function hslToRgb(h,s,l){
 	return [r*255,g*255,b*255];
 }
 
-function finishSVG(svg,svgUri,bl){var rects='',
-	svHead="<svg xmlns='http://www.w3.org/2000/svg' width='"+svgWidth+units+"' height='"+svgHeight+units+"'>\n",
-	svDefs="<defs>\n"+svg+"</defs>\n"; // AM: Safari 5.1 is dumb, requiring the otherwise unneeded <defs> element for the preview.
+function finishSVG(svg,uri,bl){var rects='',
+	svHead="<svg xmlns='http://www.w3.org/2000/svg' width='"+w+units+"' height='"+h+units+"'>\n",
+	svDefs="<defs>\n"+svg+"</defs>\n"; // AM: Safari 5.1 is dumb, requiring the otherwise unneeded <defs> element for the preview
 	while(bl--){rects+="<rect width='100%' height='100%' fill='url(#g"+(bl+1)+")'/>\n";}
 	var svEnd="</svg>";
 	svg=svHead+svDefs+rects+svEnd;
-	// AM: Show source code and Preview only when Batch Mode is not active.
-	if(!batch.checked){output.value=svg;
-		if(hasInlineSvg()){downSizePreview(svg);}}
-	// AM: Generate data URI output of SVG.
-	if(uriCb.checked||bgSize==='yes'){svgUri=svHead+svgUri+rects+svEnd; svgToDataUri(svgUri);}
+	// AM: Show SVG source and preview only when Batch Mode is not active
+	if(!b.checked){out.value=svg;
+		if(hasInlineSvg()){sizePreview(svg);}}
+	if(u.checked||!!bgSize){uri=svHead+uri+rects+svEnd; svgToUri(uri);}
 }
 
-function svgToDataUri(svgUri){svgUri=svgUri.replace(/\n|<\/?defs>/g,'').replace(/svg' width='.*?' height='.*?'/,"svg'"); // AM: remove some stuff to save bytes. For CSS usage, SVG width and height is rarely needed.
+function svgToUri(uri){uri=uri.replace(/\n|<\/?defs>/g,'').replace(/svg' width='.*?' height='.*?'/,"svg'"); // AM: remove some stuff to save bytes. For CSS usage, SVG width and height are rarely needed
 	// AM: encode output for use in CSS "data:" string. Opening/closing brackets, % signs, and # must be encoded. Spaces don't, so, convert them back from %20 to save bytes and slightly improve readability.
-	UriOutput='url("data:image/svg+xml,'+encodeURI(svgUri).replace(/%20/g,' ').replace(/#/g,'%23')+'")';
-	uriCode.value=UriOutput;uriText.style.cssText='display:block';
-	if(bgSize==='yes'){bgsUriOutput+=UriOutput+',\n';}
-	if(batch.checked&&bgSize===''){batchUriOutput+=sel+'background:'+UriOutput+'}\n\n';}
+	uOut='url("data:image/svg+xml,'+encodeURI(uri).replace(/%20/g,' ').replace(/#/g,'%23')+'")';
+	uCode.value=uOut;uTxt.style.display='block';
+	if(!!bgSize){bgsUriOut+=uOut+',\n';}
+	if(b.checked&&!bgSize){bUriOut+=sel+'background:'+uOut+'}\n\n';}
 }
 
 function updatePreview(){
-	downSizePreview(output.value);
-	if(uriCb.checked){svgToDataUri(output.value);} // AM: Update data-URI output
+	sizePreview(out.value);
+	if(u.checked){svgToUri(out.value);}
 }
 
-function downSizePreview(svg){ // AM: See if SVG dimensions exceed the #updatetext div available width, and if so, downsize the dimensions.
-	var editW,editH,editWpx,editHpx,
-	downWarn="<p><em>The preview has been scaled down to fit on the page. Your output above and the original aspect ratio have been preserved, however.</em></p>",
-	defCss="margin:0 auto;box-shadow:0 0 8px #777;background-color:#fff;background-image:"+svg+";"+bgSizeString;
+function sizePreview(svg){ // AM: See if SVG dimensions exceed the #updatetext div available width, and if so, downsize the dimensions
+	var editW,editH,editWpx,editHpx,wm=/' width='(\d+(px|%))/,hm=/height='(\d+(px|%))'>/,
+	downWarn="<p><em>The preview has been resized to fit on the page. Your output and the original aspect ratio are unchanged, however.</em></p>",
+	defCss="margin:0 auto;box-shadow:0 0 8px #777;background:#fff;background-image:"+svg+";"+bgSizeStr;
 	downWarnDiv.innerHTML=prev.style.cssText='';
-	if(svg.match(/' width='(\d+(px|%))/)){editW=svg.match(/' width='(\d+(px|%))/)[1];}
-	else if(!svg.match(/' width='.*?'>/)){editW=svgWidth+units;}
-	if(svg.match(/height='(\d+(px|%))'>/)){editH=svg.match(/height='(\d+(px|%))'>/)[1];}
-	else if(!svg.match(/height='.*?'>/)){editH=svgHeight+units;}
+	if(svg.match(wm)){editW=svg.match(wm)[1];}
+	else if(!svg.match(/' width='.*?'>/)){editW=w+units;}
+	if(svg.match(hm)){editH=svg.match(hm)[1];}
+	else if(!svg.match(/height='.*?'>/)){editH=h+units;}
 	
-	if(!editW||!editH){alert('Please make sure your SVG width and height are only in integer px or % values, then try updating again.');return 0;}
-	if(editW.match(/%/)){editWpx=parseFloat(editW)/100*prevW;} // AM: Convert %s to px.
-	if(editH.match(/%/)){editHpx=parseFloat(editH)/100*prevW;}
+	if(!editW||!editH){alert('Please make sure your width and height are only in integer px or % values, then try updating again.');return 0;}
+	if(editW.match(/%/)){editWpx=parseFloat(editW)/c*prevW;} // AM: Convert %s to px
+	if(editH.match(/%/)){editHpx=parseFloat(editH)/c*prevW;}
 	var editWf = !editWpx ? parseFloat(editW) : editWpx,
 	editHf = !editHpx ? parseFloat(editH) : editHpx;
-	if(editWf>prevW)
-	// AM: If background-size is set, then add SVG output as a background to the preview div instead of adding the inline SVG, then append the default styling defined above (including the background-size).
-		{var editWnew=Math.round(editWf/(editWf/prevW)), editHnew=Math.round(editHf/(editWf/prevW));
-		var newoutput=svg.replace(editW,editWnew+'px').replace(editH,editHnew+'px');
-		if(bgSize===''){prev.innerHTML=downWarn+newoutput;}
+	if(editWf>prevW){
+	// AM: If background-size is set, add SVG output as a background to the preview div instead of adding the inline SVG and append the default styling defined above (including the background-size)
+		var editWnew=Math.round(editWf/(editWf/prevW)), editHnew=Math.round(editHf/(editWf/prevW));
+		var newout=svg.replace(editW,editWnew+'px').replace(editH,editHnew+'px');
+		if(!bgSize){prev.innerHTML=downWarn+newout;}
 		else{prev.innerHTML='';downWarnDiv.innerHTML=downWarn;prev.style.cssText="width:"+editWnew+"px;height:"+editHnew+"px;"+defCss;}
-		}
+	}
 	else{
-		if(bgSize===''){prev.innerHTML=svg;}
+		if(!bgSize){prev.innerHTML=svg;}
 		else{prev.innerHTML='';prev.style.cssText="width:"+editW+";height:"+editH+";"+defCss;}
-		}
+	}
 }
 
 }());
