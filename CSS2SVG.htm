@@ -417,7 +417,6 @@ function buildSvg(bl){var sGrad='',uGrad='',sj=stopArr.join(),
 
 	if(!!rep) // AM: Logic for repeating gradients. It finds the difference between the last & first offsets, multiplies coords by that to resize the gradient and adjusts offsets to make them relative to the new size.
 		{var stops=sGrad.match(/t='(\d?\.?\d+)'/g),sl,sl2,nStops=[];sl=sl2=stops.length;
-		console.log('stops='+stops);
 		while(sl--){stops[sl]=stops[sl].replace(/t='|'/g,'');}
 		var pso=parseFloat(stops[sl2-1]),diff=pso-parseFloat(stops[0]),mul=1/pso;
 		while(sl2--)
