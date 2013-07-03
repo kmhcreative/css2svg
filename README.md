@@ -39,9 +39,12 @@ do not need to be included in the git commit and please change the title of the 
 <li><b>SVG Preview/Editing Unavailable</b>: Chrome 6-, IE8-, FF3.6-, Safari 5.0-, Opera 11.5-</li>
 </ul>
 <h3>Overview of major changes, done by Anthony Martinez:</h3>
+<h4><i>Version 1.5.2</i> (July 2, 2013)</h4>
+<ol>
+<li>Bug fix: Use of ID selectors in Batch Mode would sometimes cause the script to improperly throw an error message.</li>
+</ol>
 <h4><i>Version 1.5.1</i> (June 23, 2013)</h4>
 <ol>
-<li>This is a quick maintenance release to quash a few bugs that had somehow crept in just before committing 1.5.0 (and that escaped detection for all of a few minutes after committing)&#8212;d'oh!</li>
 <li>Bug fix: Logic for calculating <code>repeating-linear-gradient</code> color-stops was not being triggered properly.</li>
 <li>Bug fix: Error message was being thrown unnecessarily for gradients with no angle or origin/destination keywords defined.</li>
 </ol>
