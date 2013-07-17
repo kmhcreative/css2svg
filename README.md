@@ -81,7 +81,6 @@ do not need to be included in the git commit and please change the title of the 
 <li>Further tweaks to the page to improve usability, including adding <code>label</code> elements, making input element text now clickable (not just the radio buttons or checkboxes themselves).</li>
 <li>The CSS component is now slimmed down by a further 20%, thanks to the removal of unneeded code and optimization of the remaining code. Now, if getting the size of the JS component under control were only as simple... Actually, despite all the changes in this release, the JS is about 5% smaller compared to 1.1.0, but that could be attributed mostly to the migration of the mammoth test case out of the script and into a separate file (<a href="https://github.com/camartinez1229/css2svg/blob/master/gradient-test-cases.md">test case file</a>) for better discoverability. Ignoring that removal, the JS actually saw a 5% gain in file size.</li>
 </ol>
-</ol>
 <p><a href="https://github.com/camartinez1229/css2svg/blob/master/changelog.md">See Full Changelog Here</a></p>
 <h2>Known Issues</h2>
 <ol>
