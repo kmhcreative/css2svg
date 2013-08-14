@@ -39,6 +39,10 @@ do not need to be included in the git commit and please change the title of the 
 <li><b>SVG Preview/Editing Unavailable</b>: Chrome 6-, IE8-, FF3.6-, Safari 5.0-, Opera 11.5-</li>
 </ul>
 <h3>Overview of major changes, done by Anthony Martinez:</h3>
+<h4><i>Version 1.5.4</i> (August 14, 2013)</h4>
+<ol>
+<li>Bug fix: Following the 1.5.3 update, gradients with any explicitly defined color-stops other than <code>calc</code> expressions were rarely if at all converting properly.</li>
+</ol>
 <h4><i>Version 1.5.3</i> (July 17, 2013)</h4>
 <ol>
 <li>Added support for CSS <code><a href="http://www.w3.org/TR/css3-values/#calc">calc()</a></code> expressions, e.g. <code>calc(100% - 75px)</code>, as gradient stop values. Nested <code>calc()</code> expressions are not supported, however.</li>
@@ -65,21 +69,6 @@ do not need to be included in the git commit and please change the title of the 
 <li>Bug fix / improvement in error-handling: The script was silently allowing hex colors not in proper three- or six-digit notation, instead of throwing an error in the color validation check.</li>
 <li>Added further enhancements to the page's usability. Now, you can perform a conversion or update by pressing <kbd>shift</kbd>+<kbd>enter</kbd> inside the input/output <code>textarea</code>s, or pressing <kbd>enter</kbd> when the radio buttons, checkboxes, or dimension inputs have focus.</li>
 <li>Despite the significant updates as listed above, the page code is now about 5% smaller compared to Version 1.2.0, thanks to various micro-optimizations.</li>
-</ol>
-<h4><i>Version 1.2.0</i> (June 12, 2013)</h4>
-<ol>
-<li>Support for SVG output as base64 is now dropped in favor of partially encoded ASCII, which is more efficient than base64 and is at least somewhat legible, too. Credit for inspiration goes to this <a href="http://coding.smashingmagazine.com/?p=126525">clever article he read on Smashing Magazine</a>, showing him for the first time that data URIs don't always have to be in base64.</li>
-<li>Preview display is now available when using <code>background-size</code> in input. There is and will likely not be any support for editing/updating the output, however. Instead, to make changes, edit your original input and convert again.</li>
-<li>The output boxes and preview get cleared or reset upon toggling Batch Mode.</li>
-<li>Firefox 3.6-, Opera 10-, and perhaps a few other older browsers now have support for performing multiple conversions. Fixes issue #2 on the bottom. It was an old regex parsing quirk, fixed by just adding one line: <code>token.lastIndex=0</code>. Don't you love easy fixes?</li>
-<li>Bug fix: Using <code>background-size</code> in Batch Mode input led to awful errors in output.</li>
-<li>Bug fix: The script did not previously allow for decimal angle measurements lacking at least one leading digit. For example: <code>0.5deg</code> would work, but not <code>.5deg</code>.</li>
-<li>Bug fix: When doing multiple conversions of varying dimensions (including any that exceed available page width and therefore get scaled down to fit the page), the preview may display at an incorrect aspect ratio.</li>
-<li>Bug fix / improvement in error-handling: The SVG output text box and Update button should not activate after a failed conversion.</li>
-<li>Bug fix / improvement in error-handling: The error message for use of the non-standard <code>center</code> keyword in input was not always being thrown properly.</li>
-<li>The script now complies with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode">ECMAScript 5's Strict Mode</a>.</li>
-<li>Further tweaks to the page to improve usability, including adding <code>label</code> elements, making input element text now clickable (not just the radio buttons or checkboxes themselves).</li>
-<li>The CSS component is now slimmed down by a further 20%, thanks to the removal of unneeded code and optimization of the remaining code. Now, if getting the size of the JS component under control were only as simple... Actually, despite all the changes in this release, the JS is about 5% smaller compared to 1.1.0, but that could be attributed mostly to the migration of the mammoth test case out of the script and into a separate file (<a href="https://github.com/camartinez1229/css2svg/blob/master/gradient-test-cases.md">test case file</a>) for better discoverability. Ignoring that removal, the JS actually saw a 5% gain in file size.</li>
 </ol>
 <p><a href="https://github.com/camartinez1229/css2svg/blob/master/changelog.md">See Full Changelog Here</a></p>
 <h2>Known Issues</h2>
