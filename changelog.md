@@ -1,6 +1,21 @@
 <h1>Changelog for Previous & Archived Releases</h1>
 <p><em>By Anthony Martinez</em></p>
 <h2>Previous Releases</h2>
+<h3><i>Version 1.2.0</i> (June 12, 2013)</h3>
+<ol>
+<li>Support for SVG output as base64 is now dropped in favor of partially encoded ASCII, which is more efficient than base64 and is at least somewhat legible, too. Credit for inspiration goes to this <a href="http://coding.smashingmagazine.com/?p=126525">clever article he read on Smashing Magazine</a>, showing him for the first time that data URIs don't always have to be in base64.</li>
+<li>Preview display is now available when using <code>background-size</code> in input. There is and will likely not be any support for editing/updating the output, however. Instead, to make changes, edit your original input and convert again.</li>
+<li>The output boxes and preview get cleared or reset upon toggling Batch Mode.</li>
+<li>Firefox 3.6-, Opera 10-, and perhaps a few other older browsers now have support for performing multiple conversions. Fixes issue #2 on the bottom. It was an old regex parsing quirk, fixed by just adding one line: <code>token.lastIndex=0</code>. Don't you love easy fixes?</li>
+<li>Bug fix: Using <code>background-size</code> in Batch Mode input led to awful errors in output.</li>
+<li>Bug fix: The script did not previously allow for decimal angle measurements lacking at least one leading digit. For example: <code>0.5deg</code> would work, but not <code>.5deg</code>.</li>
+<li>Bug fix: When doing multiple conversions of varying dimensions (including any that exceed available page width and therefore get scaled down to fit the page), the preview may display at an incorrect aspect ratio.</li>
+<li>Bug fix / improvement in error-handling: The SVG output text box and Update button should not activate after a failed conversion.</li>
+<li>Bug fix / improvement in error-handling: The error message for use of the non-standard <code>center</code> keyword in input was not always being thrown properly.</li>
+<li>The script now complies with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode">ECMAScript 5's Strict Mode</a>.</li>
+<li>Further tweaks to the page to improve usability, including adding <code>label</code> elements, making input element text now clickable (not just the radio buttons or checkboxes themselves).</li>
+<li>The CSS component is now slimmed down by a further 20%, thanks to the removal of unneeded code and optimization of the remaining code. Now, if getting the size of the JS component under control were only as simple... Actually, despite all the changes in this release, the JS is about 5% smaller compared to 1.1.0, but that could be attributed mostly to the migration of the mammoth test case out of the script and into a separate file (<a href="https://github.com/camartinez1229/css2svg/blob/master/gradient-test-cases.md">test case file</a>) for better discoverability. Ignoring that removal, the JS actually saw a 5% gain in file size.</li>
+</ol>
 <h3><i>Version 1.1.0</i> (June 9, 2013)</h3>
 <ol>
 <li>Improved error-handling, such as to catch empty input and non-pixel/non-percentage dimensions when editing the output to generate a new SVG preview.</li>

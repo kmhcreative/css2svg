@@ -102,7 +102,7 @@ background:#a00;color:#fff;text-shadow:1px 1px 5px #444;-webkit-transition:.5s;-
 <textarea id="uricode" readonly="readonly"></textarea>
 </div>
 <div id="footer">
-<p>Version 1.5.3 &mdash; July 17, 2013</p>
+<p>Version 1.5.4 &mdash; August 14, 2013</p>
 <p><em>Page fully compatible with Chrome 7+, Firefox 4+, IE9+, Safari 5.1+, and Opera 11.6+</em> &mdash; <a href="http://www.kmhcreative.com/labs/CSS3-2-SVG/">About This Utility</a></p>
 <p>&copy; 2011 Kristiana M. Hansen &mdash; Free To Use &amp; Distribute<br/><a href="http://www.kmhcreative.com">www.kmhcreative.com</a></p>
 <p>Updates contributed by <a href="http://www.linkedin.com/in/canthonymartinez/">Anthony Martinez</a></p>
@@ -113,7 +113,7 @@ background:#a00;color:#fff;text-shadow:1px 1px 5px #444;-webkit-transition:.5s;-
 <a id="git" href="https://github.com/kmhcreative/css2svg">Fork Us On GitHub</a>
 <script>
 /*!
-* CSS2SVG 1.5.3 -- July 17, 2013
+* CSS2SVG 1.5.4 -- August 14, 2013
 * Original script by Kristiana M. Hansen -- www.kmhcreative.com
 * Updates by Anthony Martinez -- www.linkedin.com/in/canthonymartinez/
 * Licensed Under Creative Commons Attribution-Sharealike 3.0 -- creativecommons.org/licenses/by-sa/3.0/
@@ -286,7 +286,7 @@ function splitGradient(string){bgsUriOut=dir=error=uri=''; // AM: These must get
 			dir=dir[0].replace(/\s/g,'');
 		}
 		else if(!bgs[bl].match('center')){dir='tobottom';} // AM: no angle or keywords defined; use default 'to bottom'. If 'center' is found, error will be thrown below in normalizeAngle.
-		bgs[bl]=bgs[bl].replace(/.*?{|color-stop|repeating|linear|radial|gradient|-(moz|webkit|o|ms)-|background(-image)?\:|deg|g?rad|turn|to\s|\btop\b|right|left|bottom|center|-(?!\s+\d)|^\(,|\)$|\b \b/gm,'').
+		bgs[bl]=bgs[bl].replace(/.*?{|color-stop|repeating|linear|radial|gradient|-(moz|webkit|o|ms)-|background(-image)?\:|deg|g?rad|turn|to\s|\btop\b|right|left|bottom|center|-(?!\s+\d)|^\(,|\)$| \b/gm,'').
 		// AM: If stop-values are present, bound them with '
 		replace(/(\)|#(?:[\da-f]{3}){1,2}(?!(?:%|px|cm|mm|in\b|pt|pc))|(?:from|to|[^blac])\(|(?:,|\()[a-z]+)(calc\([^)]+\)|\d{0,3}\.?\d*(%|px|cm|mm|in\b|pt|pc)|0?\.\d+)/ig,"$1'$2'");
 		// AM: Match colors and stop-values when present
