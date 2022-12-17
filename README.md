@@ -1,7 +1,7 @@
 <h1>What Is It?</h1>
 <p>CSS2SVG is a JavaScript-based utility for converting CSS3 Gradients to SVG images to help maintain a website's appearance in browsers that do not support CSS3 gradients but do support SVG graphics (such as Internet Explorer 9).</p>
 <p>The script is pure JS and does not require any libraries (though you could certainly fork a version that does if you want). It is also presented in a single HTML page for easy usage and editing.</p>
-<h2><a href="http://jsfiddle.net/camartinez1229/thSxh/show/light/" target="_blank">Try It!</a></h2>
+<h2><a href="https://kmhcreative.github.io/css2svg/CSS2SVG.htm" target="_blank">Try It!</a></h2>
 <h2>Basic Usage Instructions</h2>
 <ol>
 <li>For offline usage, download CSS2SVG.htm from the file listing above; that's the only file you need!</li>
